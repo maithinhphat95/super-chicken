@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #c81f34;
+  --secondary-color: #fac437;
+}
+html,
+body,
+#id,
+.App {
+  height: 100%;
+}
+* {
+  margin: 0;
+  text-decoration: none;
+  list-style-type: none;
+  box-sizing: border-box;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+.art-text {
+  font-family: "Coiny", sans-serif;
+}
+.art-btn {
+  //
+}
+.d-flex {
+  display: flex;
+}
