@@ -1,0 +1,63 @@
+.menu-today-container {
+  color: white;
+  margin-top: -20px;
+  & .menu-today {
+    &-header {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--fresher-color);
+      box-shadow: inset 0 0 16px rgba($color: #333, $alpha: 0.5);
+      margin-top: 16px;
+      padding-left: 16px;
+    }
+    &-logo {
+      width: 100%;
+      & img {
+        display: block;
+        width: 100%;
+        padding: 0 40px;
+        max-width: 250px;
+        margin: 0 auto;
+      }
+    }
+    &-title {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 40px;
+      padding: 0 20px;
+    }
+    &-list {
+    }
+    &-item {
+      position: relative;
+      display: block;
+      height: 590px;
+      width: 100%;
+      background-image: url("../../../assets/images/today-menu-bg.jpg");
+      background-repeat: repeat;
+      background-size: cover;
+      overflow: hidden;
+      & > img {
+        margin: 100px auto;
+        width: 100%;
+        z-index: 3;
+      }
+      &:hover {
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          height: 100%;
+          width: 100%;
+          background-color: rgba($color: #eade57, $alpha: 0.3);
+        }
+      }
+      &:hover .slide-btn {
+        top: 440px;
+      }
+    }
+  }
+}
