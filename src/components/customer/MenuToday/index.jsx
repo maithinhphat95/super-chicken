@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import MenuTodayItem from "../MenuTodayItem";
 import logo from "../../../assets/images/logo1.png";
 import gaGion from "../../../assets/images/ga-gion.png";
@@ -19,14 +19,21 @@ function MenuToday(props) {
       <Grid container spacing={2} className="menu-today">
         {/* Title */}
         <Grid item xs={12} md={3} className="menu-today-header">
-          <div className="menu-today-logo">
+          <Box
+            sx={{
+              display: { xs: "block", sm: "flex", md: "block" },
+              alignItems: "center",
+              "&>*": { flex: 1 },
+            }}
+            className="menu-today-logo"
+          >
             <img src={logo} alt="" />
             <h1 className="art-text menu-today-title">
               Ăn gì
               <br />
               hôm nay
             </h1>
-          </div>
+          </Box>
         </Grid>
         {/* Menu Today list */}
         <Grid

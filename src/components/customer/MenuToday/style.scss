@@ -1,7 +1,7 @@
 .menu-today-container {
   color: white;
-  margin: 8px 0;
-  .menu-today {
+  margin-top: -20px;
+  & .menu-today {
     &-header {
       display: flex;
       flex-direction: column;

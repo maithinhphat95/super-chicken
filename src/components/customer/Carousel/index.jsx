@@ -26,44 +26,19 @@ function Carousel(props) {
     <div className="banner-container">
       <Slider {...settings}>
         <a className="banner" href={""}>
-          <CardMedia
-            component="img"
-            sx={{ width: "100%", height: { xs: "200px", md: "450px" } }}
-            image={banner1}
-            alt="Jollibee"
-          />
+          <CardMedia component="img" image={banner1} alt="Jollibee" />
         </a>
         <a className="banner" href={""}>
-          <CardMedia
-            component="img"
-            sx={{ width: "100%", height: { xs: "200px", md: "450px" } }}
-            image={banner2}
-            alt="Jollibee"
-          />
+          <CardMedia component="img" image={banner2} alt="Jollibee" />
         </a>
         <a className="banner" href={""}>
-          <CardMedia
-            component="img"
-            sx={{ width: "100%", height: { xs: "200px", md: "450px" } }}
-            image={banner3}
-            alt="Jollibee"
-          />
+          <CardMedia component="img" image={banner3} alt="Jollibee" />
         </a>
         <a className="banner" href={""}>
-          <CardMedia
-            component="img"
-            sx={{ width: "100%", height: { xs: "200px", md: "450px" } }}
-            image={banner4}
-            alt="Jollibee"
-          />
+          <CardMedia component="img" image={banner4} alt="Jollibee" />
         </a>
         <a className="banner" href={""}>
-          <CardMedia
-            component="img"
-            sx={{ width: "100%", height: { xs: "200px", md: "450px" } }}
-            image={banner5}
-            alt="Jollibee"
-          />
+          <CardMedia component="img" image={banner5} alt="Jollibee" />
         </a>
       </Slider>
     </div>
