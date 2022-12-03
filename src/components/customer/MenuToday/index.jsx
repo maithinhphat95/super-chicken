@@ -1,9 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Button, Grid } from "@mui/material";
-import { Link } from "react-router-dom";
-import ArtBtn from "../../common/ArtBtn";
-import SlideBtn from "../SlideBtn";
 import MenuTodayItem from "../MenuTodayItem";
 import logo from "../../../assets/images/logo1.png";
 import gaGion from "../../../assets/images/ga-gion.png";
@@ -22,9 +18,14 @@ function MenuToday(props) {
     <div className="menu-today-container">
       <Grid container spacing={2} className="menu-today">
         {/* Title */}
-        <Grid item xs={12} md={3} className="menu-today-title">
+        <Grid item xs={12} md={3} className="menu-today-header">
           <div className="menu-today-logo">
             <img src={logo} alt="" />
+            <h1 className="art-text menu-today-title">
+              Ăn gì
+              <br />
+              hôm nay
+            </h1>
           </div>
         </Grid>
         {/* Menu Today list */}
