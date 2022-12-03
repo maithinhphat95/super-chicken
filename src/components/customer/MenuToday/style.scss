@@ -1,0 +1,44 @@
+.menu-today-container {
+  margin: 8px 0;
+  .menu-today {
+    &-title {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--fresher-color);
+      box-shadow: inset 0 0 16px rgba($color: #333, $alpha: 0.5);
+      padding: 0;
+      margin-top: 16px;
+    }
+    &-logo {
+      width: 100%;
+
+      & img {
+        display: block;
+        width: 100%;
+        padding: 0 40px;
+        max-width: 200px;
+        margin: 0 auto;
+      }
+    }
+    &-list {
+    }
+    &-item {
+      position: relative;
+      display: block;
+      height: 590px;
+      width: 100%;
+      background-image: url("../../../assets/images/today-menu-bg.jpg");
+      background-repeat: repeat;
+      background-size: cover;
+      overflow: hidden;
+      & > img {
+        margin: 100px auto;
+        width: 100%;
+      }
+      &:hover .slide-btn {
+        bottom: 0;
+      }
+    }
+  }
+}

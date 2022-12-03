@@ -1,0 +1,25 @@
+.banner-container {
+  overflow: hidden;
+  & .slick-dots {
+    bottom: 30px;
+    & button::before {
+      color: gray;
+      opacity: 0.6;
+      font-size: 16px;
+    }
+  }
+  & .slick-arrow {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    &::before {
+      font-size: 40px;
+    }
+  }
+  & .slick-prev {
+    left: 25px;
+  }
+  & .slick-next {
+    right: 25px;
+  }
+}

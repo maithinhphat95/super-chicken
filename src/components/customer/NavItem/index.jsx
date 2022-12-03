@@ -8,9 +8,13 @@ NavItem.propTypes = {};
 function NavItem(props) {
   const { content, url } = props;
   const params = useParams();
+
   return (
     <li className="nav-item">
-      <Link className={`art-text active`} to={url || ""}>
+      <Link
+        className={`art-text ${params?.page === url && "active"}`}
+        to={url || ""}
+      >
         {content}
       </Link>
     </li>

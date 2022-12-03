@@ -1,10 +1,12 @@
 import React from "react";
-import "./styles/Header.scss";
+import "./style.scss";
 import "animate.css";
-import { Divider, Grid, IconButton, Stack } from "@mui/material";
+import { Grid, IconButton, Stack } from "@mui/material";
 import { FaBars, FaMapMarkerAlt, FaUserAlt } from "react-icons/fa";
-import NavItem from "../components/customer/NavItem";
-import { navList } from "../constant/constant";
+import NavItem from "../../components/customer/NavItem";
+import { navList } from "../../constant/constant";
+import logo from "../../assets/images/logo1.png";
+
 Header.propTypes = {};
 
 function Header(props) {
@@ -30,11 +32,7 @@ function Header(props) {
         <Grid item xs={4} lg={2}>
           <div className="logo">
             <a href="">
-              <img
-                className="logo-img"
-                src="https://jollibee.com.vn/images/LogoJB_New-02.png"
-                alt=""
-              />
+              <img className="logo-img" src={logo} alt="" />
             </a>
           </div>
         </Grid>
