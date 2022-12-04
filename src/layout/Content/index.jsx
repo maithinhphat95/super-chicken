@@ -1,15 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Carousel from "../components/customer/Carousel";
-import MenuToday from "../components/customer/MenuToday";
+import HomePage from "../../screens/HomePage";
 
 Content.propTypes = {};
 
 function Content(props) {
   return (
     <div className="content">
-      <Carousel />
-      <MenuToday />
+      <HomePage />
     </div>
   );
 }
