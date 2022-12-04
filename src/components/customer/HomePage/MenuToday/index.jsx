@@ -1,15 +1,15 @@
 import React from "react";
 import { Box, Button, Grid } from "@mui/material";
 import MenuTodayItem from "../MenuTodayItem";
-import logo from "../../../assets/images/logo1.png";
-import gaGion from "../../../assets/images/ga-gion.png";
-import gaCay from "../../../assets/images/ga-cay.png";
-import myY from "../../../assets/images/my-y.png";
-import nuoc from "../../../assets/images/nuoc.png";
-import gaGionText from "../../../assets/images/ga-gion-text.png";
-import gaCayText from "../../../assets/images/ga-cay-text.png";
-import myYText from "../../../assets/images/my-y-text.png";
-import nuocText from "../../../assets/images/nuoc-text.png";
+import logo from "../../../../assets/images/logo1.png";
+import gaGion from "../../../../assets/images/ga-gion.png";
+import gaCay from "../../../../assets/images/ga-cay.png";
+import myY from "../../../../assets/images/my-y.png";
+import nuoc from "../../../../assets/images/nuoc.png";
+import gaGionText from "../../../../assets/images/ga-gion-text.png";
+import gaCayText from "../../../../assets/images/ga-cay-text.png";
+import myYText from "../../../../assets/images/my-y-text.png";
+import nuocText from "../../../../assets/images/nuoc-text.png";
 import "./style.scss";
 MenuToday.propTypes = {};
 

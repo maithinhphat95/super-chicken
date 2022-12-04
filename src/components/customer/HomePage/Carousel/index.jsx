@@ -5,11 +5,11 @@ import { CardMedia } from "@mui/material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.scss";
-import banner1 from "../../../assets/images/banner1.jpg";
-import banner2 from "../../../assets/images/banner2.png";
-import banner3 from "../../../assets/images/banner3.jpg";
-import banner4 from "../../../assets/images/banner4.jpg";
-import banner5 from "../../../assets/images/banner5.jpg";
+import banner1 from "../../../../assets/images/banner1.jpg";
+import banner2 from "../../../../assets/images/banner2.png";
+import banner3 from "../../../../assets/images/banner3.jpg";
+import banner4 from "../../../../assets/images/banner4.jpg";
+import banner5 from "../../../../assets/images/banner5.jpg";
 Carousel.propTypes = {};
 
 function Carousel(props) {
