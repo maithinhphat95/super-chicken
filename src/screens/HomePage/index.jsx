@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import Carousel from "../../components/customer/HomePage/Carousel";
 import MenuToday from "../../components/customer/HomePage/MenuToday";
 import ServiceListSection from "../../components/customer/HomePage/ServiceListSection";
-import StoreFindSection from "../../components/customer/HomePage/StoreFindSection";
-
-HomePage.propTypes = {};
+import NewsSection from "../../components/customer/HomePage/NewsSection";
 
 function HomePage(props) {
   return (
@@ -13,7 +11,7 @@ function HomePage(props) {
       <Carousel />
       <MenuToday />
       <ServiceListSection />
-      <StoreFindSection />
+      <NewsSection />
     </div>
   );
 }
