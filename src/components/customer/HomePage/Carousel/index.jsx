@@ -23,7 +23,7 @@ function Carousel(props) {
     slidesToScroll: 1,
   };
   return (
-    <div className="banner-container">
+    <div className="banner-section">
       <Slider {...settings}>
         <a className="banner" href={""}>
           <CardMedia component="img" image={banner1} alt="Jollibee" />

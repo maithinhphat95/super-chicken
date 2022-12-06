@@ -1,11 +1,11 @@
-import React from "react";
 import "./style.scss";
 import "animate.css";
+import React from "react";
 import { Grid, IconButton, Stack } from "@mui/material";
 import { FaBars, FaMapMarkerAlt, FaUserAlt } from "react-icons/fa";
 import NavItem from "../../components/customer/NavItem";
 import { navList } from "../../constant/constant";
-import logo from "../../assets/images/logo1.png";
+import images from "../../assets/images";
 
 Header.propTypes = {};
 
@@ -32,7 +32,7 @@ function Header(props) {
         <Grid item xs={4} lg={2}>
           <div className="logo">
             <a href="">
-              <img className="logo-img" src={logo} alt="" />
+              <img className="logo-img" src={images.logo} alt="" />
             </a>
           </div>
         </Grid>

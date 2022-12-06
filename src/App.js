@@ -1,12 +1,29 @@
-import React from "react";
 import "./App.scss";
-import Content from "./layout/Content";
-import Header from "./layout/Header";
+import React, { Fragment } from "react";
+import { Route, Routes } from "react-router-dom";
+import { publicRoutes } from "./routes";
+import { DefaultLayout } from "./layout";
+
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Content />
+      <Routes>
+        {publicRoutes.map((route, index) => {
+          const Layout = route.layout === null ? Fragment : DefaultLayout;
+          const Page = route.component;
+          return (
+            <Route
+              key={index}
+              path={route.path}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
+      </Routes>
     </div>
   );
 }

@@ -1,21 +1,13 @@
 import React from "react";
 import { Box, Button, Grid } from "@mui/material";
 import MenuTodayItem from "../MenuTodayItem";
-import logo from "../../../../assets/images/logo1.png";
-import gaGion from "../../../../assets/images/ga-gion.png";
-import gaCay from "../../../../assets/images/ga-cay.png";
-import myY from "../../../../assets/images/my-y.png";
-import nuoc from "../../../../assets/images/nuoc.png";
-import gaGionText from "../../../../assets/images/ga-gion-text.png";
-import gaCayText from "../../../../assets/images/ga-cay-text.png";
-import myYText from "../../../../assets/images/my-y-text.png";
-import nuocText from "../../../../assets/images/nuoc-text.png";
+import images from "../../../../assets/images";
 import "./style.scss";
 MenuToday.propTypes = {};
 
 function MenuToday(props) {
   return (
-    <div className="menu-today-container">
+    <div className="menu-today-section">
       <Grid container spacing={2} className="menu-today">
         {/* Title */}
         <Grid item xs={12} md={3} className="menu-today-header">
@@ -27,7 +19,7 @@ function MenuToday(props) {
             }}
             className="menu-today-logo"
           >
-            <img src={logo} alt="" />
+            <img src={images.logo} alt="" />
             <h1 className="art-text menu-today-title">
               Ăn gì
               <br />
@@ -44,10 +36,18 @@ function MenuToday(props) {
           spacing={1}
           className="menu-today-list"
         >
-          <MenuTodayItem img={gaGion} imgText={gaGionText} url={""} />
-          <MenuTodayItem img={gaCay} imgText={gaCayText} url={""} />
-          <MenuTodayItem img={myY} imgText={myYText} url={""} />
-          <MenuTodayItem img={nuoc} imgText={nuocText} url={""} />
+          <MenuTodayItem
+            img={images.gaGion}
+            imgText={images.gaGionText}
+            url={""}
+          />
+          <MenuTodayItem
+            img={images.gaCay}
+            imgText={images.gaCayText}
+            url={""}
+          />
+          <MenuTodayItem img={images.myY} imgText={images.myYText} url={""} />
+          <MenuTodayItem img={images.nuoc} imgText={images.nuocText} url={""} />
         </Grid>
       </Grid>
     </div>
