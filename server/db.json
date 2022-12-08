@@ -1,0 +1,456 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "type": "combo",
+      "name": "combo 1",
+      "image": "https://jollibee.com.vn/uploads/dish/62c5020053e891-70.jpg",
+      "description": "01 MIẾNG GÀ GIÒN VUI VẺ + 01 MỲ Ý SỐT BÒ BẰM + 01 NƯỚC NGỌT (VỪA)",
+      "price": "65000"
+    },
+    {
+      "id": "2",
+      "type": "combo",
+      "name": "combo 2",
+      "image": "https://jollibee.com.vn/uploads/dish/848b7a6988ecd4-9999023fbf2b3fda69de66430d3e139knonccce2.png",
+      "description": "03 GÀ GIÒN VUI VẺ + 01 MỲ Ý SỐT BÒ BẰM + 1 KHOAI TÂY VỪA + 2 LY PEPSI VỪA",
+      "price": "139000"
+    },
+    {
+      "id": "3",
+      "type": "combo",
+      "name": "combo 3",
+      "image": "https://jollibee.com.vn/uploads/dish/62b8b47e20967e-4000742.png",
+      "description": "02 GÀ GIÒN VUI VẺ + 02 MỲ Ý SỐT BÒ BẰM + 1 KHOAI TÂY VỪA + 2 LY PEPSI VỪA",
+      "price": "139000"
+    },
+    {
+      "id": "4",
+      "type": "combo",
+      "name": "combo 4",
+      "image": "https://jollibee.com.vn/uploads/dish/392593efbb9219-9bd116e875f3624000558.png",
+      "description": "03 GÀ GIÒN VUI VẺ + 01 MỲ Ý SỐT BÒ BẰM + 1 KHOAI TÂY VỪA + 2 LY PEPSI VỪA",
+      "price": "139000"
+    },
+    {
+      "id": "5",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 1",
+      "image": "https://jollibee.com.vn/uploads/dish/d1834d87116836-2mingggin.png",
+      "description": "2 MIẾNG GÀ GIÒN",
+      "price": "60000"
+    },
+    {
+      "id": "6",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 2",
+      "image": "https://jollibee.com.vn/uploads/dish/427e7a3136f84a-4mingggin.png",
+      "description": "4 MIẾNG GÀ GIÒN",
+      "price": "116000"
+    },
+    {
+      "id": "7",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 3",
+      "image": "https://jollibee.com.vn/uploads/dish/ee8e7512368728-6mingggin.png",
+      "description": "6 MIẾNG GÀ GIÒN",
+      "price": "139000"
+    },
+    {
+      "id": "8",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 4",
+      "image": "https://jollibee.com.vn/uploads/dish/091277ef7fe806-hinhghep22.png",
+      "description": "CƠM GÀ GIÒN + SÚP BÍ ĐỎ + NƯỚC NGỌT",
+      "price": "50000"
+    },
+    {
+      "id": "9",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 5",
+      "image": "https://jollibee.com.vn/uploads/dish/0ade732c6f5968-2810014_comga01pepsi.png",
+      "description": "CƠM GÀ GIÒN + NƯỚC NGỌT",
+      "price": "45000"
+    },
+    {
+      "id": "10",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 6",
+      "image": "https://jollibee.com.vn/uploads/dish/18d46e3c3c7c3f-2810004_01miengcj01khoaivua01pepsi.png",
+      "description": "1 MIẾNG GÀ GIÒN + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "50000"
+    },
+    {
+      "id": "11",
+      "type": "ga gion",
+      "name": "gà giòn vui vẻ 7",
+      "image": "https://jollibee.com.vn/uploads/dish/3e4f6705b1d1ed-1810001_01miengcj1.jpg",
+      "description": "1 MIẾNG GÀ GIÒN",
+      "price": "30000"
+    },
+    {
+      "id": "12",
+      "type": "ga cay",
+      "name": "gà sốt cay 1",
+      "image": "https://jollibee.com.vn/uploads/dish/38b2b63ad78a31-1gstcaycm.jpg",
+      "description": "1 MIẾNG GÀ SỐT CAY + CƠM",
+      "price": "45000"
+    },
+    {
+      "id": "13",
+      "type": "ga cay",
+      "name": "gà sốt cay 2",
+      "image": "https://jollibee.com.vn/uploads/dish/0ea5c976da5a4a-2minggsgstcay.png",
+      "description": "2 MIẾNG GÀ SÀI GÒN SỐT CAY",
+      "price": "65000"
+    },
+    {
+      "id": "14",
+      "type": "ga cay",
+      "name": "gà sốt cay 3",
+      "image": "https://jollibee.com.vn/uploads/dish/1be860c93c1cbf-2810053_02cc01reg01pepsi.png",
+      "description": "2 MIẾNG GÀ SỐT CAY + KHOAI TÂY + NƯỚC",
+      "price": "90000"
+    },
+    {
+      "id": "15",
+      "type": "ga cay",
+      "name": "gà sốt cay 4",
+      "image": "https://jollibee.com.vn/uploads/dish/28719893e508b2-2810050_01comgacc01pepsi.png",
+      "description": "1 MIẾNG GÀ SỐT CAY + CƠM + NƯỚC",
+      "price": "50000"
+    },
+    {
+      "id": "16",
+      "type": "ga cay",
+      "name": "gà sốt cay 5",
+      "image": "https://jollibee.com.vn/uploads/dish/b827535750c3e4-hinhghep07.png",
+      "description": "1 MIẾNG GÀ SỐT CAY + CƠM + NƯỚC + SÚP",
+      "price": "55000"
+    },
+    {
+      "id": "18",
+      "type": "ga cay",
+      "name": "gà sốt cay 6",
+      "image": "https://jollibee.com.vn/uploads/dish/a80f1c062be676-2810052_01cc01khoaivua01pepsi.png",
+      "description": "1 MIẾNG GÀ SỐT CAY + KHOAI TÂY + NƯỚC",
+      "price": "55000"
+    },
+    {
+      "id": "19",
+      "type": "ga cay",
+      "name": "gà sốt cay 7",
+      "image": "https://jollibee.com.vn/uploads/dish/cc6e01cdf7b86b-1810036_01miengcc.png",
+      "description": "1 MIẾNG GÀ SÀI GÒN SỐT CAY",
+      "price": "35000"
+    },
+    {
+      "id": "20",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 1",
+      "image": "https://jollibee.com.vn/uploads/dish/5a5b876853153a-2840023_01myylon02gakoxuong01khoaivua01pepsi.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN + 2 MIẾNG GÀ KHÔNG XƯƠNG + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "75000"
+    },
+    {
+      "id": "21",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 2",
+      "image": "https://jollibee.com.vn/uploads/dish/fc52c6aab9fdc7-2840021_01myylon02gakoxuong01pepsi.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN + 2 MIẾNG GÀ KHÔNG XƯƠNG + NƯỚC NGỌT",
+      "price": "65000"
+    },
+    {
+      "id": "22",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 3",
+      "image": "https://jollibee.com.vn/uploads/dish/7befdf5dbb9328-2840019_01myylon01pepsi.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN + NƯỚC NGỌT",
+      "price": "45000"
+    },
+    {
+      "id": "23",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 4",
+      "image": "https://jollibee.com.vn/uploads/dish/a01c6ffac8f4d6-2840020_01myylon01cj01pepsi.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN + 1 MIẾNG GÀ RÁN + NƯỚC NGỌT",
+      "price": "75000"
+    },
+    {
+      "id": "24",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 5",
+      "image": "https://jollibee.com.vn/uploads/dish/20ad9d7968afc4-2840024_01myylon01cj01khoaivua01pepsi.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN + 1 MIẾNG GÀ RÁN + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "90000"
+    },
+    {
+      "id": "25",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 6",
+      "image": "https://jollibee.com.vn/uploads/dish/af648a3b708bff-2840022_01myylon01khoaivua01pepsi.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "60000"
+    },
+    {
+      "id": "26",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 7",
+      "image": "https://jollibee.com.vn/uploads/dish/7152e2e85bd4c2-2840011_01myynho01cj01khoainho01pepsi.png",
+      "description": "N3 - MÌ Ý SỐT BÒ BẰM + 1 MIẾNG GÀ RÁN + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "80000"
+    },
+    {
+      "id": "27",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 8",
+      "image": "https://jollibee.com.vn/uploads/dish/c341d1e4536398-2840010_01myynho02gakhongxuong01khoaivua01pepsi.png",
+      "description": "N5 - MÌ Ý SỐT BÒ BẰM + 2 MIẾNG GÀ GIÒN KHÔNG XƯƠNG + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "70000"
+    },
+    {
+      "id": "28",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 9",
+      "image": "https://jollibee.com.vn/uploads/dish/5f31ab1c9f1a00-2840008_01myynho02gakoxuong01pepsi.png",
+      "description": "N1 - MÌ Ý SỐT BÒ BẰM + 2 MIẾNG GÀ GIÒN KHÔNG XƯƠNG + NƯỚC NGỌT",
+      "price": "60000"
+    },
+    {
+      "id": "29",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 10",
+      "image": "https://jollibee.com.vn/uploads/dish/eb4ecd4d19ec89-2840009_01myynho01khoaivua01pepsi.png",
+      "description": "N2 - MÌ Ý SỐT BÒ BẰM + KHOAI TÂY VỪA + NƯỚC NGỌT",
+      "price": "50000"
+    },
+    {
+      "id": "30",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 11",
+      "image": "https://jollibee.com.vn/uploads/dish/89fc8798211833-2840002_01myynho01pepsi.png",
+      "description": "N6 - MÌ Ý SỐT BÒ BẰM + NƯỚC NGỌT",
+      "price": "35000"
+    },
+    {
+      "id": "31",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 12",
+      "image": "https://jollibee.com.vn/uploads/dish/7b8e79a673f041-1840007_01myylon.png",
+      "description": "MÌ Ý SỐT BÒ BẰM LỚN",
+      "price": "40000"
+    },
+    {
+      "id": "32",
+      "type": "my y",
+      "name": "mỳ ý sốt bò bằm 13",
+      "image": "https://jollibee.com.vn/uploads/dish/50a754c7b328c8-1840001_01myy.png",
+      "description": "MÌ Ý SỐT BÒ BẰM",
+      "price": "30000"
+    },
+    {
+      "id": "33",
+      "type": "burger",
+      "name": "burger 1",
+      "image": "https://jollibee.com.vn/uploads/dish/f0509916cba46a-2860002_sandwichga01pepsi.png",
+      "description": "SANDWICH GÀ GIÒN + NƯỚC NGỌT",
+      "price": "35000"
+    },
+    {
+      "id": "34",
+      "type": "burger",
+      "name": "burger 2",
+      "image": "https://jollibee.com.vn/uploads/dish/ca79195ff54344-2860007_sandwichbbq01khoaivua01pepsi.png",
+      "description": "SANDWICH THỊT NƯỚNG BBQ + KHOAI TÂY + NƯỚC NGỌT",
+      "price": "50000"
+    },
+    {
+      "id": "35",
+      "type": "burger",
+      "name": "burger 3",
+      "image": "https://jollibee.com.vn/uploads/dish/92d19ff9ee533e-2860006_01sandwichbbq01pepsi.png",
+      "description": "SANDWICH THỊT NƯỚNG BBQ + NƯỚC NGỌT",
+      "price": "35000"
+    },
+    {
+      "id": "36",
+      "type": "burger",
+      "name": "burger 4",
+      "image": "https://jollibee.com.vn/uploads/dish/20522844a2900d-1830004_sandwichesbbq.png",
+      "description": "SANDWICH THỊT NƯỚNG BBQ",
+      "price": "30000"
+    },
+    {
+      "id": "37",
+      "type": "burger",
+      "name": "burger 5",
+      "image": "https://jollibee.com.vn/uploads/dish/92d27d47dadbfc-hambugerlon.jpg",
+      "description": "SANDWICH GÀ GIÒN",
+      "price": "30000"
+    },
+    {
+      "id": "38",
+      "type": "burger",
+      "name": "burger 6",
+      "image": "https://jollibee.com.vn/uploads/dish/50bab994fefc3d-2860003_sandwichga01khoaivua01pepsi.png",
+      "description": "SANDWICH GÀ GIÒN + NƯỚC NGỌT + KHOAI TÂY",
+      "price": "50000"
+    },
+    {
+      "id": "39",
+      "type": "side dish",
+      "name": "CÁNH GÀ SỐT TIÊU",
+      "image": "https://jollibee.com.vn/uploads/dish/92965ad17bd5e1-chicken.png",
+      "description": "CÁNH GÀ SỐT TIÊU",
+      "price": "35000"
+    },
+    {
+      "id": "40",
+      "type": "side dish",
+      "name": "KHOAI LẮC RONG BIỂN",
+      "image": "https://jollibee.com.vn/uploads/dish/e37e2754354109-menuborad1.png",
+      "description": "KHOAI LẮC RONG BIỂN",
+      "price": "25000"
+    },
+    {
+      "id": "41",
+      "type": "side dish",
+      "name": "KHOAI TÂY CHIÊN (LỚN)",
+      "image": "https://jollibee.com.vn/uploads/dish/2a0e60ca7a388a-2mienggaran23.png",
+      "description": "KHOAI TÂY CHIÊN (LỚN)",
+      "price": "25000"
+    },
+    {
+      "id": "42",
+      "type": "side dish",
+      "name": "KHOAI TÂY LẮC VỊ BBQ (LỚN)",
+      "image": "https://jollibee.com.vn/uploads/dish/6930a7bd038164-2mienggaran22.png",
+      "description": "KHOAI TÂY LẮC VỊ BBQ (LỚN)",
+      "price": "35000"
+    },
+    {
+      "id": "43",
+      "type": "side dish",
+      "name": "SÚP BÍ ĐỎ",
+      "image": "https://jollibee.com.vn/uploads/dish/1e72dcb226ae80-supbido1.png",
+      "description": "SÚP BÍ ĐỎ",
+      "price": "15000"
+    },
+    {
+      "id": "44",
+      "type": "side dish",
+      "name": "CƠM TRẮNG",
+      "image": "https://jollibee.com.vn/uploads/dish/b3ad51b912e4e5-2mienggaran24.png",
+      "description": "CƠM TRẮNG",
+      "price": "5000"
+    },
+    {
+      "id": "45",
+      "type": "dessert",
+      "name": "TROPICAL SUNDAE",
+      "image": "https://jollibee.com.vn/uploads/dish/7c02e2de831e74-kemsundae06.png",
+      "description": "TROPICAL SUNDAE",
+      "price": "20000"
+    },
+    {
+      "id": "46",
+      "type": "dessert",
+      "name": "BÁNH PIE NHÂN XOÀI ĐÀO",
+      "image": "https://jollibee.com.vn/uploads/dish/99da79db6f9f3e-600x6001.png",
+      "description": "BÁNH PIE NHÂN XOÀI ĐÀO",
+      "price": "15000"
+    },
+    {
+      "id": "47",
+      "type": "dessert",
+      "name": "KEM SUNDAES DÂU",
+      "image": "https://jollibee.com.vn/uploads/dish/d01402ed11976b-kemsundeadau.png",
+      "description": "KEM SUNDAES DÂU",
+      "price": "15000"
+    },
+    {
+      "id": "48",
+      "type": "dessert",
+      "name": "KEM SUNDAES SÔCÔLA",
+      "image": "https://jollibee.com.vn/uploads/dish/192dcb48e7393a-kemsocola16.png",
+      "description": "KEM SUNDAES SÔCÔLA",
+      "price": "15000"
+    },
+    {
+      "id": "49",
+      "type": "dessert",
+      "name": "KEM SÔCÔLA (CÚP)",
+      "image": "https://jollibee.com.vn/uploads/dish/c400652c2a03e0-chocolateicecream01.png",
+      "description": "KEM SÔCÔLA (CÚP)",
+      "price": "7000"
+    },
+    {
+      "id": "50",
+      "type": "dessert",
+      "name": "TRÀ ĐÀO (LY NHỎ)",
+      "image": "https://jollibee.com.vn/uploads/dish/0f550a170bb756-tradao.png",
+      "description": "TRÀ ĐÀO (LY NHỎ)",
+      "price": "15000"
+    },
+    {
+      "id": "51",
+      "type": "dessert",
+      "name": "TRÀ ĐÀO (LY LỚN)",
+      "image": "https://jollibee.com.vn/uploads/dish/564edf0846c268-tradao.png",
+      "description": "TRÀ ĐÀO (LY LỚN)",
+      "price": "20000"
+    },
+    {
+      "id": "52",
+      "type": "dessert",
+      "name": "CA CAO SỮA ĐÁ (NHỎ)",
+      "image": "https://jollibee.com.vn/uploads/dish/c5ded2aa5f7b3c-2mienggaran19.png",
+      "description": "CA CAO SỮA ĐÁ (NHỎ)",
+      "price": "18000"
+    },
+    {
+      "id": "53",
+      "type": "dessert",
+      "name": "CA CAO SỮA ĐÁ (LỚN)",
+      "image": "https://jollibee.com.vn/uploads/dish/2a5c8bbe5aca67-2mienggaran19.png",
+      "description": "CA CAO SỮA ĐÁ (LỚN)",
+      "price": "23000"
+    },
+    {
+      "id": "54",
+      "type": "dessert",
+      "name": "PEPSI NHỎ - 330ML",
+      "image": "https://jollibee.com.vn/uploads/dish/9d61bc5e112f9e-pepnhmi.png",
+      "description": "PEPSI NHỎ - 330ML",
+      "price": "10000"
+    },
+    {
+      "id": "55",
+      "type": "dessert",
+      "name": "PEPSI LỚN - 450ML",
+      "image": "https://jollibee.com.vn/uploads/dish/ba19009c770377-750x750.png",
+      "description": "PEPSI LỚN - 450ML",
+      "price": "15000"
+    },
+    {
+      "id": "56",
+      "type": "dessert",
+      "name": "7 UP NHỎ - 330ML",
+      "image": "https://jollibee.com.vn/uploads/dish/76632fe162df44-1.png",
+      "description": "7 UP NHỎ - 330ML",
+      "price": "10000"
+    },
+    {
+      "id": "45",
+      "type": "dessert",
+      "name": "NƯỚC SUỐI AQUAFINA",
+      "image": "https://jollibee.com.vn/uploads/dish/1a00ca58bc00e1-b4ab7d469cee70aquaffina01.png",
+      "description": "NƯỚC SUỐI AQUAFINA",
+      "price": "8000"
+    }
+  ],
+  "users": [{ "id": 1, "name": "" }],
+  "carts": [
+    { "id": 1, "userId": "", "products": [{ "productId": "", "quantity": "" }] }
+  ]
+}
