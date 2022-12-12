@@ -9,3 +9,9 @@ export const navList = [
   { content: "liên hệ", url: "/contact" },
   { content: "tuyển dụng", url: "/career" },
 ];
+export const STATUS = {
+  IDLE: "idle",
+  LOADING: "loading",
+  SUCCESS: "success",
+  FAILED: "failed",
+};

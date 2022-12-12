@@ -7,15 +7,12 @@ const openSideBarSlice = createSlice({
   },
   reducers: {
     toggleSideBar: (state, action) => {
-      console.log("toggle");
       state.isOpenSideBar = !state.isOpenSideBar;
     },
     openSideBar: (state, action) => {
-      console.log("open");
       state.isOpenSideBar = true;
     },
     closeSideBar: (state, action) => {
-      console.log("close");
       state.isOpenSideBar = false;
     },
   },

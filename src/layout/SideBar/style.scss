@@ -54,18 +54,18 @@
             z-index: -1;
             left: -200px;
             background-color: white;
-            transition: 0.5s;
+            transition: 2s;
           }
           &:hover {
             background-color: var(--hover-color);
             color: black;
             &::after {
-              left: 80%;
+              left: 78%;
               top: 50%;
               transform: rotate(-45deg);
             }
             &::before {
-              left: 80%;
+              left: 78%;
               top: 0;
               transform: rotate(45deg);
             }
@@ -79,23 +79,31 @@
             position: absolute;
             width: 20%;
             height: 50%;
+            left: 78%;
             z-index: -1;
-            left: -200px;
             background-color: white;
-            transition: 0.5s;
           }
           &::after {
-            left: 80%;
             top: 50%;
             transform: rotate(-45deg);
           }
           &::before {
-            left: 80%;
             top: 0;
             transform: rotate(45deg);
           }
         }
       }
     }
+    animation: fadeIn 0.5s;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    // width: 0px;
+    left: -250px;
+  }
+  100% {
+    // width: 250px;
+    left: 0;
   }
 }
