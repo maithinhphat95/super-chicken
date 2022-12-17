@@ -1,49 +1,16 @@
-import React, { useEffect, useLayoutEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Carousel from "../../components/customer/HomePage/Carousel";
+import MenuHeader from "../../components/customer/MenuPage/MenuHeader";
+import ProductList from "../../components/customer/MenuPage/MenuContainer";
 import { fetchProduct } from "../../redux/features/Product/productSlice";
-import axios from "axios";
-import { BASE_URL } from "../../apis/axiosClient";
-import { productApi } from "../../apis/productApi";
-
-MenuPage.propTypes = {};
 
 function MenuPage(props) {
-  const productDatas = useSelector((state) => state.product);
-  const dispatch = useDispatch();
-
-  // Show state from redux
-  console.log(productDatas);
-
-  const handleClick = async () => {
-    try {
-      const res = await productApi.getData({ category: "combo" });
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    // dispatch Redux AsynThunk Action
-    dispatch(fetchProduct());
-
-    // Fetch data
-    const fetchData = async ({ category }) => {
-      try {
-        const res = await productApi.getData({ category: category });
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData({ category: "combo" });
-  }, []);
-
   return (
-    <div>
-      <p>Menu Page</p>
-      <button onClick={handleClick}>Fetch Data</button>
+    <div className="menu-page">
+      <Carousel />
+      <MenuHeader />
+      <ProductList />
     </div>
   );
 }

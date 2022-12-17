@@ -22,7 +22,10 @@
   & .slick-next {
     right: 25px;
   }
-  & img {
-    width: 100%;
+  & .banner {
+    & img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 }

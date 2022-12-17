@@ -34,7 +34,7 @@
     },
     {
       "id": "5",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 1",
       "image": "https://jollibee.com.vn/uploads/dish/d1834d87116836-2mingggin.png",
       "description": "2 MIẾNG GÀ GIÒN",
@@ -42,7 +42,7 @@
     },
     {
       "id": "6",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 2",
       "image": "https://jollibee.com.vn/uploads/dish/427e7a3136f84a-4mingggin.png",
       "description": "4 MIẾNG GÀ GIÒN",
@@ -50,7 +50,7 @@
     },
     {
       "id": "7",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 3",
       "image": "https://jollibee.com.vn/uploads/dish/ee8e7512368728-6mingggin.png",
       "description": "6 MIẾNG GÀ GIÒN",
@@ -58,7 +58,7 @@
     },
     {
       "id": "8",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 4",
       "image": "https://jollibee.com.vn/uploads/dish/091277ef7fe806-hinhghep22.png",
       "description": "CƠM GÀ GIÒN + SÚP BÍ ĐỎ + NƯỚC NGỌT",
@@ -66,7 +66,7 @@
     },
     {
       "id": "9",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 5",
       "image": "https://jollibee.com.vn/uploads/dish/0ade732c6f5968-2810014_comga01pepsi.png",
       "description": "CƠM GÀ GIÒN + NƯỚC NGỌT",
@@ -74,7 +74,7 @@
     },
     {
       "id": "10",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 6",
       "image": "https://jollibee.com.vn/uploads/dish/18d46e3c3c7c3f-2810004_01miengcj01khoaivua01pepsi.png",
       "description": "1 MIẾNG GÀ GIÒN + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -82,7 +82,7 @@
     },
     {
       "id": "11",
-      "category": "ga gion",
+      "category": "friedChicken",
       "name": "gà giòn vui vẻ 7",
       "image": "https://jollibee.com.vn/uploads/dish/3e4f6705b1d1ed-1810001_01miengcj1.jpg",
       "description": "1 MIẾNG GÀ GIÒN",
@@ -90,7 +90,7 @@
     },
     {
       "id": "12",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 1",
       "image": "https://jollibee.com.vn/uploads/dish/38b2b63ad78a31-1gstcaycm.jpg",
       "description": "1 MIẾNG GÀ SỐT CAY + CƠM",
@@ -98,7 +98,7 @@
     },
     {
       "id": "13",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 2",
       "image": "https://jollibee.com.vn/uploads/dish/0ea5c976da5a4a-2minggsgstcay.png",
       "description": "2 MIẾNG GÀ SÀI GÒN SỐT CAY",
@@ -106,7 +106,7 @@
     },
     {
       "id": "14",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 3",
       "image": "https://jollibee.com.vn/uploads/dish/1be860c93c1cbf-2810053_02cc01reg01pepsi.png",
       "description": "2 MIẾNG GÀ SỐT CAY + KHOAI TÂY + NƯỚC",
@@ -114,7 +114,7 @@
     },
     {
       "id": "15",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 4",
       "image": "https://jollibee.com.vn/uploads/dish/28719893e508b2-2810050_01comgacc01pepsi.png",
       "description": "1 MIẾNG GÀ SỐT CAY + CƠM + NƯỚC",
@@ -122,7 +122,7 @@
     },
     {
       "id": "16",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 5",
       "image": "https://jollibee.com.vn/uploads/dish/b827535750c3e4-hinhghep07.png",
       "description": "1 MIẾNG GÀ SỐT CAY + CƠM + NƯỚC + SÚP",
@@ -130,7 +130,7 @@
     },
     {
       "id": "18",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 6",
       "image": "https://jollibee.com.vn/uploads/dish/a80f1c062be676-2810052_01cc01khoaivua01pepsi.png",
       "description": "1 MIẾNG GÀ SỐT CAY + KHOAI TÂY + NƯỚC",
@@ -138,7 +138,7 @@
     },
     {
       "id": "19",
-      "category": "ga cay",
+      "category": "spicyChicken",
       "name": "gà sốt cay 7",
       "image": "https://jollibee.com.vn/uploads/dish/cc6e01cdf7b86b-1810036_01miengcc.png",
       "description": "1 MIẾNG GÀ SÀI GÒN SỐT CAY",
@@ -146,7 +146,7 @@
     },
     {
       "id": "20",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 1",
       "image": "https://jollibee.com.vn/uploads/dish/5a5b876853153a-2840023_01myylon02gakoxuong01khoaivua01pepsi.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN + 2 MIẾNG GÀ KHÔNG XƯƠNG + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -154,7 +154,7 @@
     },
     {
       "id": "21",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 2",
       "image": "https://jollibee.com.vn/uploads/dish/fc52c6aab9fdc7-2840021_01myylon02gakoxuong01pepsi.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN + 2 MIẾNG GÀ KHÔNG XƯƠNG + NƯỚC NGỌT",
@@ -162,7 +162,7 @@
     },
     {
       "id": "22",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 3",
       "image": "https://jollibee.com.vn/uploads/dish/7befdf5dbb9328-2840019_01myylon01pepsi.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN + NƯỚC NGỌT",
@@ -170,7 +170,7 @@
     },
     {
       "id": "23",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 4",
       "image": "https://jollibee.com.vn/uploads/dish/a01c6ffac8f4d6-2840020_01myylon01cj01pepsi.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN + 1 MIẾNG GÀ RÁN + NƯỚC NGỌT",
@@ -178,7 +178,7 @@
     },
     {
       "id": "24",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 5",
       "image": "https://jollibee.com.vn/uploads/dish/20ad9d7968afc4-2840024_01myylon01cj01khoaivua01pepsi.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN + 1 MIẾNG GÀ RÁN + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -186,7 +186,7 @@
     },
     {
       "id": "25",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 6",
       "image": "https://jollibee.com.vn/uploads/dish/af648a3b708bff-2840022_01myylon01khoaivua01pepsi.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -194,7 +194,7 @@
     },
     {
       "id": "26",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 7",
       "image": "https://jollibee.com.vn/uploads/dish/7152e2e85bd4c2-2840011_01myynho01cj01khoainho01pepsi.png",
       "description": "N3 - MÌ Ý SỐT BÒ BẰM + 1 MIẾNG GÀ RÁN + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -202,7 +202,7 @@
     },
     {
       "id": "27",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 8",
       "image": "https://jollibee.com.vn/uploads/dish/c341d1e4536398-2840010_01myynho02gakhongxuong01khoaivua01pepsi.png",
       "description": "N5 - MÌ Ý SỐT BÒ BẰM + 2 MIẾNG GÀ GIÒN KHÔNG XƯƠNG + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -210,7 +210,7 @@
     },
     {
       "id": "28",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 9",
       "image": "https://jollibee.com.vn/uploads/dish/5f31ab1c9f1a00-2840008_01myynho02gakoxuong01pepsi.png",
       "description": "N1 - MÌ Ý SỐT BÒ BẰM + 2 MIẾNG GÀ GIÒN KHÔNG XƯƠNG + NƯỚC NGỌT",
@@ -218,7 +218,7 @@
     },
     {
       "id": "29",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 10",
       "image": "https://jollibee.com.vn/uploads/dish/eb4ecd4d19ec89-2840009_01myynho01khoaivua01pepsi.png",
       "description": "N2 - MÌ Ý SỐT BÒ BẰM + KHOAI TÂY VỪA + NƯỚC NGỌT",
@@ -226,7 +226,7 @@
     },
     {
       "id": "30",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 11",
       "image": "https://jollibee.com.vn/uploads/dish/89fc8798211833-2840002_01myynho01pepsi.png",
       "description": "N6 - MÌ Ý SỐT BÒ BẰM + NƯỚC NGỌT",
@@ -234,7 +234,7 @@
     },
     {
       "id": "31",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 12",
       "image": "https://jollibee.com.vn/uploads/dish/7b8e79a673f041-1840007_01myylon.png",
       "description": "MÌ Ý SỐT BÒ BẰM LỚN",
@@ -242,7 +242,7 @@
     },
     {
       "id": "32",
-      "category": "my y",
+      "category": "spaghetti",
       "name": "mỳ ý sốt bò bằm 13",
       "image": "https://jollibee.com.vn/uploads/dish/50a754c7b328c8-1840001_01myy.png",
       "description": "MÌ Ý SỐT BÒ BẰM",
@@ -298,7 +298,7 @@
     },
     {
       "id": "39",
-      "category": "side dish",
+      "category": "sideDish",
       "name": "CÁNH GÀ SỐT TIÊU",
       "image": "https://jollibee.com.vn/uploads/dish/92965ad17bd5e1-chicken.png",
       "description": "CÁNH GÀ SỐT TIÊU",
@@ -306,7 +306,7 @@
     },
     {
       "id": "40",
-      "category": "side dish",
+      "category": "sideDish",
       "name": "KHOAI LẮC RONG BIỂN",
       "image": "https://jollibee.com.vn/uploads/dish/e37e2754354109-menuborad1.png",
       "description": "KHOAI LẮC RONG BIỂN",
@@ -314,7 +314,7 @@
     },
     {
       "id": "41",
-      "category": "side dish",
+      "category": "sideDish",
       "name": "KHOAI TÂY CHIÊN (LỚN)",
       "image": "https://jollibee.com.vn/uploads/dish/2a0e60ca7a388a-2mienggaran23.png",
       "description": "KHOAI TÂY CHIÊN (LỚN)",
@@ -322,7 +322,7 @@
     },
     {
       "id": "42",
-      "category": "side dish",
+      "category": "sideDish",
       "name": "KHOAI TÂY LẮC VỊ BBQ (LỚN)",
       "image": "https://jollibee.com.vn/uploads/dish/6930a7bd038164-2mienggaran22.png",
       "description": "KHOAI TÂY LẮC VỊ BBQ (LỚN)",
@@ -330,7 +330,7 @@
     },
     {
       "id": "43",
-      "category": "side dish",
+      "category": "sideDish",
       "name": "SÚP BÍ ĐỎ",
       "image": "https://jollibee.com.vn/uploads/dish/1e72dcb226ae80-supbido1.png",
       "description": "SÚP BÍ ĐỎ",
@@ -338,7 +338,7 @@
     },
     {
       "id": "44",
-      "category": "side dish",
+      "category": "sideDish",
       "name": "CƠM TRẮNG",
       "image": "https://jollibee.com.vn/uploads/dish/b3ad51b912e4e5-2mienggaran24.png",
       "description": "CƠM TRẮNG",

@@ -18,6 +18,7 @@ function Carousel(props) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    className: "carousel",
   };
   return (
     <div className="banner-section">

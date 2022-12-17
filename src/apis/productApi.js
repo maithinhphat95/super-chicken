@@ -1,4 +1,5 @@
 import axiosClient, { BASE_URL } from "./axiosClient";
+const PRODUCT_URL = `/products`;
 
 export const productApi = {
   // fetch all products
@@ -11,7 +12,6 @@ export const productApi = {
     sortBy,
     order,
   }) => {
-    const PRODUCT_URL = `${BASE_URL}/products`;
     try {
       const response = await axiosClient.get(PRODUCT_URL, {
         params: {
@@ -27,7 +27,16 @@ export const productApi = {
           ...(order && { _order: order || "asc" }),
         },
       });
-      console.log("Get Products Success~ !");
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  // Get all products data
+  getAll: async () => {
+    try {
+      const response = await axiosClient.get("/products");
       return response;
     } catch (error) {
       console.log(error);
