@@ -108,6 +108,7 @@ function MenuContainer() {
             limit: pre.limit + 4,
           };
         });
+
         break;
       case "spicyChicken":
         setOptionFetchSpicyChicken((pre) => {

@@ -14,6 +14,18 @@ function MenuHeader() {
     }
   };
 
+  const executeScroll = (id) => {
+    const element = document.getElementById(id);
+    const elementPosition = element.getBoundingClientRect().top;
+    // window.pageYOffset : khoảng cách offset từ đầu trang tới vị trí hiện tại
+    // element.getBoundingClientRect() : lấy vị trí của element so với view hiện tại.
+    // elementPosition + window.pageYOffset : vị trí element so với đầu trang
+    window.scrollTo({
+      top: elementPosition + window.pageYOffset - 80,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -22,7 +34,7 @@ function MenuHeader() {
   }, [window.scrollY]);
 
   useEffect(() => {
-    window.scrollTo(0, 520);
+    //
   }, []);
 
   return (
@@ -32,7 +44,14 @@ function MenuHeader() {
           {MENU_LIST.map((item, index) => {
             return (
               <li key={index} className="menu-header-list-category ">
-                <a href={item.url}> {item.title}</a>
+                <a
+                  // href={item.url}
+                  onClick={() => {
+                    executeScroll(item.url);
+                  }}
+                >
+                  {item.title}
+                </a>
               </li>
             );
           })}
@@ -47,7 +66,7 @@ function MenuHeader() {
                 className="menu-header-select-option"
                 value={item}
               >
-                <Link to={item.url}> {item.title}</Link>
+                {item.title}
               </option>
             );
           })}
