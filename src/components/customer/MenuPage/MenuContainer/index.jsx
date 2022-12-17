@@ -1,17 +1,12 @@
-import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import axiosClient from "../../../../apis/axiosClient";
+import { useDispatch } from "react-redux";
 import { productApi } from "../../../../apis/productApi";
-import { MENU_LIST } from "../../../../constant/constant";
 import { closeSideBar } from "../../../../redux/features/OpenSideBar/openSideBar";
-import { fetchProduct } from "../../../../redux/features/Product/productSlice";
 import MenuRow from "../MenuRow";
 import "./style.scss";
 
 function MenuContainer() {
   const dispatch = useDispatch();
-  const productStates = useSelector((state) => state.product);
 
   const [products, setProducts] = useState({
     combo: [],
@@ -199,14 +194,14 @@ function MenuContainer() {
   useEffect(() => {
     dispatch(closeSideBar());
   }, []);
-  console.log(products);
 
   return (
     <div className="menu-container art-text">
-      <div className="menu">
+      <div id="menu" className="menu">
         <h1 className="menu-title">Thực Đơn</h1>
         {/* Combo Category */}
         <MenuRow
+          id={"combo"}
           title="Combo"
           loading={loading.combo}
           loadMore={loadMore.combo}
@@ -217,6 +212,7 @@ function MenuContainer() {
         />
         {/* Fried Chicken Category */}
         <MenuRow
+          id={"fried-chicken"}
           title="Gà Giòn Vui Vẻ"
           loading={loading.friedChicken}
           loadMore={loadMore.friedChicken}
@@ -227,6 +223,7 @@ function MenuContainer() {
         />
         {/* Spicy Chicken Category */}
         <MenuRow
+          id={"spicy-chicken"}
           title="Gà Sốt Cay"
           loading={loading.spicyChicken}
           loadMore={loadMore.spicyChicken}
@@ -237,6 +234,7 @@ function MenuContainer() {
         />
         {/* Spaghetti Category */}
         <MenuRow
+          id={"spaghetti"}
           title="Mỳ Ý Sốt Bò Bằm"
           loading={loading.spaghetti}
           loadMore={loadMore.spaghetti}
@@ -247,6 +245,7 @@ function MenuContainer() {
         />
         {/* Burger Category */}
         <MenuRow
+          id={"burger"}
           title="Burger & Cơm"
           loading={loading.burger}
           loadMore={loadMore.burger}
@@ -257,6 +256,7 @@ function MenuContainer() {
         />
         {/* Side Dish Category */}
         <MenuRow
+          id={"side-dish"}
           title="Phần Ăn Phụ"
           loading={loading.sideDish}
           loadMore={loadMore.sideDish}
@@ -267,6 +267,7 @@ function MenuContainer() {
         />
         {/* Dessert Category */}
         <MenuRow
+          id={"dessert"}
           title="Món Tráng Miệng"
           loading={loading.dessert}
           loadMore={loadMore.dessert}

@@ -32,7 +32,7 @@ function MenuHeader() {
           {MENU_LIST.map((item, index) => {
             return (
               <li key={index} className="menu-header-list-category ">
-                <Link to={item.url}> {item.title}</Link>
+                <a href={item.url}> {item.title}</a>
               </li>
             );
           })}

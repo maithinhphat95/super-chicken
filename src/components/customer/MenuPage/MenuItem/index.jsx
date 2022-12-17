@@ -18,10 +18,6 @@ function MenuItem(props) {
             {item}
           </p>
         ))}
-        {/* 
-        <p className="menu-list-item-card-title">01 miếng gà giòn vui vẻ</p>
-        <p className="menu-list-item-card-title">01 mỳ ý sốt bò bằm</p>
-        <p className="menu-list-item-card-title">01 nước ngọt (vừa)</p> */}
       </div>
       <div>
         <p className="menu-list-item-price">65.000 đ</p>
