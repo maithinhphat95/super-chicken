@@ -1,27 +1,19 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import Header from "../Header";
 import Footer from "../Footer";
 import SideBar from "../SideBar";
-
-DefaultLayout.propTypes = {};
+import { useSelector } from "react-redux";
 
 function DefaultLayout({ children }) {
-  const [showSideBar, setShowSideBar] = useState(false);
+  const isOpenSideBar = useSelector((state) => state.openSideBar.isOpenSideBar);
   return (
     <>
-      <button
-        style={{ marginLeft: "50%" }}
-        onClick={() => {
-          setShowSideBar(!showSideBar);
-        }}
-      >
-        Show
-      </button>
-      <Header />
-      {showSideBar && <SideBar />}
-      <div className="content">{children}</div>
-      <Footer />
+      {isOpenSideBar && <SideBar />}
+      <div className="container">
+        <Header />
+        <div className="content">{children}</div>
+        <Footer />
+      </div>
     </>
   );
 }

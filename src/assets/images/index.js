@@ -19,4 +19,9 @@ export default {
   serviceBg: require("./service-list-bg.png"),
   tdMenuBg: require("./today-menu-bg.jpg"),
   tdMenuBgHv: require("./today-menu-bg-hv.jpg"),
+  defaultBanner: require("./default-banner.jpg"),
+  combo1: require("./combo1.jpg"),
+  combo2: require("./combo2.png"),
+  combo3: require("./combo3.png"),
+  combo4: require("./combo4.png"),
 };

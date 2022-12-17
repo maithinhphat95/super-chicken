@@ -6,10 +6,16 @@ import { FaBars, FaMapMarkerAlt, FaUserAlt } from "react-icons/fa";
 import NavItem from "../../components/customer/NavItem";
 import { navList } from "../../constant/constant";
 import images from "../../assets/images";
+import { useDispatch } from "react-redux";
+import { toggleSideBar } from "../../redux/features/OpenSideBar/openSideBar";
 
 Header.propTypes = {};
 
 function Header(props) {
+  const dispatch = useDispatch();
+  const handleToggleSideBar = () => {
+    dispatch(toggleSideBar());
+  };
   return (
     <div className="header">
       <Grid container spacing={0}>
@@ -22,6 +28,10 @@ function Header(props) {
               color="inherit"
               aria-label="menu"
               sx={{ ml: 1, color: "white" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleToggleSideBar();
+              }}
             >
               <FaBars size={"2rem"} />
             </IconButton>
