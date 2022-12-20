@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import ArtBtn from "../../../common/ArtBtn";
-import {} from "";
+import {
+  addToCart,
+  cartSlice,
+  initCart,
+} from "../../../../redux/features/Cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function MenuItem(props) {
   const { product } = props;
+  const dispatch = useDispatch();
+  const cartState = useSelector((state) => state.cart);
   const handleAddToCart = (item) => {
-    // dispatch());
+    const cartItem = { ...item, quantity: 1, subPrice: product.price };
+    dispatch(addToCart(cartItem));
   };
   return (
     <Grid item xs={12} sm={6} md={3} className="menu-list-item">

@@ -68,16 +68,21 @@
         flex-wrap: nowrap;
         font-size: 14px;
       }
-      // &-name {
-      //   font-weight: 700;
-      // }
-      &-description {
+
+      &-description,
+      &-name {
         font-weight: 500;
         max-width: 260px;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         font-size: 14px;
+      }
+      &-name {
+        text-transform: uppercase;
+      }
+      &-description {
+        text-transform: lowercase;
       }
       &-price {
         font-size: 16px;

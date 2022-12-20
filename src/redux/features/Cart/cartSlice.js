@@ -5,7 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     isOpenCart: false,
     cartList: [],
-    totalAmount: 0,
+    totalPrice: 0,
     totalQuantity: 0,
   },
   reducers: {
@@ -19,14 +19,87 @@ export const cartSlice = createSlice({
       state.isOpenCart = false;
     },
     initCart: (state, action) => {
-      const localCart = JSON.parse(localStorage.getItem("cart"));
-      console.log(localCart);
+      const localCart = JSON.parse(localStorage.getItem("cartState")) || {};
+      state.cartList = localCart.cartList;
+      state.totalPrice = localCart.totalPrice;
+      state.totalQuantity = localCart.totalQuantity;
+    },
+    saveLocal: (state, action) => {
+      localStorage.setItem("cartState", JSON.stringify(state));
     },
     addToCart: (state, action) => {
-      state.cartList.push(action.payload);
+      const existItem = state.cartList.find((item) => {
+        return item.id === action.payload.id;
+      });
+      if (!existItem) {
+        state.cartList.push(action.payload);
+      } else {
+        const existIndex = state.cartList.indexOf(existItem);
+        state.cartList[existIndex].quantity += 1;
+        state.cartList[existIndex].subPrice =
+          state.cartList[existIndex].quantity *
+          state.cartList[existIndex].price;
+      }
+      state.totalPrice = Number(
+        state.cartList.reduce((total, current) => {
+          return (total += Number(current.subPrice));
+        }, 0)
+      );
+      state.totalQuantity = Number(
+        state.cartList.reduce((total, current) => {
+          return (total += Number(current.quantity));
+        }, 0)
+      );
+      localStorage.setItem("cartState", JSON.stringify(state));
+    },
+    changeQuantity: (state, action) => {
+      const indexExist = state.cartList.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      state.cartList[indexExist].quantity = action.payload.quantity;
+      state.cartList[indexExist].subPrice =
+        action.payload.quantity * state.cartList[indexExist].price;
+
+      state.totalPrice = Number(
+        state.cartList.reduce((total, current) => {
+          return (total += Number(current.subPrice));
+        }, 0)
+      );
+
+      state.totalQuantity = Number(
+        state.cartList.reduce((total, current) => {
+          return (total += Number(current.quantity));
+        }, 0)
+      );
+      localStorage.setItem("cartState", JSON.stringify(state));
+    },
+    deleteItem: (state, action) => {
+      console.log(action.payload);
+      state.cartList.splice(action.payload, 1);
+      state.totalPrice = Number(
+        state.cartList.reduce((total, current) => {
+          return (total += Number(current.subPrice));
+        }, 0)
+      );
+
+      state.totalQuantity = Number(
+        state.cartList.reduce((total, current) => {
+          return (total += Number(current.quantity));
+        }, 0)
+      );
+      localStorage.setItem("cartState", JSON.stringify(state));
     },
   },
 });
 const { actions, reducer } = cartSlice;
-export const { toggleCart, openCart, closeCart } = actions;
+export const {
+  toggleCart,
+  openCart,
+  closeCart,
+  initCart,
+  addToCart,
+  changeQuantity,
+  deleteItem,
+  saveLocal,
+} = actions;
 export default reducer;
