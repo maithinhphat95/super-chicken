@@ -3,7 +3,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MENU_LIST } from "../../../../constant/constant";
 import "./style.scss";
-function MenuHeader() {
+function MenuPageHeader() {
   const [fixHeader, setFixHeader] = useState(false);
 
   const handleScroll = () => {
@@ -33,10 +33,6 @@ function MenuHeader() {
     };
   }, [window.scrollY]);
 
-  useEffect(() => {
-    //
-  }, []);
-
   return (
     <div className={`menu-header art-text ${fixHeader ? "fix-header" : ""} `}>
       <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -45,7 +41,7 @@ function MenuHeader() {
             return (
               <li key={index} className="menu-header-list-category ">
                 <a
-                  // href={item.url}
+                  // href={`#${item.url}`}
                   onClick={() => {
                     executeScroll(item.url);
                   }}
@@ -58,13 +54,18 @@ function MenuHeader() {
         </ul>
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" } }}>
-        <select className="menu-header-select art-text">
+        <select
+          className="menu-header-select art-text"
+          onChange={(e) => {
+            executeScroll(e.target.value);
+          }}
+        >
           {MENU_LIST.map((item, index) => {
             return (
               <option
                 key={index}
                 className="menu-header-select-option"
-                value={item}
+                value={item.url}
               >
                 {item.title}
               </option>
@@ -76,4 +77,4 @@ function MenuHeader() {
   );
 }
 
-export default MenuHeader;
+export default MenuPageHeader;

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { productApi } from "../../../../apis/productApi";
 import { closeSideBar } from "../../../../redux/features/OpenSideBar/openSideBar";
+import PageTitle from "../../../common/PageTitle";
 import MenuRow from "../MenuRow";
 import "./style.scss";
 
-function MenuContainer() {
+function MenuPageContent() {
   const dispatch = useDispatch();
 
   const [products, setProducts] = useState({
@@ -194,12 +195,20 @@ function MenuContainer() {
   // Init page
   useEffect(() => {
     dispatch(closeSideBar());
+    // document.getElementById("combo").scrollIntoView();
+    const element = document.getElementById("combo");
+    const elementPosition = element.getBoundingClientRect().top;
+    const offset = elementPosition + window.pageYOffset - 175;
+    window.scrollTo({
+      top: offset,
+      behavior: "smooth",
+    });
   }, []);
 
   return (
     <div className="menu-container art-text">
-      <div id="menu" className="menu">
-        <h1 className="menu-title">Thực Đơn</h1>
+      <div id="menu" className="menu container">
+        <PageTitle title="Thực đơn" />
         {/* Combo Category */}
         <MenuRow
           id={"combo"}
@@ -282,4 +291,4 @@ function MenuContainer() {
   );
 }
 
-export default MenuContainer;
+export default MenuPageContent;
