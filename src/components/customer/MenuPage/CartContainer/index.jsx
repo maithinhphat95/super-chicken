@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FaOpencart, FaShoppingCart, FaTrash } from "react-icons/fa";
+
 import {
   BsCart3,
   BsChevronDoubleUp,
@@ -16,6 +16,7 @@ import {
 import ArtBtn from "../../../common/ArtBtn";
 import { Badge, Box } from "@mui/material";
 import CartItem from "../CartItem";
+import { Link } from "react-router-dom";
 function CartContainer(props) {
   const cartState = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -101,7 +102,7 @@ function CartContainer(props) {
               {cartState.totalPrice.toLocaleString()} đ
             </p>
           </div>
-          <ArtBtn content="Thanh toán" style="btn2" />
+          <ArtBtn content="Thanh toán" style="btn2" url={"/payment"} />
         </div>
       </div>
 

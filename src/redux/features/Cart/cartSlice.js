@@ -23,6 +23,7 @@ export const cartSlice = createSlice({
       state.cartList = localCart.cartList;
       state.totalPrice = localCart.totalPrice;
       state.totalQuantity = localCart.totalQuantity;
+      state.isOpenCart = false;
     },
     saveLocal: (state, action) => {
       localStorage.setItem("cartState", JSON.stringify(state));
@@ -74,7 +75,6 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartState", JSON.stringify(state));
     },
     deleteItem: (state, action) => {
-      console.log(action.payload);
       state.cartList.splice(action.payload, 1);
       state.totalPrice = Number(
         state.cartList.reduce((total, current) => {
