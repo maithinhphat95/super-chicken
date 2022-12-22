@@ -307,12 +307,16 @@ function PaymentPage(props) {
                   <Grid item xs={12} md={6}>
                     <div className="payment-confirm">
                       <p>
-                        Tổng giá tiền:{" "}
-                        <span>{cartState?.totalPrice?.toLocaleString()} đ</span>
+                        Tổng giá tiền :{" "}
+                        <span className="art-text">
+                          {cartState?.totalPrice?.toLocaleString()} đ
+                        </span>
                       </p>
                       <p>
-                        Phí vận chuyển:{" "}
-                        <span>{shipFee.toLocaleString()} đ</span>
+                        Phí vận chuyển :{" "}
+                        <span className="art-text">
+                          {shipFee.toLocaleString()} đ
+                        </span>
                       </p>
                       <p className="payment-total art-text">
                         Tổng đơn hàng:{" "}
@@ -321,13 +325,6 @@ function PaymentPage(props) {
                         </span>
                       </p>
                       <div className="payment-action">
-                        {/* <input
-                          type="button"
-                          onClick={() => {
-                            setShowDialog(true);
-                          }}
-                          value="Hoàn tất"
-                        /> */}
                         <ArtBtn
                           content="Hoàn tất"
                           style="btn2"
