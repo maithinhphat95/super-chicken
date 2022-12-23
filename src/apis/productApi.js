@@ -1,4 +1,4 @@
-import axiosClient, { BASE_URL } from "./axiosClient";
+import axiosClient from "./axiosClient";
 const PRODUCT_URL = `/products`;
 
 export const productApi = {

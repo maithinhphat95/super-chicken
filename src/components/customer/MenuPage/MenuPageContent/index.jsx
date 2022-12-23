@@ -73,7 +73,6 @@ function MenuPageContent() {
     try {
       const res = await productApi.getData(option);
       const total = Number(res.headers["x-total-count"]);
-
       if (res.data.length >= total) {
         setLoadMore((prev) => {
           return { ...prev, [category]: false };

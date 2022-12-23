@@ -3,10 +3,10 @@ import "./style.scss";
 import { Link } from "react-router-dom";
 
 function ArtBtn(props) {
-  const { content, style, url, handleClick } = props;
+  const { content, style, type, url, handleClick } = props;
   return (
     <button
-      type="button"
+      type={type || "button"}
       className={`art-btn art-text ${style == "btn2" && "art-btn-style-2"}`}
       onClick={(e) => {
         e.stopPropagation();

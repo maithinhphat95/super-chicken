@@ -57,7 +57,7 @@ const initalState = {
 };
 
 const productSlice = createSlice({
-  name: "fetchProductsSlice",
+  name: "productSlice",
   initialState: initalState,
   reducers: {},
   extraReducers: (builder) => {

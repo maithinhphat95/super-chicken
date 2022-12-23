@@ -1,37 +1,69 @@
 import "./style.scss";
 import React, { useEffect, useState } from "react";
-import PageTitle from "../../components/common/PageTitle";
-import {
-  FormControl,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  Radio,
-  RadioGroup,
-  Stack,
-} from "@mui/material";
+import { Grid, IconButton, Stack } from "@mui/material";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { initCart } from "../../redux/features/Cart/cartSlice";
-import ArtBtn from "../../components/common/ArtBtn";
 import { BsXCircleFill, BsXCircle, BsXLg } from "react-icons/bs";
+import { toast, ToastContainer } from "react-toastify";
+import PageTitle from "../../components/common/PageTitle";
+import ArtBtn from "../../components/common/ArtBtn";
+import { initCart } from "../../redux/features/Cart/cartSlice";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { addOrder } from "../../redux/features/Order/orderSlice";
+import { orderApis } from "../../apis/orderApi";
 function PaymentPage(props) {
   const {} = props;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const cartState = useSelector((state) => state.cart);
-  const [shipFee, setShipFee] = useState(20000);
   const [showDialog, setShowDialog] = useState(false);
-  const handleSubmit = () => {};
+  const [shipFee, setShipFee] = useState(20000);
+
+  const handleChangeShip = (shippingAgent) => {
+    switch (shippingAgent) {
+      case "j&t":
+        setShipFee(20000);
+        break;
+      case "ghtk":
+        setShipFee(15000);
+        break;
+      case "ghn":
+        setShipFee(25000);
+        break;
+      default:
+        break;
+    }
+    //
+  };
+  const handleChangeMethod = () => {
+    //
+  };
+
+  const handleOnSubmit = (data) => {
+    console.log(data);
+    setShowDialog(false);
+    // dispatch(addOrder({ a: 1 }));
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(initCart());
   }, []);
+
   return (
     <div className="payment-page container">
+      <ToastContainer pauseOnHover={false} theme={"light"} autoClose="2000" />
       <PageTitle title="Thanh Toán" />
       <div className="payment-content ">
-        <form className="payment" onSubmit={handleSubmit}>
+        <form className="payment" onSubmit={handleSubmit(handleOnSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <div className="payment-delivery">
@@ -146,6 +178,7 @@ function PaymentPage(props) {
                 </div>
               </div>
             </Grid>
+            {/* Payment Checkout */}
             <Grid item xs={12}>
               <div className="payment-checkout">
                 <Grid container spacing={4}>
@@ -167,6 +200,13 @@ function PaymentPage(props) {
                                 type="radio"
                                 name="payment-method"
                                 defaultChecked
+                                {...register("paymentMethod", {
+                                  required: true,
+                                })}
+                                value="COD"
+                                onChange={(e) => {
+                                  handleChangeMethod(e.target.value);
+                                }}
                               />
                               <span>Ship COD</span>
                             </div>
@@ -184,7 +224,18 @@ function PaymentPage(props) {
                         >
                           <label>
                             <div>
-                              <input type="radio" name="payment-method" />
+                              <input
+                                type="radio"
+                                name="payment-method"
+                                value="Paypal"
+                                disabled
+                                {...register("paymentMethod", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeMethod(e.target.value);
+                                }}
+                              />
                               <span>Paypal</span>
                             </div>
                             <img
@@ -201,7 +252,18 @@ function PaymentPage(props) {
                         >
                           <label>
                             <div>
-                              <input type="radio" name="payment-method" />
+                              <input
+                                type="radio"
+                                name="payment-method"
+                                value="VISA"
+                                disabled
+                                {...register("paymentMethod", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeMethod(e.target.value);
+                                }}
+                              />
                               <span>VISA / Master Card</span>
                             </div>
                             <img
@@ -218,7 +280,18 @@ function PaymentPage(props) {
                         >
                           <label>
                             <div>
-                              <input type="radio" name="payment-method" />
+                              <input
+                                type="radio"
+                                name="payment-method"
+                                value="ZaloPay"
+                                disabled
+                                {...register("paymentMethod", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeMethod(e.target.value);
+                                }}
+                              />
                               <span>ZaloPay</span>
                             </div>
                             <img
@@ -235,7 +308,18 @@ function PaymentPage(props) {
                         >
                           <label>
                             <div>
-                              <input type="radio" name="payment-method" />
+                              <input
+                                type="radio"
+                                name="payment-method"
+                                value="MoMo"
+                                disabled
+                                {...register("paymentMethod", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeMethod(e.target.value);
+                                }}
+                              />
                               <span>MoMo</span>
                             </div>
                             <img
@@ -258,6 +342,12 @@ function PaymentPage(props) {
                                 name="delivery"
                                 defaultChecked
                                 value={"j&t"}
+                                {...register("shippingAgent", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeShip(e.target.value);
+                                }}
                               />
                               <span>J&T Express</span>
                             </div>
@@ -273,7 +363,13 @@ function PaymentPage(props) {
                               <input
                                 type="radio"
                                 name="delivery"
-                                value={"ghtk"}
+                                value="ghtk"
+                                {...register("shippingAgent", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeShip(e.target.value);
+                                }}
                               />
                               <span>Giaohangtietkiem</span>
                             </div>
@@ -289,7 +385,13 @@ function PaymentPage(props) {
                               <input
                                 type="radio"
                                 name="delivery"
-                                value={"ghn"}
+                                value="ghn"
+                                {...register("shippingAgent", {
+                                  required: true,
+                                })}
+                                onChange={(e) => {
+                                  handleChangeShip(e.target.value);
+                                }}
                               />
                               <span>Giao Hang Nhanh</span>
                             </div>
@@ -349,8 +451,8 @@ function PaymentPage(props) {
                             </div>
                             <div className="confirm-dialog-box-content">
                               <p>
-                                Để xác nhận đồng ý thanh toán đơn hàng này, quý
-                                khách vui lòng nhấn vào nút xác nhận.
+                                Để xác nhận thanh toán đơn hàng này, quý khách
+                                vui lòng nhấn vào nút xác nhận.
                               </p>
                               <p>Xin cảm ơn quý khách.</p>
                             </div>
@@ -362,7 +464,7 @@ function PaymentPage(props) {
                                   setShowDialog(false);
                                 }}
                               />
-                              <ArtBtn content="Xác nhận" />
+                              <ArtBtn content="Xác nhận" type="submit" />
                             </div>
                           </div>
                         </div>
