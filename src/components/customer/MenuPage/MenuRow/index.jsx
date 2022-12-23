@@ -3,9 +3,9 @@ import { CircularProgress, Grid } from "@mui/material";
 import MenuItem from "../MenuItem";
 
 function MenuRow(props) {
-  const { title, loading, loadMore, products, handleLoadMore } = props;
+  const { title, loading, loadMore, products, handleLoadMore, id } = props;
   return (
-    <div className="menu-list-category">
+    <div className="menu-list-category" id={id}>
       <h3>{title}</h3>
       <Grid container spacing={1} className="menu-list">
         {products &&

@@ -30,41 +30,41 @@ export const MENU_LIST = [
   {
     title: "THỰC ĐƠN",
     category: Object.values(CATEGORY),
-    url: "",
+    url: "menu",
   },
   {
     title: "COMBO",
     category: "combo",
-    url: "",
+    url: "combo",
   },
   {
     title: "GÀ GIÒN VUI VẺ",
     category: "friedChicken",
-    url: "",
+    url: "fried-chicken",
   },
   {
     title: "GÀ SỐT CAY",
     category: "spicyChicken",
-    url: "",
+    url: "spicy-chicken",
   },
   {
     title: "MỲ Ý SỐT BÒ BẰM",
     category: "spaghetti",
-    url: "",
+    url: "spaghetti",
   },
   {
     title: "BURGER & CƠM",
     category: "burger",
-    url: "",
+    url: "burger",
   },
   {
     title: "PHẦN ĂN PHỤ",
     category: "sideDish",
-    url: "",
+    url: "side-dish",
   },
   {
     title: "MÓN TRÁNG MIỆNG",
     category: "dessert",
-    url: "",
+    url: "dessert",
   },
 ];

@@ -3,7 +3,7 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MENU_LIST } from "../../../../constant/constant";
 import "./style.scss";
-function MenuHeader() {
+function MenuPageHeader() {
   const [fixHeader, setFixHeader] = useState(false);
 
   const handleScroll = () => {
@@ -14,16 +14,24 @@ function MenuHeader() {
     }
   };
 
+  const executeScroll = (id) => {
+    const element = document.getElementById(id);
+    const elementPosition = element.getBoundingClientRect().top;
+    // window.pageYOffset : khoảng cách offset từ đầu trang tới vị trí hiện tại
+    // element.getBoundingClientRect() : lấy vị trí của element so với view hiện tại.
+    // elementPosition + window.pageYOffset : vị trí element so với đầu trang
+    window.scrollTo({
+      top: elementPosition + window.pageYOffset - 80,
+      behavior: "smooth",
+    });
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [window.scrollY]);
-
-  useEffect(() => {
-    window.scrollTo(0, 520);
-  }, []);
 
   return (
     <div className={`menu-header art-text ${fixHeader ? "fix-header" : ""} `}>
@@ -32,22 +40,34 @@ function MenuHeader() {
           {MENU_LIST.map((item, index) => {
             return (
               <li key={index} className="menu-header-list-category ">
-                <Link to={item.url}> {item.title}</Link>
+                <a
+                  // href={`#${item.url}`}
+                  onClick={() => {
+                    executeScroll(item.url);
+                  }}
+                >
+                  {item.title}
+                </a>
               </li>
             );
           })}
         </ul>
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" } }}>
-        <select className="menu-header-select art-text">
+        <select
+          className="menu-header-select art-text"
+          onChange={(e) => {
+            executeScroll(e.target.value);
+          }}
+        >
           {MENU_LIST.map((item, index) => {
             return (
               <option
                 key={index}
                 className="menu-header-select-option"
-                value={item}
+                value={item.url}
               >
-                <Link to={item.url}> {item.title}</Link>
+                {item.title}
               </option>
             );
           })}
@@ -57,4 +77,4 @@ function MenuHeader() {
   );
 }
 
-export default MenuHeader;
+export default MenuPageHeader;

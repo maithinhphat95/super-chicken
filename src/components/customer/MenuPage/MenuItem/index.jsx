@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import ArtBtn from "../../../common/ArtBtn";
+import {
+  addToCart,
+  cartSlice,
+  initCart,
+} from "../../../../redux/features/Cart/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function MenuItem(props) {
   const { product } = props;
+  const dispatch = useDispatch();
+  const cartState = useSelector((state) => state.cart);
+  const handleAddToCart = (item) => {
+    const cartItem = { ...item, quantity: 1, subPrice: product.price };
+    dispatch(addToCart(cartItem));
+  };
   return (
     <Grid item xs={12} sm={6} md={3} className="menu-list-item">
       <div className="menu-list-item-card">
@@ -18,14 +30,18 @@ function MenuItem(props) {
             {item}
           </p>
         ))}
-        {/* 
-        <p className="menu-list-item-card-title">01 miếng gà giòn vui vẻ</p>
-        <p className="menu-list-item-card-title">01 mỳ ý sốt bò bằm</p>
-        <p className="menu-list-item-card-title">01 nước ngọt (vừa)</p> */}
       </div>
       <div>
-        <p className="menu-list-item-price">65.000 đ</p>
-        <ArtBtn style="btn2" />
+        <p className="menu-list-item-price">
+          <span>{Number(product.price).toLocaleString()}</span> đ
+        </p>
+        <ArtBtn
+          style="btn2"
+          handleClick={() => {
+            handleAddToCart(product);
+          }}
+        />
+        {/* <div className="menu-list-item-btn"></div> */}
       </div>
     </Grid>
   );

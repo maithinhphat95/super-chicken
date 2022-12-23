@@ -1,16 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import Carousel from "../../components/customer/HomePage/Carousel";
-import MenuHeader from "../../components/customer/MenuPage/MenuHeader";
-import ProductList from "../../components/customer/MenuPage/MenuContainer";
-import { fetchProduct } from "../../redux/features/Product/productSlice";
-
+import MenuPageHeader from "../../components/customer/MenuPage/MenuPageHeader";
+import MenuPageContent from "../../components/customer/MenuPage/MenuPageContent";
+import CartContainer from "../../components/customer/MenuPage/CartContainer";
 function MenuPage(props) {
   return (
     <div className="menu-page">
       <Carousel />
-      <MenuHeader />
-      <ProductList />
+      <MenuPageHeader />
+      <MenuPageContent />
+      <CartContainer />
     </div>
   );
 }

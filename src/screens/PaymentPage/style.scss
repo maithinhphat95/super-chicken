@@ -1,0 +1,252 @@
+.payment-page {
+  padding-bottom: 20px;
+  .payment-content {
+    .payment {
+      &-delivery,
+      &-bill,
+      &-checkout {
+        height: 100%;
+        padding: 20px;
+        border: 1px solid var(--primary-color);
+        border-radius: 8px;
+        background-color: var(--secondary-color);
+        &-title {
+          text-transform: uppercase;
+          font-size: 30px;
+          font-weight: 500;
+          text-align: center;
+          color: var(--primary-color);
+        }
+      }
+
+      &-delivery {
+        & span {
+          color: var(--primary-color);
+          font-weight: 700;
+        }
+        &-form {
+          &-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 12px;
+            &-input {
+              min-height: 30px;
+              width: 100%;
+              padding: 4px 8px;
+              outline: none;
+              border: 1px solid var(--primary-color);
+              border-radius: 4px;
+              background-color: var(--background-color);
+              font-family: inherit;
+              resize: none;
+            }
+          }
+          &-note {
+            font-weight: bold;
+          }
+        }
+      }
+      &-bill {
+        display: flex;
+        flex-direction: column;
+        &-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          & h3 {
+          }
+          & .payment-bill-list {
+            max-height: 320px;
+            overflow-y: auto;
+            margin: 8px 0 20px;
+            padding: 2px;
+            // border-left: 1px solid #000;
+            border-bottom: 1px solid #000;
+            &-item {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 8px;
+              background-color: var(--background-color);
+              border: 0;
+              border-radius: 8px;
+              padding: 8px;
+              &-infor {
+                width: calc(100% - 150px);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                & img {
+                  display: block;
+                  width: 50px;
+                  height: 50px;
+                  margin-right: 10px;
+                  background-color: white;
+                  border: 1px solid var(--primary-color);
+                  border-radius: 8px;
+                }
+                &-text {
+                  max-width: calc(100% - 60px);
+                }
+              }
+              &-amount {
+                width: 140px;
+                display: flex;
+                justify-content: space-between;
+              }
+              &-name,
+              &-description {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+              &-name {
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 16px;
+                color: var(--primary-color);
+              }
+              &-description {
+                text-transform: capitalize;
+                font-weight: 500;
+                font-size: 12px;
+                // font-style: italic;
+              }
+              &-quantity {
+                min-width: 30px;
+              }
+              &-price {
+                min-width: 80px;
+                text-align: right;
+                color: var(--primary-color);
+              }
+            }
+          }
+          &-edit {
+            margin-bottom: auto;
+            margin-top: 0;
+          }
+        }
+      }
+      &-checkout {
+        & .payment-method,
+        & .delivery-option {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          &-item {
+            width: 100%;
+            & label {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              height: 40px;
+              width: 100%;
+              font-size: 14px;
+              padding: 4px 8px;
+              border-radius: 4px;
+              background-color: var(--background-color);
+              cursor: pointer;
+              &:active {
+                // border: 1px solid var(--primary-color);
+              }
+              & > div {
+                display: flex;
+                align-items: center;
+                color: var(--primary-color);
+
+                & input {
+                  width: 14px;
+                  height: 14px;
+                  margin-right: 10px;
+                }
+                & span {
+                  font-weight: 700;
+                }
+              }
+              & img {
+                height: 24px;
+              }
+              &:has(input:disabled) {
+                opacity: 0.6;
+              }
+            }
+          }
+        }
+        & .payment-confirm {
+          text-align: right;
+          font-size: 20px;
+          & p {
+            font-weight: 700;
+            margin-bottom: 10px;
+          }
+
+          & .payment-total {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--primary-color);
+          }
+          & .payment-action {
+            text-align: right;
+            & button {
+              margin: 0 0 0 auto;
+              height: 40px;
+              font-size: 20px;
+            }
+          }
+          & .confirm-dialog {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba($color: gray, $alpha: 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &-box {
+              width: 100%;
+              max-width: 600px;
+              border-radius: 8px;
+              background-color: var(--background-color);
+              &-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+                color: var(--primary-color);
+                & button {
+                  color: var(--primary-color);
+                  font-size: 20px;
+                  font-weight: 900;
+                  padding: 0;
+                }
+              }
+              &-content {
+                border: 1px solid rgb(180, 180, 180);
+                border-left: 0;
+                border-right: 0;
+                padding: 20px;
+                font-size: 16px;
+                text-align: left;
+              }
+              &-action {
+                display: flex;
+                justify-content: flex-end;
+                padding: 16px 20px;
+                & button {
+                  margin: 0;
+                  margin-left: 10px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

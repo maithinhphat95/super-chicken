@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 8px gray;
   &-list {
     max-width: 1200px;
     min-height: 62px;
@@ -74,9 +75,9 @@
       height: 40px;
       background-color: var(--primary-color);
       color: white;
-      & a {
-        display: block;
-        padding: 8px;
+      &:hover {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
       }
     }
   }
