@@ -8,6 +8,8 @@ import { navList } from "../../constant/constant";
 import images from "../../assets/images";
 import { useDispatch } from "react-redux";
 import { toggleSideBar } from "../../redux/features/OpenSideBar/openSideBar";
+import { Link } from "react-router-dom";
+import { routesPath } from "../../routes";
 
 Header.propTypes = {};
 
@@ -64,11 +66,10 @@ function Header(props) {
                   Chọn khu vực
                 </span>
               </a>
-
-              <a href="" className="assist-item">
+              <Link to={routesPath.AUTH} className="assist-item">
                 <FaUserAlt />
-                <span className="assist-text">Đăng ký / Đăng nhập</span>
-              </a>
+                <p className="assist-text">Đăng ký / Đăng nhập</p>
+              </Link>
             </Stack>
             {/* Nav list */}
             <div className="nav d-flex">

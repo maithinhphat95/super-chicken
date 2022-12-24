@@ -27,3 +27,18 @@ export const publicRoutes = [
 ];
 // private routes: use for registered user
 // export const privateRoutes = [{ path: "/admin", component: AdminPage }];
+
+export const routesPath = {
+  HOME: "/",
+  MENU: "/menu",
+  BONUS: "/bonus",
+  SERVICE: "/service",
+  NEWS: "/news",
+  STORE: "/store",
+  INTRODUCE: "/instroduce",
+  CONTACT: "/contact",
+  CAREER: "/career",
+  PAYMENT: "/payment",
+  ORDERS: "/orders",
+  AUTH: "/authorization",
+};

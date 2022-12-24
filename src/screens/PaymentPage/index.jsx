@@ -29,7 +29,6 @@ import { addOrder } from "../../redux/features/Order/orderSlice";
 import "./style.scss";
 
 function PaymentPage(props) {
-  const {} = props;
   const {
     register,
     handleSubmit,
@@ -108,33 +107,33 @@ function PaymentPage(props) {
             >
               <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
-                  <div className="payment-delivery">
-                    <h3 className="payment-delivery-title art-text">
+                  <div className="form-container payment-delivery">
+                    <h3 className="form-container-title art-text">
                       Thông tin người nhận
                     </h3>
-                    <div className="payment-delivery-form">
-                      <div className="payment-delivery-form-item">
+                    <div className="form-control">
+                      <div className="form-control-item">
                         <label>
-                          Tên: <span>(*)</span>
+                          Tên: <span className="high-light">(*)</span>
                         </label>
                         <input
                           type="text"
                           placeholder="(Ví dụ: Trương Văn Xuân)"
-                          className="payment-delivery-form-item-input"
+                          className="form-control-item-input"
                           {...register("name")}
                         />
                         {errors.name && (
                           <p className="error-message">{errors.name.message}</p>
                         )}
                       </div>
-                      <div className="payment-delivery-form-item">
+                      <div className="form-control-item">
                         <label>
-                          Số Điện Thoại: <span>(*)</span>
+                          Số Điện Thoại: <span className="high-light">(*)</span>
                         </label>
                         <input
                           type="text"
                           placeholder="(Ví dụ: 0964335664)"
-                          className="payment-delivery-form-item-input"
+                          className="form-control-item-input"
                           {...register("phone")}
                         />
                         {errors?.phone && (
@@ -143,14 +142,14 @@ function PaymentPage(props) {
                           </p>
                         )}
                       </div>
-                      <div className="payment-delivery-form-item">
+                      <div className="form-control-item">
                         <label>
-                          Địa chỉ: <span>(*)</span>
+                          Địa chỉ: <span className="high-light">(*)</span>
                         </label>
                         <input
                           type="text"
                           placeholder="(Ví dụ: Số 3 đường Trần Cao Vân, Tam Thuận, Thanh Khê, Đà Nẵng)"
-                          className="payment-delivery-form-item-input"
+                          className="form-control-item-input"
                           {...register("address")}
                         />
                         {errors?.address && (
@@ -159,12 +158,12 @@ function PaymentPage(props) {
                           </p>
                         )}
                       </div>
-                      <div className="payment-delivery-form-item">
+                      <div className="form-control-item">
                         <label>Email:</label>
                         <input
                           type="text"
                           placeholder="(Ví dụ: xuantruong@gmail.com)"
-                          className="payment-delivery-form-item-input"
+                          className="form-control-item-input"
                           {...register("email")}
                         />
                         {errors?.email && (
@@ -173,27 +172,28 @@ function PaymentPage(props) {
                           </p>
                         )}
                       </div>
-                      <div className="payment-delivery-form-item">
+                      <div className="form-control-item">
                         <label>Ghi chú:</label>
                         <textarea
                           rows="4"
                           cols=""
-                          className="payment-delivery-form-item-input"
+                          className="form-control-item-input"
                           {...register("note", {
                             required: false,
                           })}
                         ></textarea>
                       </div>
                     </div>
-                    <p className="payment-delivery-note">
+                    <p className="form-note">
                       <span style={{ textDecoration: "underline" }}>Chú ý</span>
-                      : Phải nhập đầy đủ vào các mục <span>(*)</span>
+                      : Phải nhập đầy đủ vào các mục{" "}
+                      <span className="high-light">(*)</span>
                     </p>
                   </div>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <div className="payment-bill">
-                    <h3 className="payment-bill-title art-text">Hóa đơn</h3>
+                  <div className="form-container payment-bill">
+                    <h3 className="form-title art-text">Hóa đơn</h3>
                     <div className="payment-bill-content">
                       <div>
                         <h3>Đơn hàng của bạn:</h3>
@@ -251,7 +251,7 @@ function PaymentPage(props) {
                 </Grid>
                 {/* Payment Checkout */}
                 <Grid item xs={12}>
-                  <div className="payment-checkout">
+                  <div className="form-container payment-checkout">
                     <Grid container spacing={4}>
                       {/* Payment method & Delivery*/}
                       <Grid item xs={12} md={6}>

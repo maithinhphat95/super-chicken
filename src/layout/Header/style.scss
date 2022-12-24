@@ -27,6 +27,10 @@
     padding: 0 16px;
     & .assist {
       height: 50%;
+      &-item {
+        display: flex;
+        flex-direction: row;
+      }
       &-location::after {
         content: "|";
         margin-left: 16px;

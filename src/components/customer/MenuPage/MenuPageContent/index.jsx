@@ -195,10 +195,9 @@ function MenuPageContent() {
   // Init page
   useEffect(() => {
     dispatch(closeSideBar());
-    // document.getElementById("combo").scrollIntoView();
     const element = document.getElementById("combo");
     const elementPosition = element.getBoundingClientRect().top;
-    const offset = elementPosition + window.pageYOffset - 175;
+    const offset = elementPosition + window.pageYOffset - 180;
     window.scrollTo({
       top: offset,
       behavior: "smooth",

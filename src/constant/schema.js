@@ -20,6 +20,14 @@ export const paymentSchema = yup.object().shape({
 
 export const userSchema = yup.object().shape({
   name: yup.string().required("Vui lòng nhập tên"),
+  phone: yup
+    .string()
+    .required("Vui lòng nhập số điện thoại")
+    .matches(PHONE_REGEX, "Số điện thoại sai cú pháp, vui lòng nhập lại"),
+  email: yup
+    .string()
+    .required("Vui lòng nhập địa chỉ email")
+    .email("Email sai cú pháp, vui lòng nhập lại"),
   pass: yup
     .string()
     .required("Vui lòng nhập mật khẩu")
@@ -27,7 +35,7 @@ export const userSchema = yup.object().shape({
     .max(32, "Mật khẩu tối đa 32 ký tự")
     .matches(
       PASS_REGEX,
-      "Mật khẩu phải bao gồm chữ in hoa, chữ thường, số và ký tự đặt biệt (!@#$%^&*()<>)"
+      "Mật khẩu phải bao gồm 8-32 ký tự, trong đó có chữ in hoa, chữ thường, số và ký tự đặt biệt !@#$%^&*()<>"
     ),
   passConfirm: yup
     .string()
@@ -36,11 +44,6 @@ export const userSchema = yup.object().shape({
       [yup.ref("password"), null],
       "Mật khẩu không trùng, vui lòng nhập lại"
     ),
-  phone: yup
-    .string()
-    .required("Vui lòng nhập số điện thoại")
-    .matches(PHONE_REGEX, "Số điện thoại sai cú pháp, vui lòng nhập lại"),
+
   address: yup.string(),
-  // .required("Vui lòng nhập địa chỉ"),
-  email: yup.string().email("Email sai cú pháp, vui lòng nhập lại"),
 });

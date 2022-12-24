@@ -1,8 +1,20 @@
 .author-page {
-  .author-container {
+  & .author-container {
     background-color: rgba($color: white, $alpha: 0.4);
-    .author-page-content {
-      //
+    & .author-page-content {
+      & .register-form {
+        &-title {
+          font-weight: 700;
+          font-size: 20px;
+        }
+        &-control {
+          &-item {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
     }
   }
 }
