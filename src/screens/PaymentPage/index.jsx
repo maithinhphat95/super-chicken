@@ -1,18 +1,15 @@
-import "./style.scss";
-import React, { useEffect, useState } from "react";
 import { Grid, IconButton, Stack } from "@mui/material";
-import * as yup from "yup";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { BsXLg } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { BsXCircleFill, BsXCircle, BsXLg } from "react-icons/bs";
-import { toast, ToastContainer } from "react-toastify";
-import PageTitle from "../../components/common/PageTitle";
-import ArtBtn from "../../components/common/ArtBtn";
-import { initCart } from "../../redux/features/Cart/cartSlice";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { addOrder } from "../../redux/features/Order/orderSlice";
-import { orderApis } from "../../apis/orderApi";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ArtBtn from "../../components/common/ArtBtn";
+import PageTitle from "../../components/common/PageTitle";
+import { initCart } from "../../redux/features/Cart/cartSlice";
+import "./style.scss";
 function PaymentPage(props) {
   const {} = props;
   const {
