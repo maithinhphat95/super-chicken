@@ -1,5 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Grid, IconButton, Stack } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+  IconButton,
+  Stack,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsXLg } from "react-icons/bs";
@@ -8,12 +18,13 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ArtBtn from "../../components/common/ArtBtn";
+import NotiDialog from "../../components/common/NotiDialog";
 import PageContainer from "../../components/common/PageContainer";
 import PageCover from "../../components/common/PageCover";
 import PageTitle from "../../components/common/PageTitle";
 import { paymentMethod, shippingAgent } from "../../constant/constant";
-import { paymentSchema } from "../../constant/paymentSchema";
-import { initCart } from "../../redux/features/Cart/cartSlice";
+import { paymentSchema } from "../../constant/schema";
+import { clearCart, initCart } from "../../redux/features/Cart/cartSlice";
 import { addOrder } from "../../redux/features/Order/orderSlice";
 import "./style.scss";
 
@@ -23,7 +34,6 @@ function PaymentPage(props) {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm({
     mode: "onChange",
     resolver: yupResolver(paymentSchema),
@@ -31,8 +41,21 @@ function PaymentPage(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartState = useSelector((state) => state.cart);
-  const [showDialog, setShowDialog] = useState(false);
   const [shipFee, setShipFee] = useState(0);
+  const [confirmDialog, setConfirmDialog] = useState(false);
+  const [finishDialog, setFinishDialog] = useState(false);
+  const [emptyDialog, setEmptyDialog] = useState(false);
+
+  const emptyDialogContent = {
+    title: "Giỏ hàng trống",
+    message: "Giỏ hàng của bạn đang trống, vui lòng lựa chọn món ăn",
+  };
+
+  const finishDialogContent = {
+    title: "Hoàn thành đơn hàng",
+    message:
+      "Đơn hàng của bạn đang được xác nhận, cảm ơn bạn đã sử dụng dịch vụ của chúng tôi",
+  };
 
   const handleChangeShip = (agentCode, price) => {
     if (shipFee !== price) {
@@ -41,13 +64,27 @@ function PaymentPage(props) {
   };
 
   const onSubmit = (data) => {
-    dispatch(addOrder({ ...data, shipFee: shipFee }));
-    setShowDialog(false);
+    dispatch(
+      addOrder({ ...data, shipFee: shipFee, products: cartState?.cartList })
+    );
+    dispatch(clearCart());
+    setConfirmDialog(false);
+    setFinishDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    navigate("/menu");
   };
 
   const onError = (error, e) => {
-    setShowDialog(false);
+    setConfirmDialog(false);
   };
+
+  useEffect(() => {
+    if (cartState?.cartList?.length === 0) {
+      setEmptyDialog(true);
+    }
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -161,44 +198,45 @@ function PaymentPage(props) {
                       <div>
                         <h3>Đơn hàng của bạn:</h3>
                         <div className="payment-bill-list scroll-custom">
-                          {cartState.cartList.map((item, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="payment-bill-list-item"
-                              >
-                                <Stack
-                                  direction={"row"}
-                                  className="payment-bill-list-item-infor"
+                          {cartState.cartList &&
+                            cartState?.cartList?.map((item, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="payment-bill-list-item"
                                 >
-                                  <img src={item.image} alt="" />
                                   <Stack
-                                    direction={"column"}
-                                    justifyContent="center"
-                                    className="payment-bill-list-item-infor-text"
+                                    direction={"row"}
+                                    className="payment-bill-list-item-infor"
                                   >
-                                    <p className="payment-bill-list-item-name">
-                                      {item.name}
+                                    <img src={item.image} alt="" />
+                                    <Stack
+                                      direction={"column"}
+                                      justifyContent="center"
+                                      className="payment-bill-list-item-infor-text"
+                                    >
+                                      <p className="payment-bill-list-item-name">
+                                        {item.name}
+                                      </p>
+                                      <p className="payment-bill-list-item-description">
+                                        {item.description}
+                                      </p>
+                                    </Stack>
+                                  </Stack>
+                                  <Stack
+                                    direction={"row"}
+                                    className="payment-bill-list-item-amount"
+                                  >
+                                    <p className="payment-bill-list-item-quantity art-text">
+                                      x {item.quantity} =
                                     </p>
-                                    <p className="payment-bill-list-item-description">
-                                      {item.description}
+                                    <p className="payment-bill-list-item-price art-text">
+                                      {Number(item.subPrice).toLocaleString()} đ
                                     </p>
                                   </Stack>
-                                </Stack>
-                                <Stack
-                                  direction={"row"}
-                                  className="payment-bill-list-item-amount"
-                                >
-                                  <p className="payment-bill-list-item-quantity art-text">
-                                    x {item.quantity} =
-                                  </p>
-                                  <p className="payment-bill-list-item-price art-text">
-                                    {Number(item.subPrice).toLocaleString()} đ
-                                  </p>
-                                </Stack>
-                              </div>
-                            );
-                          })}
+                                </div>
+                              );
+                            })}
                         </div>
                       </div>
                       <div className="payment-bill-edit">
@@ -320,7 +358,7 @@ function PaymentPage(props) {
                             Tổng đơn hàng:{" "}
                             <span>
                               {(
-                                shipFee + cartState.totalPrice
+                                shipFee + (cartState?.totalPrice || 0)
                               ).toLocaleString()}{" "}
                               đ
                             </span>
@@ -330,12 +368,16 @@ function PaymentPage(props) {
                               content="Hoàn tất"
                               style="btn2"
                               handleClick={() => {
-                                setShowDialog(true);
+                                if (cartState?.cartList?.length !== 0) {
+                                  setConfirmDialog(true);
+                                } else {
+                                  setFinishDialog(true);
+                                }
                               }}
                               url={null}
                             />
                           </div>
-                          {showDialog && (
+                          {confirmDialog && (
                             <div className="confirm-dialog">
                               <div className="confirm-dialog-box">
                                 <div className="confirm-dialog-box-header">
@@ -344,7 +386,7 @@ function PaymentPage(props) {
                                   </h3>
                                   <IconButton
                                     onClick={() => {
-                                      setShowDialog(false);
+                                      setConfirmDialog(false);
                                     }}
                                   >
                                     <BsXLg />
@@ -362,7 +404,7 @@ function PaymentPage(props) {
                                     content="Hủy bỏ"
                                     style="btn2"
                                     handleClick={() => {
-                                      setShowDialog(false);
+                                      setConfirmDialog(false);
                                     }}
                                   />
                                   <ArtBtn content="Xác nhận" type="submit" />
@@ -380,6 +422,23 @@ function PaymentPage(props) {
           </div>
         </div>
       </PageContainer>
+
+      {/* Finish dialog */}
+      <NotiDialog
+        dialogContent={finishDialogContent}
+        open={finishDialog}
+        handleClose={() => {
+          handleCloseDialog();
+        }}
+      />
+      {/* Empty dialog */}
+      <NotiDialog
+        dialogContent={emptyDialogContent}
+        open={emptyDialog}
+        handleClose={() => {
+          handleCloseDialog();
+        }}
+      />
     </PageCover>
   );
 }
