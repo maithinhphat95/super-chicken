@@ -1,6 +1,5 @@
 .payment-page {
-  padding-bottom: 20px;
-  .payment-content {
+  .payment-page-content {
     .payment {
       &-delivery,
       &-bill,
@@ -18,7 +17,6 @@
           color: var(--primary-color);
         }
       }
-
       &-delivery {
         & span {
           color: var(--primary-color);
@@ -30,6 +28,9 @@
             flex-direction: column;
             gap: 4px;
             margin-bottom: 12px;
+            & label {
+              font-weight: 700;
+            }
             &-input {
               min-height: 30px;
               width: 100%;
@@ -132,12 +133,15 @@
         }
       }
       &-checkout {
+        & .payment-method-container {
+          margin-bottom: 10px;
+        }
         & .payment-method,
         & .delivery-option {
           display: flex;
           flex-wrap: wrap;
-          margin-top: 10px;
-          margin-bottom: 10px;
+          margin-top: 8px;
+          margin-bottom: 8px;
           &-item {
             width: 100%;
             & label {
@@ -169,7 +173,7 @@
                 }
               }
               & img {
-                height: 24px;
+                height: 90%;
               }
               &:has(input:disabled) {
                 opacity: 0.6;
@@ -177,6 +181,7 @@
             }
           }
         }
+
         & .payment-confirm {
           text-align: right;
           font-size: 20px;
@@ -248,5 +253,11 @@
         }
       }
     }
+  }
+  & .error-message {
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
   }
 }

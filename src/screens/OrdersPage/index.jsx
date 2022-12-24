@@ -1,5 +1,8 @@
 import { child, get, onValue, ref } from "firebase/database";
 import React from "react";
+import PageContainer from "../../components/common/PageContainer/index.jsx";
+import PageCover from "../../components/common/PageCover/index.jsx";
+import PageTitle from "../../components/common/PageTitle/index.jsx";
 
 import { database } from "../../firebase.js";
 function OrdersPage(props) {
@@ -35,7 +38,17 @@ function OrdersPage(props) {
   //     console.error(error);
   //   });
 
-  return <div className="orders-page"></div>;
+  return (
+    <PageCover className="orders-page">
+      <PageContainer className="orders-container container">
+        <PageTitle title="Đơn hàng của bạn" />
+        <div className="orders-page-content">
+          <h3>Hiện tại chưa có chương trình tuyển dụng.</h3>
+          <h3>Chúng tôi sẽ thông báo sớm nhất khi có vị trí tuyển dụng.</h3>
+        </div>
+      </PageContainer>
+    </PageCover>
+  );
 }
 
 export default OrdersPage;

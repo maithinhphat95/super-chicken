@@ -9,6 +9,7 @@ import ContactPage from "../screens/ContactPage";
 import CareerPage from "../screens/CareerPage";
 import PaymentPage from "../screens/PaymentPage";
 import OrdersPage from "../screens/OrdersPage";
+import AuthorizationPage from "../screens/AuthorizationPage";
 // Public routes: use for un-register user
 export const publicRoutes = [
   { path: "/", component: HomePage },
@@ -22,6 +23,7 @@ export const publicRoutes = [
   { path: "/career", component: CareerPage },
   { path: "/payment", component: PaymentPage },
   { path: "/orders", component: OrdersPage },
+  { path: "/authorization", component: AuthorizationPage },
 ];
 // private routes: use for registered user
 // export const privateRoutes = [{ path: "/admin", component: AdminPage }];
