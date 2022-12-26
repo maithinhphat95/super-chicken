@@ -39,15 +39,23 @@ function MenuToday(props) {
           <MenuTodayItem
             img={images.gaGion}
             imgText={images.gaGionText}
-            url={""}
+            url={"/menu/fried-chicken"}
           />
           <MenuTodayItem
             img={images.gaCay}
             imgText={images.gaCayText}
-            url={""}
+            url={"/menu/spicy-chicken"}
           />
-          <MenuTodayItem img={images.myY} imgText={images.myYText} url={""} />
-          <MenuTodayItem img={images.nuoc} imgText={images.nuocText} url={""} />
+          <MenuTodayItem
+            img={images.myY}
+            imgText={images.myYText}
+            url={"/menu/spaghetti"}
+          />
+          <MenuTodayItem
+            img={images.nuoc}
+            imgText={images.nuocText}
+            url={"/menu/dessert"}
+          />
         </Grid>
       </Grid>
     </div>

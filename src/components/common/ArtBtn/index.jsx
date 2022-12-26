@@ -16,7 +16,7 @@ function ArtBtn(props) {
       {url ? (
         <Link to={url}>{content || "Đặt hàng"}</Link>
       ) : (
-        content || "Đặt hàng"
+        <Link>{content || "Đặt hàng"}</Link>
       )}
     </button>
   );

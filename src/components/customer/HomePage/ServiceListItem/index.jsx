@@ -14,9 +14,9 @@ function ServiceListItem(props) {
         <img src={img} alt="" />
       </div>
       <h3>{title}</h3>
-      <Link to={url || ""}>
-        <ArtBtn content={"Xem thêm"} style={"btn2"} />
-      </Link>
+      <div>
+        <ArtBtn content={"Xem thêm"} style={"btn2"} url={url} />
+      </div>
     </Grid>
   );
 }

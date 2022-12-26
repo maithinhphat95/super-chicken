@@ -10,10 +10,10 @@ function MenuTodayItem(props) {
   const { img, imgText, url } = props;
   return (
     <Grid item xs={6} sm={3}>
-      <Link className="menu-today-item" to={url || ""}>
+      <div className="menu-today-item">
         <img src={img && img} alt="" />
-        <SlideBtn img={imgText && imgText} />
-      </Link>
+        <SlideBtn img={imgText && imgText} url={url} />
+      </div>
     </Grid>
   );
 }

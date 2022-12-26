@@ -9,7 +9,7 @@ function DefaultLayout({ children }) {
   return (
     <>
       {isOpenSideBar && <SideBar />}
-      <div className="page-container">
+      <div className="main">
         <Header />
         <div className="content">{children}</div>
         <Footer />

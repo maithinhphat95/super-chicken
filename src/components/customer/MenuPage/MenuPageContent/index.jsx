@@ -1,5 +1,8 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { BsArrowUpCircleFill, BsChevronDoubleUp } from "react-icons/bs";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
 import { closeSideBar } from "../../../../redux/features/OpenSideBar/openSideBar";
 import PageContainer from "../../../common/PageContainer";
@@ -9,6 +12,7 @@ import "./style.scss";
 
 function MenuPageContent() {
   const dispatch = useDispatch();
+  const { initCategory } = useParams();
 
   const [products, setProducts] = useState({
     combo: [],
@@ -195,17 +199,46 @@ function MenuPageContent() {
   // Init page
   useEffect(() => {
     dispatch(closeSideBar());
-    const element = document.getElementById("combo");
+    const element = document.getElementById(initCategory || "combo");
     const elementPosition = element.getBoundingClientRect().top;
     const offset = elementPosition + window.pageYOffset - 180;
+
     window.scrollTo({
       top: offset,
       behavior: "smooth",
     });
   }, []);
 
+  const [showTopBtn, setShowTopBtn] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="menu-container art-text">
+      {showTopBtn && (
+        <button className="fixed-button">
+          <div>
+            <BsArrowUpCircleFill />
+            <p>Đầu Trang</p>
+          </div>
+        </button>
+      )}
       <PageContainer className="container menu-container art-text">
         <div id="menu" className="menu">
           <PageTitle title="Thực đơn" />

@@ -14,6 +14,7 @@ import AuthorizationPage from "../screens/AuthorizationPage";
 export const publicRoutes = [
   { path: "/", component: HomePage },
   { path: "/menu", component: MenuPage },
+  { path: "/menu/:initCategory", component: MenuPage },
   { path: "/bonus", component: BonusPage },
   { path: "/service", component: ServicePage },
   { path: "/news", component: NewsPage },
