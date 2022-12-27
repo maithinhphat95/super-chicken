@@ -1,9 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  FacebookAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-} from "firebase/auth";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 // import {
 //   FacebookAuthProvider,
 //   GoogleAuthProvider,

@@ -13,7 +13,6 @@ function MenuPageContent() {
   const dispatch = useDispatch();
   const { initCategory } = useParams();
   const [viewTo, setViewTo] = useState(initCategory || "combo");
-  const [showTopBtn, setShowTopBtn] = useState(false);
 
   const [products, setProducts] = useState({
     combo: [],
@@ -218,36 +217,8 @@ function MenuPageContent() {
     fetchData("dessert", optionFetchDessert);
   }, [optionFetchDessert]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 500) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <div className="menu-container art-text">
-      {showTopBtn && (
-        <button
-          className="fixed-button"
-          onClick={() => {
-            goTo(0);
-          }}
-        >
-          <div>
-            <BsArrowUpCircleFill />
-            <p>Đầu Trang</p>
-          </div>
-        </button>
-      )}
       <PageContainer className="container menu-container art-text">
         <div id="menu" className="menu">
           <PageTitle title="Thực đơn" />

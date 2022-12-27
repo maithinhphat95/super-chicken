@@ -13,7 +13,7 @@ function MenuTodayItem(props) {
     <Grid item xs={6} sm={3}>
       <Box
         className="menu-today-item"
-        sx={{ height: { xs: "300px", sm: "590px" } }}
+        sx={{ height: { xs: "350px", sm: "590px" } }}
       >
         <img src={img && img} alt="" />
         <SlideBtn img={imgText && imgText} url={url} />
