@@ -1,4 +1,5 @@
 import { Grid, IconButton, Stack } from "@mui/material";
+import { Box } from "@mui/system";
 import "animate.css";
 import React, { useEffect } from "react";
 import { useSignOut } from "react-firebase-hooks/auth";
@@ -87,52 +88,10 @@ function Header(props) {
         <Grid item lg={8} sx={{ display: { xs: "none", lg: "block" } }}>
           <div className="nav-container">
             {/* Auth box */}
-            <AuthBox />
-            {/* <Stack
-              className="auth"
-              gap={2}
-              direction={"row"}
-              justifyContent="flex-end"
-              alignItems="center"
-            >
-              {!userState?.isLogin ? (
-                <div className="auth-box">
-                  <Link to={routesPath.LOGIN} className="auth-item">
-                    <FaUserAlt />
-                    <p className="auth-text">Đăng ký / Đăng nhập</p>
-                  </Link>
-                </div>
-              ) : (
-                <div className="auth-box art-text">
-                  <div
-                    className="auth-item auth-logined"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleActionList();
-                    }}
-                  >
-                    <p style={{ marginRight: "4px" }}>Xin chào, </p>{" "}
-                    {userState?.loginUser.name || userState?.loginUser.email}
-                    <FaCaretDown />
-                  </div>
-                  {isOpenActionList && (
-                    <div className="action-list">
-                      <button
-                        onClick={() => {
-                          navigate("/orders");
-                        }}
-                      >
-                        Đơn hàng
-                      </button>
-                      {userState?.isAdmin && (
-                        <button>Trang quản lý (Admin)</button>
-                      )}
-                      <button onClick={handleLogout}>Đăng xuất</button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </Stack> */}
+            <Box sx={{ alignSelf: "flex-end" }}>
+              <AuthBox />
+            </Box>
+
             {/* Nav list */}
             <div className="nav d-flex">
               <ul className="nav-list">

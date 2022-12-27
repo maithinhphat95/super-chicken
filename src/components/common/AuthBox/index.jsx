@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase/config";
-import { openActionList } from "../../../redux/features/DrawerSlice/drawerSlice";
+import {
+  openActionList,
+  toggleActionList,
+} from "../../../redux/features/DrawerSlice/drawerSlice";
 import { logout } from "../../../redux/features/UserSlice/userSlice";
 import { routesPath } from "../../../routes";
 import "./style.scss";
@@ -20,8 +23,8 @@ export default function AuthBox() {
   );
   const [signOut, loading, error] = useSignOut(auth);
 
-  const toggleActionList = () => {
-    dispatch(openActionList());
+  const handleToggleActionList = () => {
+    dispatch(toggleActionList());
   };
 
   const handleLogout = async () => {
@@ -33,13 +36,7 @@ export default function AuthBox() {
   };
 
   return (
-    <Stack
-      className="auth"
-      gap={2}
-      direction={"row"}
-      justifyContent="flex-end"
-      alignItems="center"
-    >
+    <Stack className="auth" gap={2} direction={"row"}>
       {!userState?.isLogin ? (
         <div className="auth-box">
           <Link to={routesPath.LOGIN} className="auth-item">
@@ -49,17 +46,18 @@ export default function AuthBox() {
         </div>
       ) : (
         <div className="auth-box art-text">
-          <div
+          <Stack
+            flexWrap={"wrap"}
             className="auth-item auth-logined"
             onClick={(e) => {
               e.stopPropagation();
-              toggleActionList();
+              handleToggleActionList();
             }}
           >
             <p style={{ marginRight: "4px" }}>Xin chào, </p>{" "}
             {userState?.loginUser.name || userState?.loginUser.email}
             <FaCaretDown />
-          </div>
+          </Stack>
           {isOpenActionList && (
             <div className="action-list">
               <button

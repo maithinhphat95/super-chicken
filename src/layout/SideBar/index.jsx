@@ -6,7 +6,10 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import images from "../../assets/images";
 import AuthBox from "../../components/common/AuthBox";
 import { navList } from "../../constant/constant";
-import { closeSideBar } from "../../redux/features/DrawerSlice/drawerSlice";
+import {
+  closeActionList,
+  closeSideBar,
+} from "../../redux/features/DrawerSlice/drawerSlice";
 import "./style.scss";
 SideBar.propTypes = {};
 
@@ -28,6 +31,7 @@ function SideBar(props) {
         className="side-bar"
         onClick={(e) => {
           e.stopPropagation();
+          dispatch(closeActionList());
         }}
       >
         <IconButton
