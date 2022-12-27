@@ -1,15 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Grid,
-  IconButton,
-  Stack,
-} from "@mui/material";
+import { Grid, IconButton, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsXLg } from "react-icons/bs";
@@ -24,8 +14,8 @@ import PageCover from "../../components/common/PageCover";
 import PageTitle from "../../components/common/PageTitle";
 import { paymentMethod, shippingAgent } from "../../constant/constant";
 import { paymentSchema } from "../../constant/schema";
-import { clearCart, initCart } from "../../redux/features/Cart/cartSlice";
-import { addOrder } from "../../redux/features/Order/orderSlice";
+import { clearCart, initCart } from "../../redux/features/CartSlice/cartSlice";
+import { addOrder } from "../../redux/features/OrderSlice/orderSlice";
 import "./style.scss";
 
 function PaymentPage(props) {
@@ -39,6 +29,7 @@ function PaymentPage(props) {
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isInitCart, setIsInitCart] = useState(false);
   const cartState = useSelector((state) => state.cart);
   const [shipFee, setShipFee] = useState(0);
   const [confirmDialog, setConfirmDialog] = useState(false);
@@ -80,14 +71,15 @@ function PaymentPage(props) {
   };
 
   useEffect(() => {
-    if (cartState?.cartList?.length === 0) {
+    if (cartState?.cartList?.length === 0 && isInitCart) {
       setEmptyDialog(true);
     }
-  }, []);
+  }, [cartState, isInitCart]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(initCart());
+    setIsInitCart(true);
   }, []);
 
   return (

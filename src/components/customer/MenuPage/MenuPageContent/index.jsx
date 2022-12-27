@@ -1,10 +1,9 @@
-import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { BsArrowUpCircleFill, BsChevronDoubleUp } from "react-icons/bs";
+import { BsArrowUpCircleFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
-import { closeSideBar } from "../../../../redux/features/OpenSideBar/openSideBar";
+import { closeSideBar } from "../../../../redux/features/DrawerSlice/drawerSlice";
 import PageContainer from "../../../common/PageContainer";
 import PageTitle from "../../../common/PageTitle";
 import MenuRow from "../MenuRow";
@@ -13,6 +12,8 @@ import "./style.scss";
 function MenuPageContent() {
   const dispatch = useDispatch();
   const { initCategory } = useParams();
+  const [viewTo, setViewTo] = useState(initCategory || "combo");
+  const [showTopBtn, setShowTopBtn] = useState(false);
 
   const [products, setProducts] = useState({
     combo: [],
@@ -70,6 +71,13 @@ function MenuPageContent() {
     limit: 4,
   });
 
+  const goTo = (topOffset) => {
+    window.scrollTo({
+      top: topOffset,
+      behavior: "smooth",
+    });
+  };
+
   // async funtion fetch data
   const fetchData = async (category, option) => {
     setLoading((prev) => {
@@ -87,6 +95,20 @@ function MenuPageContent() {
       setProducts((prev) => {
         return { ...prev, [category]: res.data };
       });
+
+      if (category === "dessert" && res.status) {
+        const finish = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve();
+          }, 300);
+        });
+        finish.then(() => {
+          const element = document.getElementById(viewTo);
+          const elementPosition = element.getBoundingClientRect().top;
+          const offSet = elementPosition + window.pageYOffset - 140;
+          goTo(offSet);
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -196,43 +218,30 @@ function MenuPageContent() {
     fetchData("dessert", optionFetchDessert);
   }, [optionFetchDessert]);
 
-  // Init page
-  useEffect(() => {
-    dispatch(closeSideBar());
-    const element = document.getElementById(initCategory || "combo");
-    const elementPosition = element.getBoundingClientRect().top;
-    const offset = elementPosition + window.pageYOffset - 180;
-
-    window.scrollTo({
-      top: offset,
-      behavior: "smooth",
-    });
-  }, []);
-
-  const [showTopBtn, setShowTopBtn] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 400) {
+      if (window.scrollY > 500) {
         setShowTopBtn(true);
       } else {
         setShowTopBtn(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
-    return window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const goToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="menu-container art-text">
       {showTopBtn && (
-        <button className="fixed-button">
+        <button
+          className="fixed-button"
+          onClick={() => {
+            goTo(0);
+          }}
+        >
           <div>
             <BsArrowUpCircleFill />
             <p>Đầu Trang</p>

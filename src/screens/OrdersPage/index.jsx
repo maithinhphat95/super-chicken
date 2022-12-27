@@ -3,8 +3,8 @@ import React from "react";
 import PageContainer from "../../components/common/PageContainer/index.jsx";
 import PageCover from "../../components/common/PageCover/index.jsx";
 import PageTitle from "../../components/common/PageTitle/index.jsx";
+import { database } from "../../firebase/config";
 
-import { database } from "../../firebase.js";
 function OrdersPage(props) {
   const dbRef = ref(database);
   const productRef = ref(database, "products/1");

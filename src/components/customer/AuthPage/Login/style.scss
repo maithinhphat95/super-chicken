@@ -1,0 +1,25 @@
+.login-form {
+  & .login-action {
+    margin: 0 auto;
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+    padding: 4px 16px;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    & > svg {
+      vertical-align: middle;
+      margin-bottom: 4px;
+      margin-right: 4px;
+    }
+  }
+  & .login-facebook {
+    background-color: blue;
+    color: white;
+  }
+  & .login-google {
+    background-color: wheat;
+    color: black;
+  }
+}

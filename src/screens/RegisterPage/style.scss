@@ -1,7 +1,11 @@
-.author-page {
-  & .author-container {
+.register-page {
+  text-align: center;
+  & .register-container {
     background-color: rgba($color: white, $alpha: 0.4);
-    & .author-page-content {
+    & .register-page-content {
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: left;
       & .register-form {
         &-title {
           font-weight: 700;

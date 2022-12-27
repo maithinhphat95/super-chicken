@@ -1,25 +1,59 @@
-import "./style.scss";
-import "animate.css";
-import React from "react";
 import { Grid, IconButton, Stack } from "@mui/material";
-import { FaBars, FaMapMarkerAlt, FaUserAlt } from "react-icons/fa";
+import "animate.css";
+import React, { useEffect } from "react";
+import { useSignOut } from "react-firebase-hooks/auth";
+import { FaBars, FaCaretDown, FaUserAlt } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import images from "../../assets/images";
+import AuthBox from "../../components/common/AuthBox";
 import NavItem from "../../components/customer/NavItem";
 import { navList } from "../../constant/constant";
-import images from "../../assets/images";
-import { useDispatch } from "react-redux";
-import { toggleSideBar } from "../../redux/features/OpenSideBar/openSideBar";
-import { Link } from "react-router-dom";
+import { auth } from "../../firebase/config";
+import {
+  closeActionList,
+  openActionList,
+  toggleSideBar,
+} from "../../redux/features/DrawerSlice/drawerSlice";
+import { logout } from "../../redux/features/UserSlice/userSlice";
 import { routesPath } from "../../routes";
+import "./style.scss";
 
 Header.propTypes = {};
-
 function Header(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userState = useSelector((state) => state.user);
+  const isOpenActionList = useSelector(
+    (state) => state.drawer.isOpenActionList
+  );
+  // Firebase-hook useSignOut
+  const [signOut, loading, error] = useSignOut(auth);
+
   const handleToggleSideBar = () => {
     dispatch(toggleSideBar());
   };
+
+  const toggleActionList = () => {
+    dispatch(openActionList());
+  };
+
+  const handleLogout = async () => {
+    dispatch(logout());
+    const success = await signOut();
+    if (success) {
+      toast.info("Đăng xuất thành công");
+    }
+  };
+
+  useEffect(() => {
+    dispatch(closeActionList());
+  }, [navigate]);
+
   return (
     <div className="header">
+      <ToastContainer autoClose="1500" />
       <Grid container spacing={0}>
         {/* Menu button */}
         <Grid item xs={4} sx={{ display: { lg: "none" } }}>
@@ -52,25 +86,53 @@ function Header(props) {
         {/* Nav Bar */}
         <Grid item lg={8} sx={{ display: { xs: "none", lg: "block" } }}>
           <div className="nav-container">
-            {/* Assist box */}
-            <Stack
-              className="assist"
+            {/* Auth box */}
+            <AuthBox />
+            {/* <Stack
+              className="auth"
               gap={2}
               direction={"row"}
               justifyContent="flex-end"
               alignItems="center"
             >
-              <a href="" className="assist-item">
-                <FaMapMarkerAlt />
-                <span className="assist-text assist-location">
-                  Chọn khu vực
-                </span>
-              </a>
-              <Link to={routesPath.AUTH} className="assist-item">
-                <FaUserAlt />
-                <p className="assist-text">Đăng ký / Đăng nhập</p>
-              </Link>
-            </Stack>
+              {!userState?.isLogin ? (
+                <div className="auth-box">
+                  <Link to={routesPath.LOGIN} className="auth-item">
+                    <FaUserAlt />
+                    <p className="auth-text">Đăng ký / Đăng nhập</p>
+                  </Link>
+                </div>
+              ) : (
+                <div className="auth-box art-text">
+                  <div
+                    className="auth-item auth-logined"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleActionList();
+                    }}
+                  >
+                    <p style={{ marginRight: "4px" }}>Xin chào, </p>{" "}
+                    {userState?.loginUser.name || userState?.loginUser.email}
+                    <FaCaretDown />
+                  </div>
+                  {isOpenActionList && (
+                    <div className="action-list">
+                      <button
+                        onClick={() => {
+                          navigate("/orders");
+                        }}
+                      >
+                        Đơn hàng
+                      </button>
+                      {userState?.isAdmin && (
+                        <button>Trang quản lý (Admin)</button>
+                      )}
+                      <button onClick={handleLogout}>Đăng xuất</button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </Stack> */}
             {/* Nav list */}
             <div className="nav d-flex">
               <ul className="nav-list">

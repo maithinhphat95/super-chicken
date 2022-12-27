@@ -1,4 +1,5 @@
 import React from "react";
+import InitPage from "../../components/common/InitPage";
 import PageContainer from "../../components/common/PageContainer";
 import PageCover from "../../components/common/PageCover";
 import PageTitle from "../../components/common/PageTitle";

@@ -18,17 +18,17 @@ export const paymentSchema = yup.object().shape({
     .typeError("Vui lòng chọn 1 đơn vị vận chuyển"),
 });
 
-export const userSchema = yup.object().shape({
-  name: yup.string().required("Vui lòng nhập tên"),
+export const registerSchema = yup.object().shape({
+  // name: yup.string().required("Vui lòng nhập tên"),
   phone: yup
     .string()
-    .required("Vui lòng nhập số điện thoại")
+    // .required("Vui lòng nhập số điện thoại")
     .matches(PHONE_REGEX, "Số điện thoại sai cú pháp, vui lòng nhập lại"),
   email: yup
     .string()
     .required("Vui lòng nhập địa chỉ email")
     .email("Email sai cú pháp, vui lòng nhập lại"),
-  pass: yup
+  password: yup
     .string()
     .required("Vui lòng nhập mật khẩu")
     .min(8, "Mật khẩu tối thiểu 8 ký tự")
@@ -37,13 +37,25 @@ export const userSchema = yup.object().shape({
       PASS_REGEX,
       "Mật khẩu phải bao gồm 8-32 ký tự, trong đó có chữ in hoa, chữ thường, số và ký tự đặt biệt !@#$%^&*()<>"
     ),
-  passConfirm: yup
+  passwordConfirm: yup
     .string()
     .required("Vui lòng nhập lại mật khẩu")
-    .oneOf(
-      [yup.ref("password"), null],
-      "Mật khẩu không trùng, vui lòng nhập lại"
-    ),
-
+    .oneOf([yup.ref("password")], "Mật khẩu không trùng, vui lòng nhập lại"),
   address: yup.string(),
+});
+
+export const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Vui lòng nhập địa chỉ email")
+    .email("Email sai cú pháp, vui lòng nhập lại"),
+  password: yup
+    .string()
+    .required("Vui lòng nhập mật khẩu")
+    .min(8, "Mật khẩu tối thiểu 8 ký tự")
+    .max(32, "Mật khẩu tối đa 32 ký tự")
+    .matches(
+      PASS_REGEX,
+      "Mật khẩu phải bao gồm 8-32 ký tự, trong đó có chữ in hoa, chữ thường, số và ký tự đặt biệt !@#$%^&*()<>"
+    ),
 });

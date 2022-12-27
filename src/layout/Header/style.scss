@@ -25,20 +25,6 @@
   & .nav-container {
     height: 100%;
     padding: 0 16px;
-    & .assist {
-      height: 50%;
-      &-item {
-        display: flex;
-        flex-direction: row;
-      }
-      &-location::after {
-        content: "|";
-        margin-left: 16px;
-      }
-      &-text {
-        margin-left: 8px;
-      }
-    }
     & .nav {
       justify-content: center;
       height: 50%;

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import PageCover from "../../components/common/PageCover";
 import Carousel from "../../components/customer/HomePage/Carousel";
 import CartContainer from "../../components/customer/MenuPage/CartContainer";

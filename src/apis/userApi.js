@@ -3,12 +3,11 @@ const USER_URL = `/users`;
 
 export const userApis = {
   // get user information/ login
-  get: async ({ id, phone, email, password }) => {
+  get: async ({ id, email, password }) => {
     try {
       const response = await axiosClient.get(USER_URL, {
         params: {
           ...(id && { id: id }),
-          ...(phone && { phone: phone }),
           ...(email && { email: email }),
           ...(password && { password: password }),
         },

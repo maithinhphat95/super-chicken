@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "./features/Cart/cartSlice.js";
-import openSideBarReducer from "./features/OpenSideBar/openSideBar.js";
-import productReducer from "./features/Product/productSlice";
-import orderReducer from "./features/Order/orderSlice";
+import cartReducer from "./features/CartSlice/cartSlice.js";
+import productReducer from "./features/ProductSlice/productSlice";
+import orderReducer from "./features/OrderSlice/orderSlice";
+import userReducer from "./features/UserSlice/userSlice.js";
+import drawerReducer from "./features/DrawerSlice/drawerSlice.js";
 
 export const store = configureStore({
   reducer: {
-    openSideBar: openSideBarReducer,
+    drawer: drawerReducer,
     product: productReducer,
     cart: cartReducer,
     order: orderReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -5,7 +5,7 @@ import {
   addToCart,
   cartSlice,
   initCart,
-} from "../../../../redux/features/Cart/cartSlice";
+} from "../../../../redux/features/CartSlice/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function MenuItem(props) {
@@ -17,7 +17,7 @@ function MenuItem(props) {
     dispatch(addToCart(cartItem));
   };
   return (
-    <Grid item xs={12} sm={6} md={3} className="menu-list-item">
+    <Grid item xs={6} sm={6} md={3} className="menu-list-item">
       <div className="menu-list-item-card">
         <div className="menu-list-item-card-img">
           <img src={product.image} alt="" />

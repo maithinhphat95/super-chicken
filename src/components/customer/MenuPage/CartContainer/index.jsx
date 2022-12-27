@@ -12,7 +12,7 @@ import {
   deleteItem,
   initCart,
   toggleCart,
-} from "../../../../redux/features/Cart/cartSlice";
+} from "../../../../redux/features/CartSlice/cartSlice";
 import ArtBtn from "../../../common/ArtBtn";
 import { Badge, Box } from "@mui/material";
 import CartItem from "../CartItem";

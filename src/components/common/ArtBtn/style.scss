@@ -1,9 +1,9 @@
 .art-btn {
   display: block;
   margin: 0 auto;
-  padding: 0;
   font-size: 16px;
-  padding: 0;
+  padding: 4px 16px;
+
   border-radius: 8px;
   text-align: center;
   border: none;
@@ -12,12 +12,12 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  & a {
-    display: block;
-    height: 100%;
-    width: 100%;
-    padding: 4px 16px;
-  }
+  // & a {
+  //   display: block;
+  //   height: 100%;
+  //   width: 100%;
+  //   padding: 4px 16px;
+  // }
   &-style-2 {
     background-color: var(--fresher-color);
     color: white;
