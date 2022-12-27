@@ -5,11 +5,11 @@ import "./style.scss";
 SlideBtn.propTypes = {};
 
 function SlideBtn(props) {
-  const { img } = props;
+  const { img, url } = props;
   return (
     <div className="slide-btn">
       <img src={img} alt="" />
-      <ArtBtn />
+      <ArtBtn url={url} />
     </div>
   );
 }

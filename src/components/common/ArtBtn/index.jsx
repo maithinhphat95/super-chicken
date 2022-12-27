@@ -1,9 +1,11 @@
 import React from "react";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ArtBtn(props) {
   const { content, style, type, url, handleClick } = props;
+  const navigate = useNavigate();
+
   return (
     <button
       type={type || "button"}
@@ -11,13 +13,10 @@ function ArtBtn(props) {
       onClick={(e) => {
         e.stopPropagation();
         handleClick && handleClick();
+        url && navigate(url);
       }}
     >
-      {url ? (
-        <Link to={url}>{content || "Đặt hàng"}</Link>
-      ) : (
-        content || "Đặt hàng"
-      )}
+      {content || "Đặt hàng"}
     </button>
   );
 }

@@ -19,11 +19,13 @@ export const cartSlice = createSlice({
       state.isOpenCart = false;
     },
     initCart: (state, action) => {
-      const localCart = JSON.parse(localStorage.getItem("cartState")) || {};
-      state.cartList = localCart.cartList;
-      state.totalPrice = localCart.totalPrice;
-      state.totalQuantity = localCart.totalQuantity;
-      state.isOpenCart = false;
+      const localCart = JSON.parse(localStorage.getItem("cartState"));
+      if (localCart) {
+        state.cartList = localCart.cartList;
+        state.totalPrice = localCart.totalPrice;
+        state.totalQuantity = localCart.totalQuantity;
+        state.isOpenCart = false;
+      }
     },
     saveLocal: (state, action) => {
       localStorage.setItem("cartState", JSON.stringify(state));
@@ -81,13 +83,18 @@ export const cartSlice = createSlice({
           return (total += Number(current.subPrice));
         }, 0)
       );
-
       state.totalQuantity = Number(
         state.cartList.reduce((total, current) => {
           return (total += Number(current.quantity));
         }, 0)
       );
       localStorage.setItem("cartState", JSON.stringify(state));
+    },
+    clearCart: (state, action) => {
+      state.cartList = [];
+      state.totalPrice = 0;
+      state.totalQuantity = 0;
+      localStorage.removeItem("cartState");
     },
   },
 });
@@ -101,5 +108,6 @@ export const {
   changeQuantity,
   deleteItem,
   saveLocal,
+  clearCart,
 } = actions;
 export default reducer;

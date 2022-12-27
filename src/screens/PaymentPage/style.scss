@@ -1,55 +1,7 @@
 .payment-page {
-  padding-bottom: 20px;
-  .payment-content {
+  .payment-page-content {
     .payment {
-      &-delivery,
-      &-bill,
-      &-checkout {
-        height: 100%;
-        padding: 20px;
-        border: 1px solid var(--primary-color);
-        border-radius: 8px;
-        background-color: var(--secondary-color);
-        &-title {
-          text-transform: uppercase;
-          font-size: 30px;
-          font-weight: 500;
-          text-align: center;
-          color: var(--primary-color);
-        }
-      }
-
-      &-delivery {
-        & span {
-          color: var(--primary-color);
-          font-weight: 700;
-        }
-        &-form {
-          &-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 12px;
-            &-input {
-              min-height: 30px;
-              width: 100%;
-              padding: 4px 8px;
-              outline: none;
-              border: 1px solid var(--primary-color);
-              border-radius: 4px;
-              background-color: var(--background-color);
-              font-family: inherit;
-              resize: none;
-            }
-          }
-          &-note {
-            font-weight: bold;
-          }
-        }
-      }
       &-bill {
-        display: flex;
-        flex-direction: column;
         &-content {
           flex: 1;
           display: flex;
@@ -132,12 +84,15 @@
         }
       }
       &-checkout {
+        & .payment-method-container {
+          margin-bottom: 10px;
+        }
         & .payment-method,
         & .delivery-option {
           display: flex;
           flex-wrap: wrap;
-          margin-top: 10px;
-          margin-bottom: 10px;
+          margin-top: 8px;
+          margin-bottom: 8px;
           &-item {
             width: 100%;
             & label {
@@ -169,7 +124,7 @@
                 }
               }
               & img {
-                height: 24px;
+                height: 90%;
               }
               &:has(input:disabled) {
                 opacity: 0.6;
@@ -177,6 +132,7 @@
             }
           }
         }
+
         & .payment-confirm {
           text-align: right;
           font-size: 20px;

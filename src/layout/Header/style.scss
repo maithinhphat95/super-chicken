@@ -25,17 +25,12 @@
   & .nav-container {
     height: 100%;
     padding: 0 16px;
-    & .assist {
-      height: 50%;
-      &-location::after {
-        content: "|";
-        margin-left: 16px;
-      }
-      &-text {
-        margin-left: 8px;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
     & .nav {
+      width: 100%;
       justify-content: center;
       height: 50%;
       &-list {

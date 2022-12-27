@@ -1,0 +1,31 @@
+.login-page {
+  text-align: center;
+  & .login-container {
+    background-color: rgba($color: white, $alpha: 0.4);
+    & .login-page-content {
+      max-width: 600px;
+      margin: auto;
+      padding-top: 20px;
+      text-align: left;
+      & .login-form {
+        &-title {
+          font-weight: 700;
+          font-size: 20px;
+        }
+        &-control {
+          &-item {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+        & .register-link {
+          font-weight: 500;
+          &:hover {
+            color: blue;
+          }
+        }
+      }
+    }
+  }
+}

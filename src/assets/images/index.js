@@ -1,4 +1,4 @@
-export default {
+const images = {
   logo: require("./logo.png"),
   banner1: require("./banner1.jpg"),
   banner2: require("./banner2.jpg"),
@@ -26,3 +26,5 @@ export default {
   combo3: require("./combo3.png"),
   combo4: require("./combo4.png"),
 };
+
+export default images;

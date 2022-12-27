@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import SlideBtn from "../SlideBtn";
+import { Stack } from "@mui/system";
 
 MenuTodayItem.propTypes = {};
 
@@ -10,10 +11,13 @@ function MenuTodayItem(props) {
   const { img, imgText, url } = props;
   return (
     <Grid item xs={6} sm={3}>
-      <Link className="menu-today-item" to={url || ""}>
+      <Box
+        className="menu-today-item"
+        sx={{ height: { xs: "350px", sm: "590px" } }}
+      >
         <img src={img && img} alt="" />
-        <SlideBtn img={imgText && imgText} />
-      </Link>
+        <SlideBtn img={imgText && imgText} url={url} />
+      </Box>
     </Grid>
   );
 }

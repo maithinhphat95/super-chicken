@@ -1,15 +1,18 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import { MENU_LIST } from "../../../../constant/constant";
 import "./style.scss";
 function MenuPageHeader() {
   const [fixHeader, setFixHeader] = useState(false);
+  const selectCategory = useRef();
+  const [initOffset, setInitOffset] = useState(140);
 
   const handleScroll = () => {
-    if (window.scrollY >= 530) {
+    if (window.scrollY >= 400) {
+      setInitOffset(80);
       setFixHeader(true);
     } else {
+      setInitOffset(140);
       setFixHeader(false);
     }
   };
@@ -17,13 +20,13 @@ function MenuPageHeader() {
   const executeScroll = (id) => {
     const element = document.getElementById(id);
     const elementPosition = element.getBoundingClientRect().top;
-    // window.pageYOffset : khoảng cách offset từ đầu trang tới vị trí hiện tại
-    // element.getBoundingClientRect() : lấy vị trí của element so với view hiện tại.
-    // elementPosition + window.pageYOffset : vị trí element so với đầu trang
+    const offset = elementPosition + window.pageYOffset - initOffset;
+    // (selectCategory.current === "menu" ? 140 : 80);
     window.scrollTo({
-      top: elementPosition + window.pageYOffset - 80,
+      top: offset,
       behavior: "smooth",
     });
+    selectCategory.current = id;
   };
 
   useEffect(() => {
@@ -34,7 +37,7 @@ function MenuPageHeader() {
   }, [window.scrollY]);
 
   return (
-    <div className={`menu-header art-text ${fixHeader ? "fix-header" : ""} `}>
+    <div className={`menu-header art-text ${fixHeader && "fix-header"} `}>
       <Box sx={{ display: { xs: "none", md: "block" } }}>
         <ul className="menu-header-list">
           {MENU_LIST.map((item, index) => {

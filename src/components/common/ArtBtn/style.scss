@@ -1,13 +1,9 @@
 .art-btn {
   display: block;
   margin: 0 auto;
-  padding: 0;
   font-size: 16px;
-  // width: 80%;
-  // max-width: 120px;
-  padding: 0 10px;
-  height: 32px;
-  line-height: 32px;
+  padding: 4px 16px;
+
   border-radius: 8px;
   text-align: center;
   border: none;
@@ -16,12 +12,12 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  & a {
-    display: block;
-    height: 100%;
-    width: 100%;
-    padding: 0 10px;
-  }
+  // & a {
+  //   display: block;
+  //   height: 100%;
+  //   width: 100%;
+  //   padding: 4px 16px;
+  // }
   &-style-2 {
     background-color: var(--fresher-color);
     color: white;
@@ -29,10 +25,10 @@
   &::after {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 100px;
     height: 40%;
     top: 0;
-    left: -120px;
+    left: -150px;
     transform: rotate(-45deg);
     background-color: white;
     transition: 0.7s;

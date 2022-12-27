@@ -12,7 +12,7 @@ import {
   deleteItem,
   initCart,
   toggleCart,
-} from "../../../../redux/features/Cart/cartSlice";
+} from "../../../../redux/features/CartSlice/cartSlice";
 import ArtBtn from "../../../common/ArtBtn";
 import { Badge, Box } from "@mui/material";
 import CartItem from "../CartItem";
@@ -33,17 +33,17 @@ function CartContainer(props) {
     if (value === "increase") {
       dispatch(
         changeQuantity({
-          ...cartState.cartList[index],
-          quantity: cartState.cartList[index].quantity + 1,
+          ...cartState?.cartList[index],
+          quantity: cartState?.cartList[index].quantity + 1,
         })
       );
     } else if (value === "decrease") {
       dispatch(
         changeQuantity({
-          ...cartState.cartList[index],
+          ...cartState?.cartList[index],
           quantity:
-            cartState.cartList[index].quantity > 1
-              ? cartState.cartList[index].quantity - 1
+            cartState?.cartList[index].quantity > 1
+              ? cartState?.cartList[index].quantity - 1
               : 1,
         })
       );
@@ -52,7 +52,7 @@ function CartContainer(props) {
     } else {
       dispatch(
         changeQuantity({
-          ...cartState.cartList[index],
+          ...cartState?.cartList[index],
           quantity: Number(value),
         })
       );
@@ -99,7 +99,7 @@ function CartContainer(props) {
               <BsCart3 className="cart-btn-payment-icon" />
             </Badge>
             <p className="cart-btn-payment-price">
-              {cartState.totalPrice.toLocaleString()} đ
+              {cartState?.totalPrice?.toLocaleString()} đ
             </p>
           </div>
           <ArtBtn content="Thanh toán" style="btn2" url={"/payment"} />
@@ -109,8 +109,8 @@ function CartContainer(props) {
       {/* List */}
       <div className="cart-list scroll-custom ">
         {/* Item */}
-        {cartState.cartList.length > 0
-          ? cartState.cartList.map((item, index) => {
+        {cartState?.cartList?.length > 0
+          ? cartState?.cartList.map((item, index) => {
               return (
                 <CartItem
                   key={index}

@@ -23,7 +23,7 @@ body,
   }
 }
 .art-text {
-  font-family: "Coiny", "Open Sans", sans-serif;
+  font-family: "Coiny", "Open Sans", sans-serif !important;
 }
 .nor-text {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -50,6 +50,29 @@ html {
     border-radius: 4px;
   }
 }
+
+.custom-hover {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 40%;
+    top: -200px;
+    left: 0;
+    transform: translateX(-25%) rotate(-45deg);
+    background-color: white;
+    transition: 0.7s;
+  }
+  &:hover {
+    background-color: var(--hover-color) !important;
+    color: black !important;
+    &::after {
+      top: 200px;
+    }
+  }
+}
 .scroll-custom {
   &::-webkit-scrollbar {
     width: 6px;
@@ -68,4 +91,84 @@ html {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+.form-container {
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  & .form-title {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: center;
+    color: var(--primary-color);
+  }
+  & .form-control {
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 12px;
+
+      & label {
+        font-weight: 700;
+      }
+      &-input {
+        min-height: 30px;
+        width: 100%;
+        padding: 4px 8px;
+        outline: none;
+        border: 1px solid var(--primary-color);
+        border-radius: 4px;
+        background-color: var(--background-color);
+        font-family: inherit;
+        resize: none;
+      }
+    }
+  }
+  & .high-light {
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+  & .form-note {
+    font-weight: bold;
+  }
+  & .form-action {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+}
+.fixed-button {
+  position: fixed !important;
+  z-index: 120;
+  top: 80px;
+  right: 20px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 0;
+  outline: none;
+  border-radius: 8px;
+  padding: 0;
+  cursor: pointer;
+  font-size: 16px;
+  & > * {
+    display: flex;
+    padding: 8px;
+    gap: 8px;
+  }
 }

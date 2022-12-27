@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { BsArrowUpCircleFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
-import { closeSideBar } from "../../../../redux/features/OpenSideBar/openSideBar";
+import { closeSideBar } from "../../../../redux/features/DrawerSlice/drawerSlice";
+import PageContainer from "../../../common/PageContainer";
 import PageTitle from "../../../common/PageTitle";
 import MenuRow from "../MenuRow";
 import "./style.scss";
 
 function MenuPageContent() {
   const dispatch = useDispatch();
+  const { initCategory } = useParams();
+  const [viewTo, setViewTo] = useState(initCategory || "combo");
 
   const [products, setProducts] = useState({
     combo: [],
@@ -65,6 +70,13 @@ function MenuPageContent() {
     limit: 4,
   });
 
+  const goTo = (topOffset) => {
+    window.scrollTo({
+      top: topOffset,
+      behavior: "smooth",
+    });
+  };
+
   // async funtion fetch data
   const fetchData = async (category, option) => {
     setLoading((prev) => {
@@ -82,6 +94,20 @@ function MenuPageContent() {
       setProducts((prev) => {
         return { ...prev, [category]: res.data };
       });
+
+      if (category === "dessert" && res.status) {
+        const finish = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve();
+          }, 300);
+        });
+        finish.then(() => {
+          const element = document.getElementById(viewTo);
+          const elementPosition = element.getBoundingClientRect().top;
+          const offSet = elementPosition + window.pageYOffset - 140;
+          goTo(offSet);
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -191,101 +217,90 @@ function MenuPageContent() {
     fetchData("dessert", optionFetchDessert);
   }, [optionFetchDessert]);
 
-  // Init page
-  useEffect(() => {
-    dispatch(closeSideBar());
-    // document.getElementById("combo").scrollIntoView();
-    const element = document.getElementById("combo");
-    const elementPosition = element.getBoundingClientRect().top;
-    const offset = elementPosition + window.pageYOffset - 175;
-    window.scrollTo({
-      top: offset,
-      behavior: "smooth",
-    });
-  }, []);
-
   return (
     <div className="menu-container art-text">
-      <div id="menu" className="menu container">
-        <PageTitle title="Thực đơn" />
-        {/* Combo Category */}
-        <MenuRow
-          id={"combo"}
-          title="Combo"
-          loading={loading.combo}
-          loadMore={loadMore.combo}
-          products={products.combo}
-          handleLoadMore={() => {
-            handleLoadMore("combo");
-          }}
-        />
-        {/* Fried Chicken Category */}
-        <MenuRow
-          id={"fried-chicken"}
-          title="Gà Giòn Vui Vẻ"
-          loading={loading.friedChicken}
-          loadMore={loadMore.friedChicken}
-          products={products.friedChicken}
-          handleLoadMore={() => {
-            handleLoadMore("friedChicken");
-          }}
-        />
-        {/* Spicy Chicken Category */}
-        <MenuRow
-          id={"spicy-chicken"}
-          title="Gà Sốt Cay"
-          loading={loading.spicyChicken}
-          loadMore={loadMore.spicyChicken}
-          products={products.spicyChicken}
-          handleLoadMore={() => {
-            handleLoadMore("spicyChicken");
-          }}
-        />
-        {/* Spaghetti Category */}
-        <MenuRow
-          id={"spaghetti"}
-          title="Mỳ Ý Sốt Bò Bằm"
-          loading={loading.spaghetti}
-          loadMore={loadMore.spaghetti}
-          products={products.spaghetti}
-          handleLoadMore={() => {
-            handleLoadMore("spaghetti");
-          }}
-        />
-        {/* Burger Category */}
-        <MenuRow
-          id={"burger"}
-          title="Burger & Cơm"
-          loading={loading.burger}
-          loadMore={loadMore.burger}
-          products={products.burger}
-          handleLoadMore={() => {
-            handleLoadMore("burger");
-          }}
-        />
-        {/* Side Dish Category */}
-        <MenuRow
-          id={"side-dish"}
-          title="Phần Ăn Phụ"
-          loading={loading.sideDish}
-          loadMore={loadMore.sideDish}
-          products={products.sideDish}
-          handleLoadMore={() => {
-            handleLoadMore("sideDish");
-          }}
-        />
-        {/* Dessert Category */}
-        <MenuRow
-          id={"dessert"}
-          title="Món Tráng Miệng"
-          loading={loading.dessert}
-          loadMore={loadMore.dessert}
-          products={products.dessert}
-          handleLoadMore={() => {
-            handleLoadMore("dessert");
-          }}
-        />
-      </div>
+      <PageContainer className="container menu-container art-text">
+        <div id="menu" className="menu">
+          <PageTitle title="Thực đơn" />
+          {/* Combo Category */}
+          <MenuRow
+            id={"combo"}
+            title="Combo"
+            loading={loading.combo}
+            loadMore={loadMore.combo}
+            products={products.combo}
+            handleLoadMore={() => {
+              handleLoadMore("combo");
+            }}
+          />
+          {/* Fried Chicken Category */}
+          <MenuRow
+            id={"fried-chicken"}
+            title="Gà Giòn Vui Vẻ"
+            loading={loading.friedChicken}
+            loadMore={loadMore.friedChicken}
+            products={products.friedChicken}
+            handleLoadMore={() => {
+              handleLoadMore("friedChicken");
+            }}
+          />
+          {/* Spicy Chicken Category */}
+          <MenuRow
+            id={"spicy-chicken"}
+            title="Gà Sốt Cay"
+            loading={loading.spicyChicken}
+            loadMore={loadMore.spicyChicken}
+            products={products.spicyChicken}
+            handleLoadMore={() => {
+              handleLoadMore("spicyChicken");
+            }}
+          />
+          {/* Spaghetti Category */}
+          <MenuRow
+            id={"spaghetti"}
+            title="Mỳ Ý Sốt Bò Bằm"
+            loading={loading.spaghetti}
+            loadMore={loadMore.spaghetti}
+            products={products.spaghetti}
+            handleLoadMore={() => {
+              handleLoadMore("spaghetti");
+            }}
+          />
+          {/* Burger Category */}
+          <MenuRow
+            id={"burger"}
+            title="Burger & Cơm"
+            loading={loading.burger}
+            loadMore={loadMore.burger}
+            products={products.burger}
+            handleLoadMore={() => {
+              handleLoadMore("burger");
+            }}
+          />
+          {/* Side Dish Category */}
+          <MenuRow
+            id={"side-dish"}
+            title="Phần Ăn Phụ"
+            loading={loading.sideDish}
+            loadMore={loadMore.sideDish}
+            products={products.sideDish}
+            handleLoadMore={() => {
+              handleLoadMore("sideDish");
+            }}
+          />
+          {/* Dessert Category */}
+          <MenuRow
+            id={"dessert"}
+            title="Món Tráng Miệng"
+            loading={loading.dessert}
+            loadMore={loadMore.dessert}
+            products={products.dessert}
+            handleLoadMore={() => {
+              handleLoadMore("dessert");
+            }}
+          />
+        </div>
+      </PageContainer>
     </div>
   );
 }

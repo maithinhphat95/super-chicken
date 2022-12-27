@@ -1,0 +1,24 @@
+.register-page {
+  text-align: center;
+  & .register-container {
+    background-color: rgba($color: white, $alpha: 0.4);
+    & .register-page-content {
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: left;
+      & .register-form {
+        &-title {
+          font-weight: 700;
+          font-size: 20px;
+        }
+        &-control {
+          &-item {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+}
