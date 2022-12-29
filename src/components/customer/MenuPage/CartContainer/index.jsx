@@ -58,6 +58,7 @@ function CartContainer(props) {
       );
     }
   };
+
   // Init Cart From local Storage
   useEffect(() => {
     dispatch(initCart());

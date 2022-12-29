@@ -54,7 +54,7 @@ function Header(props) {
 
   return (
     <div className="header">
-      <ToastContainer autoClose="1500" />
+      <ToastContainer autoClose="1500" pauseOnHover="false" />
       <Grid container spacing={0}>
         {/* Menu button */}
         <Grid item xs={4} sx={{ display: { lg: "none" } }}>
@@ -78,9 +78,9 @@ function Header(props) {
         {/* Logo */}
         <Grid item xs={4} lg={2}>
           <div className="logo">
-            <a href="">
+            <Link to={"/"}>
               <img className="logo-img" src={images.logo} alt="" />
-            </a>
+            </Link>
           </div>
         </Grid>
 

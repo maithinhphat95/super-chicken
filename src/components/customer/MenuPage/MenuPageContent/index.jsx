@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { BsArrowUpCircleFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
-import { closeSideBar } from "../../../../redux/features/DrawerSlice/drawerSlice";
 import PageContainer from "../../../common/PageContainer";
 import PageTitle from "../../../common/PageTitle";
 import MenuRow from "../MenuRow";
 import "./style.scss";
 
 function MenuPageContent() {
-  const dispatch = useDispatch();
   const { initCategory } = useParams();
   const [viewTo, setViewTo] = useState(initCategory || "combo");
 

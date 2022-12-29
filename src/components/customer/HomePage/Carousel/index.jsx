@@ -6,6 +6,7 @@ import images from "../../../../assets/images";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 Carousel.propTypes = {};
 
@@ -23,21 +24,21 @@ function Carousel(props) {
   return (
     <div className="banner-section">
       <Slider {...settings}>
-        <a className="banner" href={""}>
+        <Link className="banner" to={"/"}>
           <CardMedia component="img" image={images.banner1} alt="Jollibee" />
-        </a>
-        <a className="banner" href={""}>
+        </Link>
+        <Link className="banner" to={"/"}>
           <CardMedia component="img" image={images.banner2} alt="Jollibee" />
-        </a>
-        <a className="banner" href={""}>
+        </Link>
+        <Link className="banner" to={"/"}>
           <CardMedia component="img" image={images.banner3} alt="Jollibee" />
-        </a>
-        <a className="banner" href={""}>
+        </Link>
+        <Link className="banner" to={"/"}>
           <CardMedia component="img" image={images.banner4} alt="Jollibee" />
-        </a>
-        <a className="banner" href={""}>
+        </Link>
+        <Link className="banner" to={"/"}>
           <CardMedia component="img" image={images.banner5} alt="Jollibee" />
-        </a>
+        </Link>
       </Slider>
     </div>
   );

@@ -21,9 +21,9 @@ export const cartSlice = createSlice({
     initCart: (state, action) => {
       const localCart = JSON.parse(localStorage.getItem("cartState"));
       if (localCart) {
-        state.cartList = localCart.cartList;
-        state.totalPrice = localCart.totalPrice;
-        state.totalQuantity = localCart.totalQuantity;
+        state.cartList = localCart?.cartList;
+        state.totalPrice = localCart?.totalPrice;
+        state.totalQuantity = localCart?.totalQuantity;
         state.isOpenCart = false;
       }
     },

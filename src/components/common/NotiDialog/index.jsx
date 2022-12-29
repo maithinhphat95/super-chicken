@@ -9,7 +9,7 @@ import React from "react";
 import ArtBtn from "../ArtBtn";
 import "./style.scss";
 function NotiDialog(props) {
-  const { dialogContent, open, handleClose } = props;
+  const { dialogContent, open, handleClose, type } = props;
   return (
     <Dialog
       fullScreen={false}
@@ -30,10 +30,7 @@ function NotiDialog(props) {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <ArtBtn content="Xác nhận" handleClick={handleClose} />
-        {/* <Button onClick={handleClose} autoFocus>
-          Xác nhận
-        </Button> */}
+        <ArtBtn type="button" content="Đóng" handleClick={handleClose} />
       </DialogActions>
     </Dialog>
   );

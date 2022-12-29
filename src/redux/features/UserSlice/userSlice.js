@@ -3,8 +3,6 @@ import { BASE_URL } from "../../../apis/axiosClient";
 import { userApis } from "../../../apis/userApi";
 import { STATUS } from "../../../constant/constant";
 
-const PRODUCT_URL = `${BASE_URL}/products`;
-
 // Middleware thunk functions
 export const fetchUser = createAsyncThunk(
   "user/fetchUser",

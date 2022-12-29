@@ -33,7 +33,7 @@ function MenuItem(props) {
       </div>
       <div>
         <p className="menu-list-item-price">
-          <span>{Number(product.price).toLocaleString()}</span> đ
+          <span>{Number(product.price)?.toLocaleString()}</span> đ
         </p>
         <ArtBtn
           style="btn2"

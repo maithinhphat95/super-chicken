@@ -154,53 +154,6 @@
               font-size: 20px;
             }
           }
-          & .confirm-dialog {
-            position: fixed;
-            top: 0;
-            right: 0;
-            height: 100%;
-            width: 100%;
-            background-color: rgba($color: gray, $alpha: 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &-box {
-              width: 100%;
-              max-width: 600px;
-              border-radius: 8px;
-              background-color: var(--background-color);
-              &-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 10px 20px;
-                color: var(--primary-color);
-                & button {
-                  color: var(--primary-color);
-                  font-size: 20px;
-                  font-weight: 900;
-                  padding: 0;
-                }
-              }
-              &-content {
-                border: 1px solid rgb(180, 180, 180);
-                border-left: 0;
-                border-right: 0;
-                padding: 20px;
-                font-size: 16px;
-                text-align: left;
-              }
-              &-action {
-                display: flex;
-                justify-content: flex-end;
-                padding: 16px 20px;
-                & button {
-                  margin: 0;
-                  margin-left: 10px;
-                }
-              }
-            }
-          }
         }
       }
     }

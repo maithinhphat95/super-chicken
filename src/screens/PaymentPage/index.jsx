@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import { BsXLg } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ArtBtn from "../../components/common/ArtBtn";
+import ConfirmDialog from "../../components/common/ConfirmDialog";
 import NotiDialog from "../../components/common/NotiDialog";
 import PageContainer from "../../components/common/PageContainer";
 import PageCover from "../../components/common/PageCover";
@@ -35,22 +36,30 @@ function PaymentPage(props) {
   const [confirmDialog, setConfirmDialog] = useState(false);
   const [finishDialog, setFinishDialog] = useState(false);
   const [emptyDialog, setEmptyDialog] = useState(false);
-
+  const [completePayment, setCompletePayment] = useState(false);
   const emptyDialogContent = {
     title: "Giỏ hàng trống",
     message: "Giỏ hàng của bạn đang trống, vui lòng lựa chọn món ăn",
   };
-
   const finishDialogContent = {
     title: "Hoàn thành đơn hàng",
     message:
       "Đơn hàng của bạn đang được xác nhận, cảm ơn bạn đã sử dụng dịch vụ của chúng tôi",
+  };
+  const confirmDialogContent = {
+    title: "Hoàn Tất Đơn Hàng",
+    message:
+      "Để xác nhận thanh toán đơn hàng này, quý khách vui lòng nhấn vào nút xác nhận. Xin cảm ơn quý khách.",
   };
 
   const handleChangeShip = (agentCode, price) => {
     if (shipFee !== price) {
       setShipFee(Number(price));
     }
+  };
+
+  const handleCloseConfirmDialog = () => {
+    setConfirmDialog(false);
   };
 
   const onSubmit = (data) => {
@@ -60,27 +69,29 @@ function PaymentPage(props) {
     dispatch(clearCart());
     setConfirmDialog(false);
     setFinishDialog(true);
+    setCompletePayment(true);
   };
 
-  const handleCloseDialog = () => {
+  const handleCloseSuccessDialog = () => {
     navigate("/menu");
   };
 
   const onError = (error, e) => {
     setConfirmDialog(false);
+    toast.error("Vui lòng điền đầy đủ thông tin");
   };
-
-  useEffect(() => {
-    if (cartState?.cartList?.length === 0 && isInitCart) {
-      setEmptyDialog(true);
-    }
-  }, [cartState, isInitCart]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(initCart());
     setIsInitCart(true);
   }, []);
+
+  useEffect(() => {
+    if ((cartState?.cartList.length === 0) & isInitCart) {
+      !completePayment && setEmptyDialog(true);
+    }
+  }, [cartState, isInitCart]);
 
   return (
     <PageCover className="payment-page">
@@ -89,7 +100,7 @@ function PaymentPage(props) {
           <ToastContainer
             pauseOnHover={false}
             theme={"light"}
-            autoClose="2000"
+            autoClose="1500"
           />
           <PageTitle title="Thanh Toán" />
           <div className="payment-page-content ">
@@ -370,39 +381,11 @@ function PaymentPage(props) {
                             />
                           </div>
                           {confirmDialog && (
-                            <div className="confirm-dialog">
-                              <div className="confirm-dialog-box">
-                                <div className="confirm-dialog-box-header">
-                                  <h3 className="art-text">
-                                    Hoàn Tất Đơn Hàng
-                                  </h3>
-                                  <IconButton
-                                    onClick={() => {
-                                      setConfirmDialog(false);
-                                    }}
-                                  >
-                                    <BsXLg />
-                                  </IconButton>
-                                </div>
-                                <div className="confirm-dialog-box-content">
-                                  <p>
-                                    Để xác nhận thanh toán đơn hàng này, quý
-                                    khách vui lòng nhấn vào nút xác nhận.
-                                  </p>
-                                  <p>Xin cảm ơn quý khách.</p>
-                                </div>
-                                <div className="confirm-dialog-box-action">
-                                  <ArtBtn
-                                    content="Hủy bỏ"
-                                    style="btn2"
-                                    handleClick={() => {
-                                      setConfirmDialog(false);
-                                    }}
-                                  />
-                                  <ArtBtn content="Xác nhận" type="submit" />
-                                </div>
-                              </div>
-                            </div>
+                            <ConfirmDialog
+                              dialogContent={confirmDialogContent}
+                              handleClose={handleCloseConfirmDialog}
+                              submit={true}
+                            />
                           )}
                         </div>
                       </Grid>
@@ -420,7 +403,7 @@ function PaymentPage(props) {
         dialogContent={finishDialogContent}
         open={finishDialog}
         handleClose={() => {
-          handleCloseDialog();
+          handleCloseSuccessDialog();
         }}
       />
       {/* Empty dialog */}
@@ -428,7 +411,7 @@ function PaymentPage(props) {
         dialogContent={emptyDialogContent}
         open={emptyDialog}
         handleClose={() => {
-          handleCloseDialog();
+          handleCloseSuccessDialog();
         }}
       />
     </PageCover>
