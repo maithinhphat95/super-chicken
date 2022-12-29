@@ -8,15 +8,17 @@ import {
   closeSideBar,
 } from "../../redux/features/DrawerSlice/drawerSlice";
 import { BsArrowUpCircleFill } from "react-icons/bs";
+import { Outlet, useLocation } from "react-router";
 
 function DefaultLayout({ children }) {
   const [showTopBtn, setShowTopBtn] = useState(false);
   const isOpenSideBar = useSelector((state) => state.drawer.isOpenSideBar);
+  const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeSideBar());
     dispatch(closeActionList());
-  }, [children]);
+  }, [location, children]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +55,10 @@ function DefaultLayout({ children }) {
       {isOpenSideBar && <SideBar />}
       <div className="page-container">
         <Header />
-        <div className="content">{children}</div>
+        <div className="content">
+          {children}
+          <Outlet />
+        </div>
         <Footer />
       </div>
     </>

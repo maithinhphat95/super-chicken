@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
 import PageContainer from "../../../common/PageContainer";
@@ -8,7 +7,6 @@ import MenuRow from "../MenuRow";
 import "./style.scss";
 
 function MenuPageContent() {
-  const dispatch = useDispatch();
   const { initCategory } = useParams();
   const [viewTo, setViewTo] = useState(initCategory || "combo");
 

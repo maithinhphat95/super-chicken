@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -45,7 +45,9 @@ function SideBar(props) {
         <div className="logo">
           <img src={images.logo} alt="" />
         </div>
-        <AuthBox />
+        <Box sx={{ padding: "0 10px" }}>
+          <AuthBox />
+        </Box>
         <ul className="side-bar-list">
           {navList &&
             navList.map((item, index) => {

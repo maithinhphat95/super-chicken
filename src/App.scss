@@ -158,9 +158,9 @@ html {
   z-index: 120;
   top: 80px;
   right: 20px;
-  background-color: var(--secondary-color);
+  background-color: var(--background-color);
   color: var(--primary-color);
-  border: 0;
+  border: 1px solid var(--primary-color);
   outline: none;
   border-radius: 8px;
   padding: 0;

@@ -1,27 +1,28 @@
 import { Stack } from "@mui/material";
-import React from "react";
-import { useSignOut } from "react-firebase-hooks/auth";
+import React, { useEffect } from "react";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { FaCaretDown, FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase/config";
-import {
-  openActionList,
-  toggleActionList,
-} from "../../../redux/features/DrawerSlice/drawerSlice";
-import { logout } from "../../../redux/features/UserSlice/userSlice";
+import { toggleActionList } from "../../../redux/features/DrawerSlice/drawerSlice";
+import { login, logout } from "../../../redux/features/UserSlice/userSlice";
 import { routesPath } from "../../../routes";
 import "./style.scss";
 
 export default function AuthBox() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const userState = useSelector((state) => state.user);
   const isOpenActionList = useSelector(
     (state) => state.drawer.isOpenActionList
   );
-  const [signOut, loading, error] = useSignOut(auth);
+
+  const [signOut] = useSignOut(auth);
+
+  const [user, loading, error] = useAuthState(auth);
 
   const handleToggleActionList = () => {
     dispatch(toggleActionList());
@@ -34,6 +35,21 @@ export default function AuthBox() {
       toast.info("Đăng xuất thành công");
     }
   };
+
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        dispatch(logout());
+      } else {
+        const loginUser = {
+          name: user?.displayName,
+          email: user?.email,
+          accessToken: user?.accessToken,
+        };
+        dispatch(login(loginUser));
+      }
+    }
+  }, [user]);
 
   return (
     <Stack className="auth" gap={2} direction={"row"}>
@@ -62,10 +78,10 @@ export default function AuthBox() {
             <div className="action-list">
               <button
                 onClick={() => {
-                  navigate("/orders");
+                  navigate(routesPath.PROFILE);
                 }}
               >
-                Đơn hàng
+                Thông tin cá nhân
               </button>
               {userState?.isAdmin && <button>Trang quản lý (Admin)</button>}
               <button onClick={handleLogout}>Đăng xuất</button>

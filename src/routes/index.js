@@ -8,9 +8,10 @@ import InstroPage from "../screens/InstroPage";
 import ContactPage from "../screens/ContactPage";
 import CareerPage from "../screens/CareerPage";
 import PaymentPage from "../screens/PaymentPage";
-import OrdersPage from "../screens/OrdersPage";
+import ProfilePage from "../screens/ProfilePage";
 import RegisterPage from "../screens/RegisterPage";
 import LoginPage from "../screens/LoginPage";
+
 // Public routes: use for un-register user
 export const publicRoutes = [
   { path: "/", component: HomePage },
@@ -24,7 +25,8 @@ export const publicRoutes = [
   { path: "/contact", component: ContactPage },
   { path: "/career", component: CareerPage },
   { path: "/payment", component: PaymentPage },
-  { path: "/orders", component: OrdersPage },
+  // { path: "/profile", component: ProfilePage },
+  { path: "/profile/*", component: ProfilePage },
   { path: "/register", component: RegisterPage },
   { path: "/login", component: LoginPage },
 ];
@@ -42,7 +44,7 @@ export const routesPath = {
   CONTACT: "/contact",
   CAREER: "/career",
   PAYMENT: "/payment",
-  ORDERS: "/orders",
+  PROFILE: "/profile",
   AUTH: "/authorization",
   REGISTER: "/register",
   LOGIN: "/login",
