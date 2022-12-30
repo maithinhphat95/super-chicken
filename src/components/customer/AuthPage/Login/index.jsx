@@ -62,14 +62,14 @@ export default function Login() {
   };
 
   const handleLoginFb = () => {
-    const provider = new FacebookAuthProvider();
-    provider.addScope("user_birthday");
-    provider.setCustomParameters({
-      prompt: "select_account",
-      display: "popup",
-    });
-    signInWithPopup(auth, provider);
-    // signInWithFacebook();
+    // const provider = new FacebookAuthProvider();
+    // provider.addScope("user_birthday");
+    // provider.setCustomParameters({
+    //   prompt: "select_account",
+    //   display: "popup",
+    // });
+    // signInWithPopup(auth, provider);
+    signInWithFacebook();
   };
 
   const handleLoginGg = () => {
