@@ -93,17 +93,6 @@ export default function UserInfor() {
     handleOpenSuccess();
   };
 
-  //   useEffect(() => {
-  //     //   reset(defaultValue, { keepDefaultValues: true });
-  //     // reset((formValues) => ({
-  //     //   ...formValues,
-  //     //   ...defaultValue,
-  //     // }));
-  //     for (let key in defaultValue) {
-  //       setValue(key, user[key]);
-  //     }
-  //   }, []);
-
   const handleOnError = (error) => {
     console.log(error);
     handleCloseConfirm();
@@ -147,9 +136,6 @@ export default function UserInfor() {
               </label>
               <input
                 disabled
-                // className={`user-infor-input ${
-                //   error?.displayName ? "error" : ""
-                // } `}
                 className={`user-infor-input ${
                   error?.displayName ? "error" : ""
                 }`}

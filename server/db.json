@@ -1029,6 +1029,52 @@
         }
       ],
       "id": 26
+    },
+    {
+      "name": "Mai Thịnh Phát",
+      "phone": "+84964084330",
+      "address": "Số 293 Âu Cơ, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng",
+      "email": "maithinhphat.tdh@gmail.com",
+      "note": "",
+      "paymentMethod": "COD",
+      "shippingAgent": "shopeeFood",
+      "shipFee": 20000,
+      "products": [
+        {
+          "id": "2",
+          "category": "combo",
+          "name": "combo 2",
+          "image": "https://jollibee.com.vn/uploads/dish/848b7a6988ecd4-9999023fbf2b3fda69de66430d3e139knonccce2.png",
+          "description": "03 GÀ GIÒN VUI VẺ + 01 MỲ Ý SỐT BÒ BẰM + 1 KHOAI TÂY VỪA + 2 LY PEPSI VỪA",
+          "price": "139000",
+          "quantity": 1,
+          "subPrice": "139000"
+        }
+      ],
+      "id": 27
+    },
+    {
+      "name": "Mai Thịnh Phát",
+      "phone": "+84964084330",
+      "address": "Số 293 Âu Cơ, Hòa Khánh Bắc, Liên Chiểu, Đà Nẵng",
+      "email": "maithinhphat.tdh@gmail.com",
+      "note": "",
+      "paymentMethod": "COD",
+      "shippingAgent": "grapFood",
+      "shipFee": 25000,
+      "products": [
+        {
+          "id": "3",
+          "category": "combo",
+          "name": "combo 3",
+          "image": "https://jollibee.com.vn/uploads/dish/62b8b47e20967e-4000742.png",
+          "description": "02 GÀ GIÒN VUI VẺ + 02 MỲ Ý SỐT BÒ BẰM + 1 KHOAI TÂY VỪA + 2 LY PEPSI VỪA",
+          "price": "139000",
+          "quantity": 1,
+          "subPrice": "139000"
+        }
+      ],
+      "id": 28
     }
   ]
 }
