@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { orderApis } from "../../../apis/orderApi";
 import { STATUS } from "../../../constant/constant";
+// import {} from "";
 export const fetchOrders = createAsyncThunk("order/fetchOrder", async () => {
   //
 });
@@ -13,6 +14,7 @@ export const addOrder = createAsyncThunk("order/addOrder", async (data) => {
     success: "Đơn hàng đã hoàn tất 👌",
     error: "Đơn hàng bị lỗi, vui lòng xác nhận lại 🤯",
   });
+
   return response;
 });
 

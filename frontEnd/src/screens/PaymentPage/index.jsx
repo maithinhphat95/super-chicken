@@ -37,6 +37,7 @@ function PaymentPage(props) {
   const [finishDialog, setFinishDialog] = useState(false);
   const [emptyDialog, setEmptyDialog] = useState(false);
   const [completePayment, setCompletePayment] = useState(false);
+
   const emptyDialogContent = {
     title: "Giỏ hàng trống",
     message: "Giỏ hàng của bạn đang trống, vui lòng lựa chọn món ăn",
@@ -58,20 +59,23 @@ function PaymentPage(props) {
     }
   };
 
-  const handleCloseConfirmDialog = () => {
-    setConfirmDialog(false);
-  };
-
   const onSubmit = (data) => {
-    dispatch(
-      addOrder({ ...data, shipFee: shipFee, products: cartState?.cartList })
-    );
+    const newOrder = {
+      ...data,
+      shipFee: shipFee,
+      products: cartState?.cartList,
+    };
+    dispatch(addOrder(newOrder));
+
     dispatch(clearCart());
     setConfirmDialog(false);
     setFinishDialog(true);
     setCompletePayment(true);
   };
 
+  const handleCloseConfirmDialog = () => {
+    setConfirmDialog(false);
+  };
   const handleCloseSuccessDialog = () => {
     navigate("/menu");
   };

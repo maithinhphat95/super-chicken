@@ -1,3 +1,4 @@
+import { child, ref, set } from "@firebase/database";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 // import {
@@ -18,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { loginSchema } from "../../../../constant/schema";
-import { auth } from "../../../../firebase/config";
+import { auth, database } from "../../../../firebase/config";
 import { login } from "../../../../redux/features/UserSlice/userSlice";
 import { routesPath } from "../../../../routes";
 import ArtBtn from "../../../common/ArtBtn";
@@ -35,12 +36,24 @@ export default function Login() {
     mode: "onChange",
     resolver: yupResolver(loginSchema),
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const loginUser = useSelector((state) => state.user);
+  const [userData, setUserData] = useState({
+    displayName: "",
+    email: "",
+    dateOfBirth: "",
+    phoneNumber: "",
+    photoURL: "",
+    uid: "",
+    accessToken: "",
+  });
+
   // Firebase hook
-  const [user] = useAuthState(auth);
+  const [user, userLoading] = useAuthState(auth);
+
   const [signInWithEmailAndPassword, epuser, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const [signInWithFacebook, fbUser, fbLoading, fbError] =
@@ -53,22 +66,38 @@ export default function Login() {
     message: "Bạn đã đăng nhập thành công",
   };
 
+  const dbRef = ref(database);
+  const usersRef = child(dbRef, "users");
+
   const onHandleSubmit = (data) => {
     signInWithEmailAndPassword(data?.email, data?.password);
   };
+
+  // const registerUser = async () => {
+  // };
+  // if (fbUser | ggUser) {
+  //   const socialUser = fbUser || ggUser;
+  //   setUserData((prev) => {
+  //     return {
+  //       ...prev,
+  //       displayName: socialUser?.displayName,
+  //       email: socialUser?.email,
+  //       dateOfBirth: socialUser?.reloadUserInfo?.dateOfBirth,
+  //       phoneNumber: socialUser?.phoneNumber,
+  //       photoURL: socialUser?.photoURL,
+  //       uid: socialUser?.uid,
+  //       accessToken: socialUser?.accessToken,
+  //     };
+  //   });
+  //   console.log(userData);
+  //   set(ref(usersRef, socialUser.uid), userData);
+  // }
 
   const onHandleError = (error) => {
     console.log(error);
   };
 
   const handleLoginFb = () => {
-    // const provider = new FacebookAuthProvider();
-    // provider.addScope("user_birthday");
-    // provider.setCustomParameters({
-    //   prompt: "select_account",
-    //   display: "popup",
-    // });
-    // signInWithPopup(auth, provider);
     signInWithFacebook();
   };
 
@@ -79,8 +108,9 @@ export default function Login() {
   const handleCloseDialog = () => {
     navigate(-1);
   };
+
   useEffect(() => {
-    if (loginUser.isLogin) {
+    if (userLoading & loginUser.isLogin) {
       navigate(-1);
     }
   }, []);
