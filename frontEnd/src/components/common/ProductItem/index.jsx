@@ -1,38 +1,33 @@
-import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import ArtBtn from "../../../common/ArtBtn";
-import {
-  addToCart,
-  cartSlice,
-  initCart,
-} from "../../../../redux/features/CartSlice/cartSlice";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-function MenuItem(props) {
+import { addToCart } from "../../../redux/features/CartSlice/cartSlice";
+import ArtBtn from "../ArtBtn";
+import "./style.scss";
+export default function ProductItem(props) {
   const { product } = props;
   const dispatch = useDispatch();
-  const cartState = useSelector((state) => state.cart);
   const handleAddToCart = (item) => {
     const cartItem = { ...item, quantity: 1, subPrice: product.price };
     dispatch(addToCart(cartItem));
   };
   return (
-    <Grid item xs={6} sm={6} md={3} className="menu-list-item">
-      <div className="menu-list-item-card">
-        <div className="menu-list-item-card-img">
+    <Grid item xs={6} sm={6} md={3} className="product-item">
+      <div className="product-item-card">
+        <div className="product-item-card-img">
           <img src={product.image} alt="" />
         </div>
-        <h3 className="menu-list-item-card-name">
+        <h3 className="product-item-card-name art-text">
           <span>{product.name}</span>
         </h3>
         {product.description.split(" + ").map((item, index) => (
-          <p key={index} className="menu-list-item-card-description">
+          <p key={index} className="product-item-card-description">
             {item}
           </p>
         ))}
       </div>
       <div>
-        <p className="menu-list-item-price">
+        <p className="product-item-price art-text">
           <span>{Number(product.price)?.toLocaleString()}</span> đ
         </p>
         <ArtBtn
@@ -41,10 +36,7 @@ function MenuItem(props) {
             handleAddToCart(product);
           }}
         />
-        {/* <div className="menu-list-item-btn"></div> */}
       </div>
     </Grid>
   );
 }
-
-export default MenuItem;

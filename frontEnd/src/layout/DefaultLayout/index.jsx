@@ -48,7 +48,6 @@ function DefaultLayout({ children }) {
           }}
         >
           <div>
-            {/* <BsArrowUpCircleFill /> */}
             <p>
               <FaAngleDoubleUp />
               <FaHome />
@@ -57,7 +56,7 @@ function DefaultLayout({ children }) {
         </button>
       )}
       {isOpenSideBar && <SideBar />}
-      <div className="page-container">
+      <div className="">
         <Header />
         <div className="content">
           {children}

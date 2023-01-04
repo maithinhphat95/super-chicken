@@ -45,6 +45,7 @@ export default function AuthBox() {
           name: user?.displayName,
           email: user?.email,
           accessToken: user?.accessToken,
+          uid: user?.uid,
         };
         dispatch(login(loginUser));
       }

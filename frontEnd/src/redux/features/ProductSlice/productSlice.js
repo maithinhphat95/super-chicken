@@ -27,12 +27,7 @@ export const fetchProduct = createAsyncThunk(
       sortBy,
       order,
     });
-    const payload = {
-      field: field,
-      data: response.data,
-      xTotalCount: Number(response.headers["x-total-count"]),
-    };
-    return payload;
+    return response.data;
   }
 );
 
@@ -42,17 +37,9 @@ export const updateProduct = createAsyncThunk(
     //
   }
 );
-const initData = { xTotalCount: 0, data: [] };
 
 const initalState = {
-  products: initData,
-  combos: initData,
-  friedChickens: initData,
-  spicyChickens: initData,
-  spaghetties: initData,
-  burgers: initData,
-  sideDishes: initData,
-  desserts: initData,
+  products: [],
   status: STATUS.IDLE,
 };
 
@@ -67,12 +54,7 @@ const productSlice = createSlice({
     });
     builder.addCase(fetchProduct.fulfilled, (state, action) => {
       state.status = STATUS.SUCCESS;
-      state[action.payload.field] = {
-        ...{
-          data: action.payload.data,
-          xTotalCount: action.payload.xTotalCount,
-        },
-      };
+      state.products = action.payload;
     });
     builder.addCase(fetchProduct.rejected, (state, action) => {
       state.status = STATUS.FAILED;

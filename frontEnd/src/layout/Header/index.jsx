@@ -1,51 +1,28 @@
-import { Grid, IconButton, Stack } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { Box } from "@mui/system";
 import "animate.css";
 import React, { useEffect } from "react";
-import { useSignOut } from "react-firebase-hooks/auth";
-import { FaBars, FaCaretDown, FaUserAlt } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { FaBars } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import images from "../../assets/images";
 import AuthBox from "../../components/common/AuthBox";
 import NavItem from "../../components/customer/NavItem";
 import { navList } from "../../constant/constant";
-import { auth } from "../../firebase/config";
 import {
   closeActionList,
-  openActionList,
   toggleSideBar,
 } from "../../redux/features/DrawerSlice/drawerSlice";
-import { logout } from "../../redux/features/UserSlice/userSlice";
-import { routesPath } from "../../routes";
 import "./style.scss";
 
 Header.propTypes = {};
 function Header(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userState = useSelector((state) => state.user);
-  const isOpenActionList = useSelector(
-    (state) => state.drawer.isOpenActionList
-  );
-  // Firebase-hook useSignOut
-  const [signOut, loading, error] = useSignOut(auth);
 
   const handleToggleSideBar = () => {
     dispatch(toggleSideBar());
-  };
-
-  const toggleActionList = () => {
-    dispatch(openActionList());
-  };
-
-  const handleLogout = async () => {
-    dispatch(logout());
-    const success = await signOut();
-    if (success) {
-      toast.info("Đăng xuất thành công");
-    }
   };
 
   useEffect(() => {

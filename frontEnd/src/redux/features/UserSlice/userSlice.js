@@ -1,25 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../../apis/axiosClient";
-import { userApis } from "../../../apis/userApi";
+import { createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../../../constant/constant";
-
-// Middleware thunk functions
-export const fetchUser = createAsyncThunk(
-  "user/fetchUser",
-  async ({ id, email, password }) => {
-    const response = await userApis.get({
-      id,
-      email,
-      password,
-    });
-
-    return response.data;
-  }
-);
-
-export const updateUser = createAsyncThunk("user/updateUser", async () => {
-  //
-});
 
 const initalState = {
   isLogin: false,
@@ -27,6 +7,7 @@ const initalState = {
     name: null,
     email: "",
     accessToken: "",
+    uid: "",
   },
   status: STATUS.IDLE,
 };
@@ -40,6 +21,7 @@ const userSlice = createSlice({
       state.loginUser.name = action.payload.name;
       state.loginUser.email = action.payload.email;
       state.loginUser.accessToken = action.payload.accessToken;
+      state.loginUser.uid = action.payload.uid;
       localStorage.setItem("accessToken", action.payload.accessToken);
     },
     logout: (state, action) => {
@@ -48,7 +30,6 @@ const userSlice = createSlice({
       state.loginUser = initalState.loginUser;
     },
   },
-  extraReducers: (builder) => {},
 });
 
 const { actions, reducer } = userSlice;

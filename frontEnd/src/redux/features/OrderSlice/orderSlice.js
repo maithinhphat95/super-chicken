@@ -1,20 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
+import { child, push, ref, set } from "firebase/database";
 import { toast } from "react-toastify";
 import { orderApis } from "../../../apis/orderApi";
 import { STATUS } from "../../../constant/constant";
-// import {} from "";
-export const fetchOrders = createAsyncThunk("order/fetchOrder", async () => {
+import { database } from "../../../firebase/config";
+
+export const fetchOrders = createAsyncThunk("order/fetchOrder", async (uid) => {
   //
 });
 
 export const addOrder = createAsyncThunk("order/addOrder", async (data) => {
-  const response = await toast.promise(orderApis.add(data), {
+  const newOrderRef = push(ref(database, "orders"));
+  const response = await toast.promise(set(newOrderRef, data), {
     pending: "Đơn hàng đang được xử lý",
     success: "Đơn hàng đã hoàn tất 👌",
     error: "Đơn hàng bị lỗi, vui lòng xác nhận lại 🤯",
   });
-
   return response;
 });
 
@@ -28,13 +29,15 @@ export const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(addOrder.pending, (state, action) => {
       state.status = STATUS.LOADING;
+      console.log("loading");
     });
     builder.addCase(addOrder.fulfilled, (state, action) => {
       state.status = STATUS.SUCCESS;
-      state.orderList.push(action.payload.data);
+      console.log("success");
     });
     builder.addCase(addOrder.rejected, (state, action) => {
       state.status = STATUS.FAILED;
+      console.log("failed");
     });
   },
 });

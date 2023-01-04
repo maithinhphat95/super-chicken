@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Box, Button, Stack } from "@mui/material";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
+import ArtBtn from "../../../common/ArtBtn";
 import PageContainer from "../../../common/PageContainer";
 import PageTitle from "../../../common/PageTitle";
 import MenuRow from "../MenuRow";
 import "./style.scss";
-
+import { BsSearch } from "react-icons/bs";
 function MenuPageContent() {
   const { initCategory } = useParams();
   const [viewTo, setViewTo] = useState(initCategory || "combo");
-
+  const [firstLoad, setFirstLoad] = useState(true);
   const [products, setProducts] = useState({
     combo: [],
     friedChicken: [],
@@ -73,7 +75,7 @@ function MenuPageContent() {
     });
   };
 
-  // async funtion fetch data
+  // Async funtion fetch data
   const fetchData = async (category, option) => {
     setLoading((prev) => {
       return { ...prev, [category]: true };
@@ -86,22 +88,21 @@ function MenuPageContent() {
           return { ...prev, [category]: false };
         });
       }
-
       setProducts((prev) => {
         return { ...prev, [category]: res.data };
       });
-
-      if (category === "dessert" && res.status) {
-        const finish = new Promise((resolve, reject) => {
+      if (firstLoad) {
+        const finishLoad = new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve();
-          }, 300);
+          }, 500);
         });
-        finish.then(() => {
+        finishLoad.then(() => {
           const element = document.getElementById(viewTo);
           const elementPosition = element.getBoundingClientRect().top;
           const offSet = elementPosition + window.pageYOffset - 140;
           goTo(offSet);
+          setFirstLoad(false);
         });
       }
     } catch (error) {
@@ -156,7 +157,6 @@ function MenuPageContent() {
           };
         });
         break;
-
       case "sideDish":
         setOptionFetchSideDish((pre) => {
           return {
@@ -179,37 +179,37 @@ function MenuPageContent() {
   };
 
   // Fetch Combo
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("combo", optionFetchCombo);
   }, [optionFetchCombo]);
 
   // Fetch friedChicken
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("friedChicken", optionFetchFriedChicken);
   }, [optionFetchFriedChicken]);
 
   // Fetch spicyChicken
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("spicyChicken", optionFetchSpicyChicken);
   }, [optionFetchSpicyChicken]);
 
   // Fetch Spaghetti
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("spaghetti", optionFetchSpaghetti);
   }, [optionFetchSpaghetti]);
 
   // Fetch Burger and Price
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("burger", optionFetchBurger);
   }, [optionFetchBurger]);
 
   // Fetch Side Dish
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("sideDish", optionFetchSideDish);
   }, [optionFetchSideDish]);
 
   // Fetch Dessert
-  useEffect(() => {
+  useLayoutEffect(() => {
     fetchData("dessert", optionFetchDessert);
   }, [optionFetchDessert]);
 
@@ -217,8 +217,16 @@ function MenuPageContent() {
     <div className="menu-container art-text">
       <PageContainer className="container menu-container art-text">
         <div id="menu" className="menu">
-          <PageTitle title="Thực đơn" />
+          <Stack direction={"row"} justifyContent="space-between">
+            <PageTitle title="Thực đơn" />
+            <Stack direction={"row"} alignItems={"center"}>
+              <Link to="/menu/search" className="menu-search">
+                <BsSearch /> Tìm kiếm
+              </Link>
+            </Stack>
+          </Stack>
           {/* Combo Category */}
+
           <MenuRow
             id={"combo"}
             title="Combo"
