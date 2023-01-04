@@ -1,8 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Grid, IconButton, Stack } from "@mui/material";
+import { Grid, Stack } from "@mui/material";
+import { child, push, ref, set } from "firebase/database";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { BsXLg } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -15,10 +16,10 @@ import PageCover from "../../components/common/PageCover";
 import PageTitle from "../../components/common/PageTitle";
 import { paymentMethod, shippingAgent } from "../../constant/constant";
 import { paymentSchema } from "../../constant/schema";
+import { auth, database } from "../../firebase/config";
 import { clearCart, initCart } from "../../redux/features/CartSlice/cartSlice";
 import { addOrder } from "../../redux/features/OrderSlice/orderSlice";
 import "./style.scss";
-
 function PaymentPage(props) {
   const {
     register,
@@ -32,11 +33,13 @@ function PaymentPage(props) {
   const navigate = useNavigate();
   const [isInitCart, setIsInitCart] = useState(false);
   const cartState = useSelector((state) => state.cart);
+  const userState = useSelector((state) => state.user);
   const [shipFee, setShipFee] = useState(0);
   const [confirmDialog, setConfirmDialog] = useState(false);
   const [finishDialog, setFinishDialog] = useState(false);
   const [emptyDialog, setEmptyDialog] = useState(false);
   const [completePayment, setCompletePayment] = useState(false);
+
   const emptyDialogContent = {
     title: "Giỏ hàng trống",
     message: "Giỏ hàng của bạn đang trống, vui lòng lựa chọn món ăn",
@@ -58,20 +61,25 @@ function PaymentPage(props) {
     }
   };
 
-  const handleCloseConfirmDialog = () => {
-    setConfirmDialog(false);
-  };
-
   const onSubmit = (data) => {
-    dispatch(
-      addOrder({ ...data, shipFee: shipFee, products: cartState?.cartList })
-    );
+    const today = new Date();
+    const newOrder = {
+      ...data,
+      shipFee: shipFee,
+      products: cartState?.cartList,
+      userId: userState.loginUser.uid,
+      date: today.toLocaleString(),
+    };
+    dispatch(addOrder(newOrder));
     dispatch(clearCart());
     setConfirmDialog(false);
     setFinishDialog(true);
     setCompletePayment(true);
   };
 
+  const handleCloseConfirmDialog = () => {
+    setConfirmDialog(false);
+  };
   const handleCloseSuccessDialog = () => {
     navigate("/menu");
   };

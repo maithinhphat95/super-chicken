@@ -27,6 +27,7 @@ export const orderApis = {
       console.log(error);
     }
   },
+
   // Add a new order
   add: async (data) => {
     try {

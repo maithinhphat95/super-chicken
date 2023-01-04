@@ -1,6 +1,6 @@
 import React from "react";
 import { CircularProgress, Grid } from "@mui/material";
-import MenuItem from "../MenuItem";
+import ProductItem from "../../../common/ProductItem";
 
 function MenuRow(props) {
   const { title, loading, loadMore, products, handleLoadMore, id } = props;
@@ -10,7 +10,7 @@ function MenuRow(props) {
       <Grid container spacing={1} className="menu-list">
         {products &&
           products.map((product, index) => (
-            <MenuItem key={index} product={product} />
+            <ProductItem key={index} product={product} />
           ))}
       </Grid>
       <div className="menu-list-category-load">

@@ -38,9 +38,6 @@ export default function UserInfor() {
     register,
     handleSubmit,
     formState = { error },
-    setValue,
-    reset,
-    getValues,
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),

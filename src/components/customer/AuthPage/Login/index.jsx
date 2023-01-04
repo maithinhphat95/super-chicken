@@ -1,10 +1,5 @@
+import { child, ref } from "@firebase/database";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
-// import {
-//   FacebookAuthProvider,
-//   GoogleAuthProvider,
-//   signInWithPopup,
-// } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import {
   useAuthState,
@@ -18,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { loginSchema } from "../../../../constant/schema";
-import { auth } from "../../../../firebase/config";
+import { auth, database } from "../../../../firebase/config";
 import { login } from "../../../../redux/features/UserSlice/userSlice";
 import { routesPath } from "../../../../routes";
 import ArtBtn from "../../../common/ArtBtn";
@@ -35,74 +30,68 @@ export default function Login() {
     mode: "onChange",
     resolver: yupResolver(loginSchema),
   });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
   const loginUser = useSelector((state) => state.user);
+
   // Firebase hook
-  const [user] = useAuthState(auth);
-  const [signInWithEmailAndPassword, epuser, loading, error] =
+  const [user, loading, error] = useAuthState(auth);
+  const [signInWithEmailAndPassword, passUser, passLoading, passError] =
     useSignInWithEmailAndPassword(auth);
-  const [signInWithFacebook, fbUser, fbLoading, fbError] =
-    useSignInWithFacebook(auth);
   const [signInWithGoogle, ggUser, ggLoading, ggError] =
     useSignInWithGoogle(auth);
-
+  const [signInWithFacebook, fbUser, fbLoading, fbError] =
+    useSignInWithFacebook(auth);
   const dialogContent = {
     title: "Đăng nhập thành công",
     message: "Bạn đã đăng nhập thành công",
   };
 
-  const onHandleSubmit = (data) => {
-    signInWithEmailAndPassword(data?.email, data?.password);
+  const dbRef = ref(database);
+  const usersRef = child(dbRef, "users");
+
+  const onHandleSubmit = async (data) => {
+    await signInWithEmailAndPassword(data?.email, data?.password);
   };
 
+  const handleLoginGg = async () => {
+    await signInWithGoogle("", {
+      prompt: "select_account",
+    });
+  };
+  const handleLoginFb = async () => {
+    await signInWithFacebook();
+  };
   const onHandleError = (error) => {
     console.log(error);
   };
-
-  const handleLoginFb = () => {
-    const provider = new FacebookAuthProvider();
-    provider.addScope("user_birthday");
-    provider.setCustomParameters({
-      prompt: "select_account",
-      display: "popup",
-    });
-    signInWithPopup(auth, provider);
-    // signInWithFacebook();
-  };
-
-  const handleLoginGg = () => {
-    signInWithGoogle();
-  };
-
   const handleCloseDialog = () => {
     navigate(-1);
   };
   useEffect(() => {
-    if (loginUser.isLogin) {
+    if (loading & loginUser.isLogin) {
       navigate(-1);
     }
   }, []);
 
   useEffect(() => {
-    const currentError = error || fbError || ggError;
-    if (currentError) {
-      console.log(currentError);
-      if (currentError.message.includes("user-not-found")) {
+    const userError = error || passError || ggError || fbError;
+    if (userError) {
+      console.log(userError);
+      if (userError.message.includes("user-not-found")) {
         toast.error("Tài khoản không tồn tại");
         reset();
-      } else if (currentError.message.includes("wrong-password")) {
+      } else if (userError.message.includes("wrong-password")) {
         toast.error("Sai mật khẩu");
         reset();
-      } else if (currentError.message.includes("too-many-requests")) {
+      } else if (userError.message.includes("too-many-requests")) {
         toast.error(
           "Nhập sai nhiều lần, tài khoản tạm thời bị vô hiệu. Vui lòng thử lại sau."
         );
       } else if (
-        currentError.message.includes(
-          "account-exists-with-different-credential"
-        )
+        userError.message.includes("account-exists-with-different-credential")
       ) {
         toast.error(
           "Tài khoản có email trùng với 1 tài khoản khác. Vui lòng kiểm tra lại"
@@ -111,7 +100,7 @@ export default function Login() {
         toast.error("Xảy ra lỗi, vui lòng kiểm tra lại");
       }
     }
-  }, [error, fbError, ggError]);
+  }, [error, passError, ggError, fbError]);
 
   useEffect(() => {
     if (user) {
@@ -121,6 +110,7 @@ export default function Login() {
         name: user?.displayName || "",
         email: user?.email,
         accessToken: user?.accessToken,
+        uid: user?.uid,
       };
       dispatch(login(userInfor));
       setOpenDialog(true);
@@ -185,18 +175,18 @@ export default function Login() {
         />
         <button
           type="button"
-          className="login-action login-facebook custom-hover"
-          onClick={handleLoginFb}
-        >
-          <FaFacebookSquare /> Đăng nhập bằng Facebook
-        </button>
-        <button
-          type="button"
           className="login-action login-google custom-hover"
           onClick={handleLoginGg}
         >
           <FaGoogle /> Đăng nhập bằng Google
         </button>
+        {/* <button
+          type="button"
+          className="login-action login-facebook custom-hover"
+          onClick={handleLoginFb}
+        >
+          <FaFacebookSquare /> Đăng nhập bằng Facebook
+        </button> */}
         <div>
           <Link to={routesPath.REGISTER} className="nor-text register-link">
             Bạn chưa có tài khoản, đăng ký ngay

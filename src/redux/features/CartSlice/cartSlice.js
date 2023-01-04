@@ -39,9 +39,9 @@ export const cartSlice = createSlice({
       } else {
         const existIndex = state.cartList.indexOf(existItem);
         state.cartList[existIndex].quantity += 1;
-        state.cartList[existIndex].subPrice =
-          state.cartList[existIndex].quantity *
-          state.cartList[existIndex].price;
+        state.cartList[existIndex].subPrice = Number(
+          state.cartList[existIndex].quantity * state.cartList[existIndex].price
+        );
       }
       state.totalPrice = Number(
         state.cartList.reduce((total, current) => {

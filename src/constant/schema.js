@@ -59,3 +59,9 @@ export const loginSchema = yup.object().shape({
       "Mật khẩu phải bao gồm 8-32 ký tự, trong đó có chữ in hoa, chữ thường, số và ký tự đặt biệt !@#$%^&*()<>"
     ),
 });
+
+export const searchSchema = yup.object().shape({
+  searhKey: yup.string(),
+  searchcategory: yup.string(),
+  searchPrice: yup.array().length(2),
+});

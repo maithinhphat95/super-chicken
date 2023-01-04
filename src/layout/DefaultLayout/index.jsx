@@ -9,6 +9,7 @@ import {
 } from "../../redux/features/DrawerSlice/drawerSlice";
 import { BsArrowUpCircleFill } from "react-icons/bs";
 import { Outlet, useLocation } from "react-router";
+import { FaAngleDoubleUp, FaHome } from "react-icons/fa";
 
 function DefaultLayout({ children }) {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -47,13 +48,15 @@ function DefaultLayout({ children }) {
           }}
         >
           <div>
-            <BsArrowUpCircleFill />
-            <p>Đầu Trang</p>
+            <p>
+              <FaAngleDoubleUp />
+              <FaHome />
+            </p>
           </div>
         </button>
       )}
       {isOpenSideBar && <SideBar />}
-      <div className="page-container">
+      <div className="">
         <Header />
         <div className="content">
           {children}
