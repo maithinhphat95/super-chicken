@@ -1,13 +1,12 @@
-import { Box, Button, Stack } from "@mui/material";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Stack } from "@mui/material";
+import React, { useLayoutEffect, useState } from "react";
+import { BsSearch } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 import { productApi } from "../../../../apis/productApi";
-import ArtBtn from "../../../common/ArtBtn";
 import PageContainer from "../../../common/PageContainer";
 import PageTitle from "../../../common/PageTitle";
 import MenuRow from "../MenuRow";
 import "./style.scss";
-import { BsSearch } from "react-icons/bs";
 function MenuPageContent() {
   const { initCategory } = useParams();
   const [viewTo, setViewTo] = useState(initCategory || "combo");
