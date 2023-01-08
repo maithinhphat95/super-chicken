@@ -19,7 +19,14 @@
     color: white;
   }
   & .login-google {
-    background-color: wheat;
+    // background-color: rgb(255, 145, 0);
+    // color: white;
+    background-color: var(--secondary-color);
     color: black;
+  }
+  & .register-link {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

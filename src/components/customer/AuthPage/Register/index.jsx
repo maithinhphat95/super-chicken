@@ -1,6 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Box, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -22,19 +26,23 @@ export default function Register() {
   // Hook Firebase
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+  const [userLogin] = useAuthState(auth);
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
 
   const dialogContent = {
     title: "Đăng ký thành công",
-    message: "Bạn đã đăng ký thành công. Chuyển hướng sang trang đăng nhập",
+    message:
+      "Bạn đã đăng ký thành công. Chúc mừng bạn đã là thành viên của gia đình Super Chicken",
   };
 
   const handleCloseDialog = () => {
-    navigate("/login");
+    setOpenDialog(false);
+    navigate("/");
   };
 
   const onHandleSubmit = async (data) => {
+    // đăng ký và tự động đăng nhập
     createUserWithEmailAndPassword(data.email, data.password);
   };
 
@@ -51,12 +59,19 @@ export default function Register() {
   }, [error]);
 
   useEffect(() => {
+    console.log(user);
     if (user) {
       reset();
       toast.success("Đăng ký thành công");
       setOpenDialog(true);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (userLogin) {
+      navigate("/");
+    }
+  }, [userLogin]);
 
   const onHandleError = (error) => {
     console.log(error);
@@ -123,9 +138,14 @@ export default function Register() {
         </div>
       </div>
       {/* Form Action */}
-      <div className="form-action">
-        <ArtBtn content="Đăng ký" style="btn2" type="submit" />
-      </div>
+      <Stack direction="row" justifyContent={"center"} spacing={1}>
+        <Box>
+          <ArtBtn content="Đăng ký" style="btn2" type="submit" />
+        </Box>
+        <Box>
+          <ArtBtn content="Đăng nhập" type="button" url="/login" />
+        </Box>
+      </Stack>
     </form>
   );
 }

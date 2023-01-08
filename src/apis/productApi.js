@@ -8,7 +8,7 @@ export const productApi = {
     category,
     limit,
     keySearch,
-    rangePrice,
+    searchPrice,
     sortBy,
     order,
   }) => {
@@ -19,9 +19,9 @@ export const productApi = {
           ...(category && { category: category }),
           ...(limit && { _limit: limit }),
           ...(keySearch && { q: keySearch }),
-          ...(rangePrice && {
-            price_lte: rangePrice.lte,
-            price_gte: rangePrice.gte,
+          ...(searchPrice && {
+            price_lte: searchPrice[0],
+            price_gte: searchPrice[1],
           }),
           ...(sortBy && { _sort: sortBy }),
           ...(order && { _order: order || "asc" }),

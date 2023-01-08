@@ -27,25 +27,35 @@ const schema = yup.object().shape({
 
 export default function UserInfor() {
   const [user] = useAuthState(auth);
-  const [defaultValue, setDefaultValue] = useState({
-    displayName: user?.displayName,
-    email: user?.email,
-    phoneNumber: user?.phoneNumber,
-    dateOfBirth: user?.reloadUserInfo?.dateOfBirth,
-    photoURL: user?.photoURL,
-  });
+  const [init, setInit] = useState(false);
   const {
     register,
     handleSubmit,
     formState = { error },
+    setValue,
   } = useForm({
     mode: "all",
     resolver: yupResolver(schema),
-    defaultValues: defaultValue,
+    defaultValues: {
+      displayName: user?.displayName,
+      email: user?.email,
+      phoneNumber: user?.phoneNumber,
+      dateOfBirth: user?.reloadUserInfo?.dateOfBirth,
+      photoURL: user?.photoURL,
+    },
   });
 
-  const [updateProfile, updating, error] = useUpdateProfile(auth);
+  if (user && !init) {
+    setValue("displayName", user?.displayName);
+    setInit(true);
+  }
+  // Get date create
+  // if (user) {
+  //   const date = new Date(Number(user.reloadUserInfo.createdAt));
+  //   console.log(date.toLocaleString());
+  // }
 
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
   const [openUpdateConfirm, setOpenUpdateConfirm] = useState(false);
   const [openUpdateSuccess, setOpenUpdateSuccess] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -73,21 +83,30 @@ export default function UserInfor() {
   };
 
   const handleOnSubmit = async (data) => {
-    const success = await updateProfile({
-      ...(data?.displayName?.trim().length > 0 && {
-        displayName: data?.displayName?.trim(),
-      }),
-      ...(data?.photoURL?.trim().length > 0 && {
-        photoURL: data?.photoURL?.trim(),
-      }),
-    });
+    if (
+      data.displayName != user.displayName ||
+      data.photoURL != user.photoURL
+    ) {
+      const success = await updateProfile({
+        ...(data?.displayName?.trim().length > 0 && {
+          displayName: data?.displayName?.trim(),
+        }),
+        ...(data?.photoURL?.trim().length > 0 && {
+          photoURL: data?.photoURL?.trim() || "",
+        }),
+      });
 
-    if (success) {
-      toast.info("Hoàn tất cập nhật thông tin");
-      user.reload();
+      if (success) {
+        toast.info("Hoàn tất cập nhật thông tin");
+        user.reload();
+        console.log(user);
+      }
+      handleCloseConfirm();
+      handleOpenSuccess();
+    } else {
+      toast.info("Thông tin không thay đổi");
+      handleCloseConfirm();
     }
-    handleCloseConfirm();
-    handleOpenSuccess();
   };
 
   const handleOnError = (error) => {
@@ -95,6 +114,7 @@ export default function UserInfor() {
     handleCloseConfirm();
     toast.error("Vui lòng nhập đầy đủ thông tin");
   };
+
   const handleToggleUpdate = () => {
     const inputList = document.getElementsByClassName("user-infor-input");
     for (let i = 0; i < inputList.length; i++) {

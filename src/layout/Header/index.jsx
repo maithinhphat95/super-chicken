@@ -31,7 +31,6 @@ function Header(props) {
 
   return (
     <div className="header">
-      <ToastContainer autoClose="1500" pauseOnHover="false" />
       <Grid container spacing={0}>
         {/* Menu button */}
         <Grid item xs={4} sx={{ display: { lg: "none" } }}>
