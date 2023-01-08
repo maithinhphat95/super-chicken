@@ -1,6 +1,7 @@
 import React from "react";
 import { CircularProgress, Grid } from "@mui/material";
 import ProductItem from "../../../common/ProductItem";
+import ProductLoading from "../../../common/ProductLoading";
 
 function MenuRow(props) {
   const { title, loading, loadMore, products, handleLoadMore, id } = props;
@@ -13,21 +14,11 @@ function MenuRow(props) {
             <ProductItem key={index} product={product} />
           ))}
       </Grid>
-      <div className="menu-list-category-load">
-        {loading && (
-          <div className="menu-list-category-loading">
-            <CircularProgress color="error" />
-          </div>
-        )}
-        {loadMore && (
-          <button
-            className="menu-list-category-load-more nor-text"
-            onClick={handleLoadMore}
-          >
-            + Load More +
-          </button>
-        )}
-      </div>
+      <ProductLoading
+        loading={loading}
+        loadMore={loadMore}
+        handleLoadMore={handleLoadMore}
+      />
     </div>
   );
 }

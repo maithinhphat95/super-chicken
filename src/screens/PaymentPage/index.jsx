@@ -35,11 +35,12 @@ function PaymentPage(props) {
   const cartState = useSelector((state) => state.cart);
   const userState = useSelector((state) => state.user);
   const [shipFee, setShipFee] = useState(0);
+  const [navigateDialog, setNavigateDialog] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState(false);
   const [finishDialog, setFinishDialog] = useState(false);
   const [emptyDialog, setEmptyDialog] = useState(false);
   const [completePayment, setCompletePayment] = useState(false);
-
+  const [user, loading, error] = useAuthState(auth);
   const emptyDialogContent = {
     title: "Giỏ hàng trống",
     message: "Giỏ hàng của bạn đang trống, vui lòng lựa chọn món ăn",
@@ -53,6 +54,10 @@ function PaymentPage(props) {
     title: "Hoàn Tất Đơn Hàng",
     message:
       "Để xác nhận thanh toán đơn hàng này, quý khách vui lòng nhấn vào nút xác nhận. Xin cảm ơn quý khách.",
+  };
+  const navigateDialogContent = {
+    title: "Bạn chưa đăng nhập",
+    message: "Vui lòng đăng nhập trước khi thanh toán.",
   };
 
   const handleChangeShip = (agentCode, price) => {
@@ -100,6 +105,12 @@ function PaymentPage(props) {
       !completePayment && setEmptyDialog(true);
     }
   }, [cartState, isInitCart]);
+
+  useEffect(() => {
+    if (!user || !userState.isLogin) {
+      setNavigateDialog(true);
+    }
+  }, [user, userState]);
 
   return (
     <PageCover className="payment-page">
@@ -420,6 +431,15 @@ function PaymentPage(props) {
         open={emptyDialog}
         handleClose={() => {
           handleCloseSuccessDialog();
+        }}
+      />
+      {/* Nagigate dialog */}
+      <NotiDialog
+        dialogContent={navigateDialogContent}
+        open={navigateDialog}
+        handleClose={() => {
+          setNavigateDialog(false);
+          navigate("/login");
         }}
       />
     </PageCover>

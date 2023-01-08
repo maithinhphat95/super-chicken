@@ -12,7 +12,7 @@ export default function ProductItem(props) {
     dispatch(addToCart(cartItem));
   };
   return (
-    <Grid item xs={6} sm={6} md={3} className="product-item">
+    <Grid item xs={6} sm={6} md={4} lg={3} className="product-item">
       <div className="product-item-card">
         <div className="product-item-card-img">
           <img src={product.image} alt="" />

@@ -8,26 +8,17 @@ const PRODUCT_URL = `${BASE_URL}/products`;
 // Middleware thunk functions
 export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
-  async ({
-    id,
-    category,
-    limit,
-    keySearch,
-    rangePrice,
-    sortBy,
-    order,
-    field,
-  }) => {
+  async ({ id, category, limit, keySearch, searchPrice, sortBy, order }) => {
     const response = await productApi.getData({
       id,
       category,
       limit,
       keySearch,
-      rangePrice,
+      searchPrice,
       sortBy,
       order,
     });
-    return response.data;
+    return response;
   }
 );
 
@@ -40,6 +31,7 @@ export const updateProduct = createAsyncThunk(
 
 const initalState = {
   products: [],
+  total: 0,
   status: STATUS.IDLE,
 };
 
@@ -54,7 +46,8 @@ const productSlice = createSlice({
     });
     builder.addCase(fetchProduct.fulfilled, (state, action) => {
       state.status = STATUS.SUCCESS;
-      state.products = action.payload;
+      state.products = action.payload.data;
+      state.total = action.payload.headers["X-Total-Count"];
     });
     builder.addCase(fetchProduct.rejected, (state, action) => {
       state.status = STATUS.FAILED;

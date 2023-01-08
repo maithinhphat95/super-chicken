@@ -1,11 +1,12 @@
 import { Stack } from "@mui/material";
+import { get, ref, set } from "firebase/database";
 import React, { useEffect } from "react";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { FaCaretDown, FaUserAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { auth } from "../../../firebase/config";
+import { toast, ToastContainer } from "react-toastify";
+import { auth, database } from "../../../firebase/config";
 import { toggleActionList } from "../../../redux/features/DrawerSlice/drawerSlice";
 import { login, logout } from "../../../redux/features/UserSlice/userSlice";
 import { routesPath } from "../../../routes";
@@ -27,6 +28,24 @@ export default function AuthBox() {
   const handleToggleActionList = () => {
     dispatch(toggleActionList());
   };
+
+  const checkStoredUser = async () => {
+    await get(ref(database, "users/" + user.uid)).then((snapshot) => {
+      if (!snapshot.exists()) {
+        set(ref(database, "users/" + user.uid), {
+          accessToken: user.accessToken,
+          createDate: new Date().toLocaleString(),
+          admin: false,
+          vip: false,
+          voucherList: [],
+        });
+      }
+    });
+  };
+
+  if (user && !loading) {
+    checkStoredUser();
+  }
 
   const handleLogout = async () => {
     dispatch(logout());
@@ -54,6 +73,7 @@ export default function AuthBox() {
 
   return (
     <Stack className="auth" gap={2} direction={"row"}>
+      <ToastContainer autoClose="1500" pauseOnHover="false" />
       {!userState?.isLogin ? (
         <div className="auth-box">
           <Link to={routesPath.LOGIN} className="auth-item">

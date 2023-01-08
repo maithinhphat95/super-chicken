@@ -1,4 +1,4 @@
-import { child, ref } from "@firebase/database";
+import { child, get, ref } from "@firebase/database";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import {
@@ -50,7 +50,6 @@ export default function Login() {
   };
 
   const dbRef = ref(database);
-  const usersRef = child(dbRef, "users");
 
   const onHandleSubmit = async (data) => {
     await signInWithEmailAndPassword(data?.email, data?.password);
@@ -105,6 +104,7 @@ export default function Login() {
   useEffect(() => {
     if (user) {
       reset();
+
       toast.success("Đăng nhập thành công");
       const userInfor = {
         name: user?.displayName || "",
