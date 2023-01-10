@@ -77,6 +77,8 @@ function PaymentPage(props) {
       products: cartState?.cartList,
       userId: userState.loginUser.uid,
       date: today.toLocaleString(),
+      discounts: currentDiscount,
+      voucher: "",
     };
     dispatch(addOrder(newOrder));
     dispatch(clearCart());
