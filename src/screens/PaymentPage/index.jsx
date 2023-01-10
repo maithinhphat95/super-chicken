@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Grid, Stack } from "@mui/material";
-import { child, push, ref, set } from "firebase/database";
+import { child, onValue, push, query, ref, set } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
@@ -41,6 +41,9 @@ function PaymentPage(props) {
   const [emptyDialog, setEmptyDialog] = useState(false);
   const [completePayment, setCompletePayment] = useState(false);
   const [user, loading, error] = useAuthState(auth);
+  const [discounts, setDiscounts] = useState([]);
+  const [currentDiscount, setCurrentDiscount] = useState(0);
+  const discountsRef = ref(database, "discounts");
   const emptyDialogContent = {
     title: "Giỏ hàng trống",
     message: "Giỏ hàng của bạn đang trống, vui lòng lựa chọn món ăn",
@@ -107,10 +110,31 @@ function PaymentPage(props) {
   }, [cartState, isInitCart]);
 
   useEffect(() => {
-    if (!user || !userState.isLogin) {
-      setNavigateDialog(true);
+    onValue(query(discountsRef), (snapshots) => {
+      setDiscounts(snapshots.val());
+    });
+  }, []);
+
+  useEffect(() => {
+    let maxDiscount = 0;
+    discounts.forEach((discount) => {
+      if (
+        Number(cartState?.totalPrice) > Number(discount.condition) &&
+        discount?.value > maxDiscount
+      ) {
+        maxDiscount = discount?.value;
+      }
+      setCurrentDiscount(maxDiscount);
+    });
+  }, [discounts, cartState]);
+
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        setNavigateDialog(true);
+      }
     }
-  }, [user, userState]);
+  }, [user, loading]);
 
   return (
     <PageCover className="payment-page">
@@ -371,6 +395,25 @@ function PaymentPage(props) {
                             </span>
                           </p>
                           <p>
+                            Chiếc khấu :{" "}
+                            <span className="art-text">
+                              {currentDiscount.toLocaleString()}%{" "}
+                              {`(-${Number(
+                                (cartState?.totalPrice * currentDiscount) / 100
+                              )?.toLocaleString()} đ)`}
+                            </span>
+                          </p>
+                          <p>
+                            Tạm tính :{" "}
+                            <span className="art-text">
+                              {Number(
+                                cartState?.totalPrice *
+                                  (1 - currentDiscount / 100)
+                              )?.toLocaleString()}{" "}
+                              đ
+                            </span>
+                          </p>
+                          <p>
                             Phí vận chuyển :{" "}
                             <span className="art-text">
                               {shipFee.toLocaleString()} đ
@@ -380,7 +423,11 @@ function PaymentPage(props) {
                             Tổng đơn hàng:{" "}
                             <span>
                               {(
-                                shipFee + (cartState?.totalPrice || 0)
+                                shipFee +
+                                (Number(
+                                  cartState?.totalPrice *
+                                    (1 - currentDiscount / 100)
+                                ) || 0)
                               ).toLocaleString()}{" "}
                               đ
                             </span>

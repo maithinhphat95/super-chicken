@@ -94,16 +94,6 @@ export default function SearchFood() {
   const productsState = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
-  const settingQuery = (orderBy, valueLow, valueHigh) => {
-    const foodQuery = query(
-      productRef,
-      orderByChild(orderBy), // sort array theo orderBy ascending
-      startAt(valueLow), // range price min
-      endAt(valueHigh) // range price max
-    );
-    return foodQuery;
-  };
-
   // Bước 1: set State mặc định cho customQuery để fetch data bằng firebase / set optionFectch ban đầu cho JSON server
   const [customQuery, setCustomQuery] = useState(query(productRef));
   const [optionFetch, setOptionFetch] = useState({
@@ -120,50 +110,19 @@ export default function SearchFood() {
   useEffect(() => {
     setIsLoading(true);
     // Bước 2.1: Lấy tổng sản phẩm theo điều kiện của Query
-    const getProducts = async () => {
-      let getByName = [];
-      let getByDesc = [];
-      onValue(query(customQuery, orderByChild("name")), (snapshots) => {
-        if (Array.isArray(snapshots.val())) {
-          const newList = [...snapshots?.val()];
-          getByName = [...getByName, ...newList];
-          // setProductsTotal(newList); // Get total products follow query param
-          // setProductsFiltered(newList);
-        } else if (snapshots.val()) {
-          const newList = [...Object.values(snapshots?.val())];
-          getByName = [...getByName, ...newList];
-
-          // setProductsTotal(newList); // Get total products follow query param
-          // setProductsFiltered(newList);
-        } else {
-          // setProductsTotal([]); // Get total products follow query param
-          // setProductsFiltered([]);
-        }
-      });
-      onValue(query(customQuery, orderByChild("description")), (snapshots) => {
-        if (Array.isArray(snapshots.val())) {
-          const newList = [...snapshots?.val()];
-          getByDesc = [...getByDesc, ...newList];
-          // setProductsTotal(newList); // Get total products follow query param
-          // setProductsFiltered(newList);
-        } else if (snapshots.val()) {
-          const newList = [...Object.values(snapshots?.val())];
-          getByDesc = [...getByDesc, ...newList];
-
-          // setProductsTotal(newList); // Get total products follow query param
-          // setProductsFiltered(newList);
-        } else {
-          // setProductsTotal([]); // Get total products follow query param
-          // setProductsFiltered([]);
-        }
-      });
-      let totalProducts = [...getByDesc];
-      setProductsTotal(totalProducts); // Get total products follow query param
-      setProductsFiltered(totalProducts);
-    };
-    getProducts();
+    onValue(query(customQuery), (snapshots) => {
+      if (snapshots.exists()) {
+        const newList = [...snapshots?.val()] || [
+          ...Object.values(snapshots?.val()),
+        ];
+        setProductsTotal([...newList]); // Get total products follow query param
+        setProductsFiltered([...newList]);
+      }
+    });
     setIsLoading(false);
   }, [customQuery]);
+
+  console.log(productsTotal);
 
   useEffect(() => {
     let list = [...productsFiltered];
@@ -219,13 +178,15 @@ export default function SearchFood() {
     switch (field) {
       case "keySearch": // OK
         // change e.target.value of keySearch in Firebase custom query
-        const queryByText = query(
-          productRef,
-          // orderByChild("description"),
-          startAt(e?.target?.value.trim()?.toUpperCase()),
-          endAt(e?.target?.value.trim()?.toUpperCase() + "\uf8ff")
-        );
-        setCustomQuery(queryByText);
+        if (e?.target?.value?.trim()?.length > 0) {
+          const queryByText = query(
+            productRef,
+            orderByChild("description"),
+            startAt(e?.target?.value.trim()?.toUpperCase()),
+            endAt(e?.target?.value.trim()?.toUpperCase() + "\uf8ff")
+          );
+          setCustomQuery(queryByText);
+        }
 
         // change e.target.value of keySearch in optionFetch Axios
         setOptionFetch((prev) => {
