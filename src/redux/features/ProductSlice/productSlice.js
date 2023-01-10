@@ -46,8 +46,8 @@ const productSlice = createSlice({
     });
     builder.addCase(fetchProduct.fulfilled, (state, action) => {
       state.status = STATUS.SUCCESS;
-      state.products = action.payload.data;
-      state.total = action.payload.headers["X-Total-Count"];
+      state.products = action?.payload?.data;
+      state.total = action?.payload?.headers["X-Total-Count"];
     });
     builder.addCase(fetchProduct.rejected, (state, action) => {
       state.status = STATUS.FAILED;

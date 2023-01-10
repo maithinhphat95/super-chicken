@@ -1,4 +1,3 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Grid, Slider, Stack } from "@mui/material";
 import {
   endAt,
@@ -12,6 +11,7 @@ import {
   startAt,
 } from "firebase/database";
 import React, { useEffect, useState } from "react";
+import { DebounceInput } from "react-debounce-input";
 import { BsChevronDoubleDown, BsChevronDoubleUp } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import ArtBtn from "../../components/common/ArtBtn";
@@ -60,7 +60,7 @@ const foodCategory = [
 const foodSort = [
   {
     name: "mặc định",
-    value: "default",
+    value: "auto",
   },
   {
     name: "giá tăng dần",
@@ -68,105 +68,99 @@ const foodSort = [
   },
   {
     name: "giá giảm dần",
-    value: "des",
+    value: "desc",
   },
 ];
 const productRef = ref(database, "products");
 
 export default function SearchFood() {
   const [showSetting, setShowSetting] = useState(false);
-  const [total, setTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadMore, setIsLoadMore] = useState(true);
+
   const [limitLoad, setLimitLoad] = useState(8);
+  const [categories, setCategories] = useState([]);
+  const [order, setOrder] = useState("auto");
   const [searchPrice, setSearchPrice] = useState([0, 150000]);
-  const [mounted, setMounted] = useState(false); // To control set product in async funtion <Promise>
-  // Product get from firebase by key search - no limit
+
+  // Products get from firebase by query no limited
+  const [productsTotal, setProductsTotal] = useState([]);
+  // Products get from firebase by query - no limited & filtered
+  const [productsFiltered, setProductsFiltered] = useState(productsTotal);
+  // Products get from firebase by query - limited
   const [products, setProducts] = useState([]);
-  // Product get from firebase by key search - limited & filtered
-  const [productsFiltered, setProductsFiltered] = useState(products);
-  // Product get from JSON server
+
+  // Products get from JSON server
   const productsState = useSelector((state) => state.product);
   const dispatch = useDispatch();
-
-  const settingQuery = (orderBy, valueLow, valueHigh) => {
-    const foodQuery = query(
-      productRef,
-      orderByChild(orderBy), // sort array theo orderBy ascending
-      startAt(valueLow), // range price min
-      endAt(valueHigh) // range price max
-    );
-    return foodQuery;
-  };
 
   // Bước 1: set State mặc định cho customQuery để fetch data bằng firebase / set optionFectch ban đầu cho JSON server
   const [customQuery, setCustomQuery] = useState(query(productRef));
   const [optionFetch, setOptionFetch] = useState({
-    id: "",
-    category: "",
-    limit: "",
+    category: [],
+    limit: 8,
     keySearch: "",
     searchPrice: [0, 150000],
     sortBy: "price",
-    order: null,
+    order: "asc",
   });
 
   // Bước 2: fetch data theo customQuery
-
   // 2A. By firebase realtime
   useEffect(() => {
     setIsLoading(true);
-    // Bước 2.1: Lấy tổng sản phẩm theo điều kiện của Query (chưa Limit)
-    const getTotal = async (customQuery) => {
-      await get(customQuery).then((snapshots) => {
-        if (snapshots.exists() && !mounted) {
-          setTotal(Object.values(snapshots?.val())?.length); //set tổng số lượng
-        }
-      });
-    };
-
-    // Bước 2.2: Lấy số lượng sản phẩm được limit theo state limitLoad
-    const getProducts = async (customQuery) => {
-      await get(query(customQuery, limitToFirst(limitLoad))).then(
-        (snapshots) => {
-          // Kiểm tra nếu tồn tại data và data chưa được mount vào component thì setproducts(data.val())
-          if (snapshots.exists() && !mounted) {
-            setProducts(Object.values(snapshots.val()));
-          }
-        },
-        (reason) => {
-          console.log(reason);
-        }
-      );
-    };
-    // Sau khi thay đổi customQuery và limitLoad, chờ 0.5s tự động active getTotal và getProduct, và set mount = true
-    getTotal(customQuery);
-    getProducts(customQuery);
-    setMounted(true);
+    // Bước 2.1: Lấy tổng sản phẩm theo điều kiện của Query
+    onValue(query(customQuery), (snapshots) => {
+      if (snapshots.exists()) {
+        const newList = [...snapshots?.val()] || [
+          ...Object.values(snapshots?.val()),
+        ];
+        setProductsTotal([...newList]); // Get total products follow query param
+        setProductsFiltered([...newList]);
+      }
+    });
     setIsLoading(false);
-  }, [customQuery, limitLoad]);
+  }, [customQuery]);
+
+  useEffect(() => {
+    let list = [...productsFiltered];
+    const sortedList =
+      order === "asc"
+        ? list.sort((a, b) => {
+            return Number(a.price) - Number(b.price);
+          })
+        : order === "desc"
+        ? list.sort((a, b) => {
+            return Number(b.price) - Number(a.price);
+          })
+        : productsFiltered;
+    const productLimited = sortedList.slice(0, limitLoad);
+    setProducts(productLimited);
+    setIsLoading(false);
+  }, [limitLoad, order, productsFiltered]);
 
   // 2B. By JSON server --------------------------
-  useEffect(() => {
-    setIsLoading(true);
-    dispatch(fetchProduct(optionFetch));
-    if (productsState.products.length < productsState.total) {
-      setIsLoadMore(true);
-    } else setIsLoadMore(false);
-    setIsLoading(false);
-  }, [optionFetch]);
+  // Bật lại sau khi chạy server
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   dispatch(fetchProduct(optionFetch));
+  //   if (productsState.products.length < productsState.total) {
+  //     setIsLoadMore(true);
+  //   } else setIsLoadMore(false);
+  //   setIsLoading(false);
+  // }, [optionFetch]);
 
   // Bước 3: Kiểm tra total > products.length ? loadmore = true : false
   useEffect(() => {
     // Kiểm tra khi dùng firebase
-    if (products?.length >= total) {
+    if (products?.length >= productsFiltered.length) {
       // Kiểm tra khi dùng JSON server
       // if (productsState.products.length >= productsState.total ) {
       setIsLoadMore(false);
     } else {
       setIsLoadMore(true);
     }
-  }, [total, products]);
+  }, [productsTotal, products]);
 
   // Bước 4: Khi user nhấn nút load more, set loading = true, limitload += 8, mount = false
   const handleLoadMore = () => {
@@ -175,70 +169,100 @@ export default function SearchFood() {
     setOptionFetch((prev) => {
       return { ...prev, limit: prev.limit + 8 }; // Limit load of JSON server
     });
-    setMounted(false);
   };
 
-  // Bước 5. Khi người dùng nhập key search, delay 0.5s rồi fetch data
-  const myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(true);
-    }, 1000);
-  });
+  // Bước 5. Khi người dùng nhập key search, debounce 500s rồi fetch data
+  const handleUpdateOption = (field, e) => {
+    switch (field) {
+      case "keySearch": // OK
+        // change e.target.value of keySearch in Firebase custom query
+        if (e?.target?.value?.trim()?.length > 0) {
+          const queryByText = query(
+            productRef,
+            orderByChild("description"),
+            startAt(e?.target?.value.trim()?.toUpperCase()),
+            endAt(e?.target?.value.trim()?.toUpperCase() + "\uf8ff")
+          );
+          setCustomQuery(queryByText);
+        }
 
-  function makeDelay(ms) {
-    var timer = 0;
-    return function (callback) {
-      clearTimeout(timer);
-      timer = setTimeout(callback, ms);
-    };
-  }
-
-  const handleUpdateOption = (field, value) => {
-    if (field === "keySearch") {
-      myPromise.then(() => {
-        // change value of keySearch in optionFetch Axios
+        // change e.target.value of keySearch in optionFetch Axios
         setOptionFetch((prev) => {
-          return { ...prev, keySearch: value, limit: 8 };
+          return { ...prev, keySearch: e?.target?.value, limit: 8 };
         });
-        // change value of keySearch in Firebase custom query
-        const queryByText = query(
-          productRef,
-          orderByChild("description"),
-          startAt(value.trim()?.toUpperCase()),
-          endAt(value.trim()?.toUpperCase() + "\uf8ff")
-        );
-        setCustomQuery(queryByText);
-        setMounted(false);
-      });
-    } else if (field === "searchCategory" || "searchSort" || "searchPrice") {
-      // change Option axios fetch
-      setOptionFetch((prev) => {
-        return { ...prev, limit: prev.limit, [field]: value };
-      });
-      // change Firebase custom query / change data fetched
+        break;
+
+      case "category":
+        let categoryList = [...optionFetch.category];
+        if (e?.target?.checked) {
+          categoryList = [...categoryList, e?.target?.value];
+        } else {
+          categoryList.splice(categoryList.indexOf(e?.target?.value), 1);
+        }
+        setOptionFetch((prev) => {
+          return {
+            ...prev,
+            limit: prev.limit,
+            [field]: categoryList,
+          };
+        });
+        // Firebase
+        setCategories([...categoryList]);
+        break;
+
+      case "order": // OK
+        if (e?.target?.value !== "order") {
+          // change Option axios fetch --------------------------
+          setOptionFetch((prev) => {
+            return { ...prev, limit: prev.limit, [field]: e?.target?.value };
+          });
+          // Change order for query
+          setOrder(e?.target?.value);
+          setLimitLoad(8);
+        }
+        break;
+
+      case "searchPrice":
+        // Change option fetch axios
+        setOptionFetch((prev) => {
+          return { ...prev, limit: prev.limit, [field]: e };
+        });
+        // Manual filter by price Firebase
+        setSearchPrice(e);
+        break;
+
+      default:
+        break;
     }
   };
-
-  // Change the limit load to 8 when price range changed
+  // Filter manual
   useEffect(() => {
-    handleUpdateOption("searchPrice", searchPrice); // update optionFetch
+    let categoryFilter = [];
+    let newList = [...productsTotal];
+    // Filter by category
+    if (categories?.length > 0) {
+      categories.forEach((category) => {
+        categoryFilter = [
+          ...categoryFilter,
+          ...newList.filter((item) => item.category === category),
+        ];
+      });
+    } else {
+      categoryFilter = newList;
+    }
+    // Filter by price range
+    let priceFilter = categoryFilter?.filter(
+      (product) =>
+        product.price >= searchPrice[0] && product.price <= searchPrice[1]
+    );
+    setProductsFiltered(priceFilter);
     setLimitLoad(8);
-    setMounted(false);
-  }, [searchPrice]);
-
-  // Update the custom query when change the limitLoad (follow the above useEffect)
-  useEffect(() => {
-    // setCustomQuery(settingQuery("price", searchPrice[0], searchPrice[1]));
-    setMounted(false);
-  }, [limitLoad]);
-
-  const onHandleError = (errors) => {
-    console.log(errors);
-  };
+  }, [categories, productsTotal, searchPrice]);
 
   const handleChangeSlider = (e, newValue) => {
     setSearchPrice(newValue);
   };
+
   return (
     <PageCover className="search-page">
       <Carousel />
@@ -251,12 +275,13 @@ export default function SearchFood() {
                 <form>
                   <div className="search-setting-item">
                     <h3>Tìm kiếm:</h3>
-                    <input
+                    <DebounceInput
                       type="text"
                       id="search-key"
-                      placeholder="nhập tên món ăn ..."
+                      debounceTimeout={500}
+                      placeholder="nhập từ khóa để tìm kiếm ..."
                       onChange={(e) => {
-                        handleUpdateOption("keySearch", e.target.value);
+                        handleUpdateOption("keySearch", e);
                       }}
                     />
                   </div>
@@ -302,11 +327,8 @@ export default function SearchFood() {
                                 name="search-category"
                                 type="checkbox"
                                 value={item.value}
-                                onChange={(e) => {
-                                  handleUpdateOption(
-                                    "searchCategory",
-                                    e.target.value
-                                  );
+                                onClick={(e) => {
+                                  handleUpdateOption("category", e);
                                 }}
                               />{" "}
                               {item.name.toLocaleString()}
@@ -323,14 +345,11 @@ export default function SearchFood() {
                             <label>
                               <input
                                 name="search-sort"
-                                defaultChecked={item.value === "asc"}
+                                defaultChecked={item.value === "auto"}
                                 type="radio"
                                 value={item.value}
                                 onChange={(e) => {
-                                  handleUpdateOption(
-                                    "searchSort",
-                                    e.target.value
-                                  );
+                                  handleUpdateOption("order", e);
                                 }}
                               />{" "}
                               {item.name}
@@ -358,30 +377,58 @@ export default function SearchFood() {
                         direction={"row"}
                         className="search-setting-item-price"
                       >
-                        <input
+                        <DebounceInput
                           type="number"
                           className=""
+                          debounceTimeout={1000}
                           value={searchPrice[0]}
                           max={150000}
                           step={1000}
                           onChange={(e) => {
-                            setSearchPrice([
-                              Number(e.target.value),
-                              searchPrice[1],
-                            ]);
+                            if (e.target.value >= 0) {
+                              if (e.target.value < searchPrice[1]) {
+                                setSearchPrice([
+                                  Number(e.target.value),
+                                  searchPrice[1],
+                                ]);
+                              } else {
+                                setSearchPrice([
+                                  searchPrice[1],
+                                  searchPrice[1],
+                                ]);
+                              }
+                            } else {
+                              setSearchPrice([0, searchPrice[1]]);
+                            }
                           }}
                         />
-                        <input
+                        <DebounceInput
                           type="number"
                           className=""
+                          debounceTimeout={1000}
+                          forceNotifyOnBlur={true}
                           value={searchPrice[1]}
                           min={0}
                           step={1000}
                           onChange={(e) => {
-                            setSearchPrice([
-                              searchPrice[0],
-                              Number(e.target.value),
-                            ]);
+                            if (e.target.value === "") {
+                              return;
+                            }
+                            if (e?.target?.value >= 150000) {
+                              setSearchPrice([searchPrice[0], 150000]);
+                            } else {
+                              if (e.target.value > searchPrice[0]) {
+                                setSearchPrice([
+                                  searchPrice[0],
+                                  Number(e.target.value),
+                                ]);
+                              } else {
+                                setSearchPrice([
+                                  searchPrice[0],
+                                  searchPrice[0],
+                                ]);
+                              }
+                            }
                           }}
                         />
                       </Stack>
@@ -394,10 +441,14 @@ export default function SearchFood() {
             <Grid item xs={12} lg={9}>
               <div className="search-result">
                 <div className="search-result-total">
-                  Kết quả: <span>{total}</span> món ăn
+                  Kết quả: <span>{productsTotal?.length || 0}</span> món ăn
                 </div>
                 <div className="search-result-list">
                   <Grid container spacing={1}>
+                    {/* {productsState?.products &&
+                      productsState?.products?.map((item, index) => (
+                        <MenuItem key={index} product={item} />
+                      ))} */}
                     {products &&
                       products?.map((item, index) => (
                         <MenuItem key={index} product={item} />

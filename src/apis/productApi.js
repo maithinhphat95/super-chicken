@@ -20,8 +20,8 @@ export const productApi = {
           ...(limit && { _limit: limit }),
           ...(keySearch && { q: keySearch }),
           ...(searchPrice && {
-            price_lte: searchPrice[0],
-            price_gte: searchPrice[1],
+            price_lte: searchPrice,
+            price_gte: searchPrice,
           }),
           ...(sortBy && { _sort: sortBy }),
           ...(order && { _order: order || "asc" }),

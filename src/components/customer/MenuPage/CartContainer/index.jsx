@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useState } from "react";
+import { ref, onValue, query } from "firebase/database";
+import { Badge, Box } from "@mui/material";
 import {
   BsCart3,
-  BsChevronDoubleUp,
   BsChevronDoubleDown,
+  BsChevronDoubleUp,
 } from "react-icons/bs";
-import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeQuantity,
@@ -14,13 +14,15 @@ import {
   toggleCart,
 } from "../../../../redux/features/CartSlice/cartSlice";
 import ArtBtn from "../../../common/ArtBtn";
-import { Badge, Box } from "@mui/material";
 import CartItem from "../CartItem";
-import { Link } from "react-router-dom";
+import "./style.scss";
+import { database } from "../../../../firebase/config";
 function CartContainer(props) {
   const cartState = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const [discounts, setDiscounts] = useState([]);
+  const [currentDiscount, setCurrentDiscount] = useState(0);
+  const discountsRef = ref(database, "discounts");
   const handleToggleCart = () => {
     dispatch(toggleCart());
   };
@@ -59,6 +61,25 @@ function CartContainer(props) {
     }
   };
 
+  useEffect(() => {
+    onValue(query(discountsRef), (snapshots) => {
+      setDiscounts(snapshots.val());
+    });
+  }, []);
+
+  useEffect(() => {
+    let maxDiscount = 0;
+    discounts.forEach((discount) => {
+      if (
+        Number(cartState?.totalPrice) > Number(discount.condition) &&
+        discount?.value > maxDiscount
+      ) {
+        maxDiscount = discount?.value;
+      }
+      setCurrentDiscount(maxDiscount);
+    });
+  }, [discounts, cartState]);
+
   // Init Cart From local Storage
   useEffect(() => {
     dispatch(initCart());
@@ -94,14 +115,25 @@ function CartContainer(props) {
           )}
         </div>
 
-        <div className="cart-btn-payment  art-text">
+        <div className="cart-btn-payment  ">
           <div>
             <Badge badgeContent={cartState.totalQuantity} color="error">
               <BsCart3 className="cart-btn-payment-icon" />
             </Badge>
-            <p className="cart-btn-payment-price">
-              {cartState?.totalPrice?.toLocaleString()} đ
-            </p>
+            <div>
+              <p className="cart-btn-payment-price art-text">
+                {Number(
+                  cartState?.totalPrice * (1 - currentDiscount / 100)
+                ).toLocaleString()}{" "}
+                đ
+              </p>
+              {currentDiscount > 0 && (
+                <p className="cart-btn-payment-price-old">
+                  <span>{cartState?.totalPrice?.toLocaleString()} đ </span>
+                  {"Discount: " + currentDiscount + "%"}
+                </p>
+              )}
+            </div>
           </div>
           <ArtBtn content="Thanh toán" style="btn2" url={"/payment"} />
         </div>
