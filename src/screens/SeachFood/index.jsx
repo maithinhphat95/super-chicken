@@ -122,8 +122,6 @@ export default function SearchFood() {
     setIsLoading(false);
   }, [customQuery]);
 
-  console.log(productsTotal);
-
   useEffect(() => {
     let list = [...productsFiltered];
     const sortedList =
