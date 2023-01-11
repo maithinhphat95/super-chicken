@@ -109,12 +109,17 @@ export default function SearchFood() {
   // 2A. By firebase realtime
   useEffect(() => {
     setIsLoading(true);
+
     // Bước 2.1: Lấy tổng sản phẩm theo điều kiện của Query
+    let newList = [];
     onValue(query(customQuery), (snapshots) => {
       if (snapshots.exists()) {
-        const newList = [...snapshots?.val()] || [
-          ...Object.values(snapshots?.val()),
-        ];
+        if (Array.isArray(snapshots?.val())) {
+          newList = [...snapshots?.val()];
+        } else {
+          newList = [...Object.values(snapshots?.val())];
+        }
+
         setProductsTotal([...newList]); // Get total products follow query param
         setProductsFiltered([...newList]);
       }
@@ -176,6 +181,7 @@ export default function SearchFood() {
     switch (field) {
       case "keySearch": // OK
         // change e.target.value of keySearch in Firebase custom query
+        console.log(e?.target?.value?.trim());
         if (e?.target?.value?.trim()?.length > 0) {
           const queryByText = query(
             productRef,
