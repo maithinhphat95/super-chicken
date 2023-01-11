@@ -7,9 +7,10 @@ import {
   closeActionList,
   closeSideBar,
 } from "../../redux/features/DrawerSlice/drawerSlice";
-import { BsArrowUpCircleFill } from "react-icons/bs";
+import { BsChevronUp } from "react-icons/bs";
 import { Outlet, useLocation } from "react-router";
-import { FaAngleDoubleUp, FaHome } from "react-icons/fa";
+import { FaAngleDoubleUp, FaHome, FaAngleUp } from "react-icons/fa";
+import { Box } from "@mui/material";
 
 function DefaultLayout({ children }) {
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -48,10 +49,19 @@ function DefaultLayout({ children }) {
           }}
         >
           <div>
-            <p>
-              <FaAngleDoubleUp />
+            <Box
+              sx={{
+                border: "1px solid white",
+                borderRadius: "50%",
+                width: "24px",
+                height: "24px",
+              }}
+            >
+              <FaAngleUp />
+            </Box>
+            {/* <p>
               <FaHome />
-            </p>
+            </p> */}
           </div>
         </button>
       )}

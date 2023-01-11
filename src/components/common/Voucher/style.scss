@@ -1,0 +1,85 @@
+.voucher {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 4px;
+  background-color: white;
+  max-width: fit-content;
+  box-shadow: 0 0 6px 2px rgb(255, 255, 255);
+  border: 1px solid var(--primary-color);
+  height: 40px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  &:hover,
+  & .active {
+    box-shadow: 0 0 2px 2px rgb(244, 137, 137);
+    & ::before {
+      box-shadow: -2px 0px 1px 1px rgb(244, 137, 137) inset;
+    }
+    & .voucher-side {
+      color: var(--primary-color);
+      background-color: yellow;
+    }
+    & .voucher-content {
+      background-image: linear-gradient(
+        to bottom right,
+        rgb(255, 225, 0),
+        var(--secondary-color),
+        var(--fresher-color)
+      );
+      color: white;
+    }
+  }
+
+  &-side {
+    width: 48px;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    box-sizing: content-box;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 20px;
+    color: gray;
+    padding-right: 4px;
+    border-radius: 4px 0 0 4px;
+    &::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      z-index: 10;
+      transform: translateY(-50%);
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border-right: 1px solid var(--primary-color);
+      background-color: var(--background-color);
+    }
+  }
+
+  &-content {
+    width: 100px;
+    height: 100%;
+    position: relative;
+    border-left: 1px dashed var(--primary-color);
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+    & p:first-child {
+      line-height: 1.2;
+      font-weight: bolder;
+    }
+    & p:last-child {
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 400;
+    }
+  }
+}

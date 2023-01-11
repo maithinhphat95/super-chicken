@@ -14,6 +14,7 @@ import NotiDialog from "../../components/common/NotiDialog";
 import PageContainer from "../../components/common/PageContainer";
 import PageCover from "../../components/common/PageCover";
 import PageTitle from "../../components/common/PageTitle";
+import Voucher from "../../components/common/Voucher";
 import { paymentMethod, shippingAgent } from "../../constant/constant";
 import { paymentSchema } from "../../constant/schema";
 import { auth, database } from "../../firebase/config";
@@ -390,6 +391,44 @@ function PaymentPage(props) {
                       {/* Confirm */}
                       <Grid item xs={12} md={6}>
                         <div className="payment-confirm">
+                          <div className="payment-voucher scroll-custom-hor">
+                            <label>
+                              <input type="radio" name="voucher" value={"5"} />{" "}
+                              <Voucher
+                                active={false}
+                                value={5}
+                                code={"NEW2023"}
+                                date={"31/1/2023"}
+                              />
+                            </label>
+                            <label>
+                              <input type="radio" name="voucher" value={"5"} />{" "}
+                              <Voucher
+                                active={false}
+                                value={10}
+                                code={"NEWMEM"}
+                                date={"31/12/2023"}
+                              />
+                            </label>
+                            <label>
+                              <input type="radio" name="voucher" value={"5"} />{" "}
+                              <Voucher
+                                active={false}
+                                value={15}
+                                code={"TET2023"}
+                                date={"7/1/2023"}
+                              />
+                            </label>
+                            <label>
+                              <input type="radio" name="voucher" value={"5"} />{" "}
+                              <Voucher
+                                active={false}
+                                value={15}
+                                code={"XUAN2023"}
+                                date={"28/2/2023"}
+                              />
+                            </label>
+                          </div>
                           <p>
                             Tổng giá tiền :{" "}
                             <span className="art-text">

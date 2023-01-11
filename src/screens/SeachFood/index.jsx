@@ -181,7 +181,6 @@ export default function SearchFood() {
     switch (field) {
       case "keySearch": // OK
         // change e.target.value of keySearch in Firebase custom query
-        console.log(e?.target?.value?.trim());
         if (e?.target?.value?.trim()?.length > 0) {
           const queryByText = query(
             productRef,
@@ -447,7 +446,7 @@ export default function SearchFood() {
             <Grid item xs={12} lg={9}>
               <div className="search-result">
                 <div className="search-result-total">
-                  Kết quả: <span>{productsTotal?.length || 0}</span> món ăn
+                  Kết quả: <span>{productsFiltered?.length || 0}</span> món ăn
                 </div>
                 <div className="search-result-list">
                   <Grid container spacing={1}>

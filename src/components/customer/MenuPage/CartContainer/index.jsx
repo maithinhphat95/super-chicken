@@ -130,7 +130,7 @@ function CartContainer(props) {
               {currentDiscount > 0 && (
                 <p className="cart-btn-payment-price-old">
                   <span>{cartState?.totalPrice?.toLocaleString()} đ </span>
-                  {"Discount: " + currentDiscount + "%"}
+                  {"(-" + currentDiscount + "%)"}
                 </p>
               )}
             </div>
